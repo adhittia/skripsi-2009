@@ -1,0 +1,6 @@
+1.Install MySQL 5.0
+2.Set user:root pass:rahasia
+3.Buat schema catering
+4.Install MySQL Administrator
+5.Restore catering.sql dengan MySQL Administrator -> Restore
+6.Install MySQL Connector .NET utk coding
