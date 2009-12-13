@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activeRecordMapping dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" isCompleteView="false" name="SMSActiveRecord">
+  <modelMoniker Id="779f0d04-62cd-418f-8f57-b16788f9f8b8" />
+  <nestedChildShapes>
+    <classShape Id="7d2b96b8-5951-43a1-8899-d945bddd56ef" absoluteBounds="0.5, 2.375, 1.5, 1.3748478190104168">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/CustomerOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4a0c744e-db97-496e-a4b9-569f9de5a0ab" absoluteBounds="0.515, 2.785, 1.4700000000000002, 0.86484781901041663" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="66a7f6b1-d831-444c-b849-bd4a3cb23497" absoluteBounds="5.125, 2.5, 1.5, 1.7035424804687502">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/SmsOutput" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a623869d-1fbe-40a4-a423-1b224e2a3360" absoluteBounds="5.1400000000000006, 2.91, 1.4700000000000002, 1.19354248046875" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="84b7f646-ff80-41b5-9b13-56f19ae021d2" absoluteBounds="0.5, 4, 1.5, 1.0461531575520828">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/CustomerOrderDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4f85fe57-8f28-43dd-a30f-5e43dcbbdafe" absoluteBounds="0.515, 4.41, 1.4700000000000002, 0.53615315755208326" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bfe141c7-e61a-42c1-b27b-df4c536e6f73" absoluteBounds="4.375, 0.625, 1.5, 1.7035424804687502">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/CustomerProfile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="af68d81c-16a0-48e4-abc1-654908644899" absoluteBounds="4.3900000000000006, 1.0350000000000001, 1.4700000000000002, 1.19354248046875" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e8936f69-bfaa-48f0-bcd5-82f35e5d2a50" absoluteBounds="0.625, 5.375, 1.5, 1.3748478190104168">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/DaftarRegister" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d28e02cf-a9a6-4040-923e-ac7c655a6b12" absoluteBounds="0.64, 5.785, 1.4700000000000002, 0.86484781901041663" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="09cb8916-757e-4b8f-88e6-a6e7d5a0efb4" absoluteBounds="2.375, 2.5, 1.5, 1.8678898111979159">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/JadwalBroadcast" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9a7cefeb-0101-4ee2-ba99-5540c7deb96a" absoluteBounds="2.39, 2.91, 1.4700000000000002, 1.3578898111979165" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4efa4341-6fea-4291-96f6-b1667f44342a" absoluteBounds="0.5, 0.5, 1.5, 1.7035424804687502">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/Menu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9dd86c86-b660-451f-82d2-ff17a2247860" absoluteBounds="0.51500000000000012, 0.91000000000000014, 1.4700000000000002, 1.19354248046875" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="177262b9-c8ea-41af-9e97-cb84b2e09a50" absoluteBounds="4.5, 4.5, 1.5, 1.5391951497395828">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/MenuSchedule" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ea4b165e-51d9-442d-97b7-abd5e404be01" absoluteBounds="4.5150000000000006, 4.91, 1.4700000000000002, 1.029195149739583" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d6ff614c-9c32-44bf-989a-52acbbef82e5" absoluteBounds="2.375, 0.625, 1.5, 1.5391951497395833">
+      <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/SmsInput" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d8dee334-a329-499b-af00-63244fc9392a" absoluteBounds="2.39, 1.0350000000000001, 1.4700000000000002, 1.029195149739583" name="Properties" title="Properties" titleFillColor="LightGray" compartmentFillColor="White" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</activeRecordMapping>

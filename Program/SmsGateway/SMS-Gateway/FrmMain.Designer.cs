@@ -76,11 +76,45 @@ namespace SMS_Gateway
             this.Btn_Add_Cmd = new System.Windows.Forms.Button();
             this.gridBroadcastSchedule = new System.Windows.Forms.DataGridView();
             this.Btn_Add_Broadcast = new System.Windows.Forms.Button();
+            this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.btnAddCustomer = new System.Windows.Forms.Button();
+            this.tabMenu = new System.Windows.Forms.TabPage();
+            this.btnRemoveMenu = new System.Windows.Forms.Button();
+            this.lvMenu = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            this.btnNewMenu = new System.Windows.Forms.Button();
+            this.tabSchedule = new System.Windows.Forms.TabPage();
+            this.btnAddSchedule = new System.Windows.Forms.Button();
             this.Btn_Close = new System.Windows.Forms.Button();
             this.statusBarMain = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.InboxTimer = new System.Windows.Forms.Timer(this.components);
             this.OutboxTimer = new System.Windows.Forms.Timer(this.components);
+            this.lvCustomer = new System.Windows.Forms.ListView();
+            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader11 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader12 = new System.Windows.Forms.ColumnHeader();
+            this.btnRemoveCustomer = new System.Windows.Forms.Button();
+            this.lvSchedule = new System.Windows.Forms.ListView();
+            this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
+            this.btnScheduleRemove = new System.Windows.Forms.Button();
+            this.tabTransaction = new System.Windows.Forms.TabPage();
+            this.btnDeliveryOrder = new System.Windows.Forms.Button();
+            this.btnBillingInformation = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabMain.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -94,7 +128,12 @@ namespace SMS_Gateway
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridComands)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBroadcastSchedule)).BeginInit();
+            this.tabCustomer.SuspendLayout();
+            this.tabMenu.SuspendLayout();
+            this.tabSchedule.SuspendLayout();
             this.statusBarMain.SuspendLayout();
+            this.tabTransaction.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
@@ -104,6 +143,10 @@ namespace SMS_Gateway
             this.tabMain.Controls.Add(this.tabOutbox);
             this.tabMain.Controls.Add(this.tabReport);
             this.tabMain.Controls.Add(this.tabSettings);
+            this.tabMain.Controls.Add(this.tabCustomer);
+            this.tabMain.Controls.Add(this.tabMenu);
+            this.tabMain.Controls.Add(this.tabSchedule);
+            this.tabMain.Controls.Add(this.tabTransaction);
             this.tabMain.Location = new System.Drawing.Point(8, 17);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -662,6 +705,134 @@ namespace SMS_Gateway
             this.Btn_Add_Broadcast.UseVisualStyleBackColor = true;
             this.Btn_Add_Broadcast.Click += new System.EventHandler(this.Btn_Add_Broadcast_Click);
             // 
+            // tabCustomer
+            // 
+            this.tabCustomer.Controls.Add(this.btnRemoveCustomer);
+            this.tabCustomer.Controls.Add(this.lvCustomer);
+            this.tabCustomer.Controls.Add(this.btnAddCustomer);
+            this.tabCustomer.Location = new System.Drawing.Point(4, 22);
+            this.tabCustomer.Name = "tabCustomer";
+            this.tabCustomer.Size = new System.Drawing.Size(669, 359);
+            this.tabCustomer.TabIndex = 6;
+            this.tabCustomer.Text = "Customer";
+            this.tabCustomer.UseVisualStyleBackColor = true;
+            // 
+            // btnAddCustomer
+            // 
+            this.btnAddCustomer.Location = new System.Drawing.Point(19, 25);
+            this.btnAddCustomer.Name = "btnAddCustomer";
+            this.btnAddCustomer.Size = new System.Drawing.Size(96, 23);
+            this.btnAddCustomer.TabIndex = 5;
+            this.btnAddCustomer.Text = "Add Customer";
+            this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
+            // 
+            // tabMenu
+            // 
+            this.tabMenu.Controls.Add(this.btnRemoveMenu);
+            this.tabMenu.Controls.Add(this.lvMenu);
+            this.tabMenu.Controls.Add(this.btnNewMenu);
+            this.tabMenu.Location = new System.Drawing.Point(4, 22);
+            this.tabMenu.Name = "tabMenu";
+            this.tabMenu.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMenu.Size = new System.Drawing.Size(669, 359);
+            this.tabMenu.TabIndex = 5;
+            this.tabMenu.Text = "Menu";
+            this.tabMenu.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveMenu
+            // 
+            this.btnRemoveMenu.Location = new System.Drawing.Point(100, 24);
+            this.btnRemoveMenu.Name = "btnRemoveMenu";
+            this.btnRemoveMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveMenu.TabIndex = 5;
+            this.btnRemoveMenu.Text = "Remove";
+            this.btnRemoveMenu.UseVisualStyleBackColor = true;
+            this.btnRemoveMenu.Click += new System.EventHandler(this.btnRemoveMenu_Click);
+            // 
+            // lvMenu
+            // 
+            this.lvMenu.CheckBoxes = true;
+            this.lvMenu.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.lvMenu.FullRowSelect = true;
+            this.lvMenu.GridLines = true;
+            this.lvMenu.HideSelection = false;
+            this.lvMenu.Location = new System.Drawing.Point(19, 53);
+            this.lvMenu.Name = "lvMenu";
+            this.lvMenu.Size = new System.Drawing.Size(634, 237);
+            this.lvMenu.TabIndex = 4;
+            this.lvMenu.UseCompatibleStateImageBehavior = false;
+            this.lvMenu.View = System.Windows.Forms.View.Details;
+            this.lvMenu.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvMenu_MouseDoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Menu ID";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 138;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Description";
+            this.columnHeader3.Width = 142;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Type";
+            this.columnHeader4.Width = 95;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Category";
+            this.columnHeader5.Width = 89;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Price";
+            this.columnHeader6.Width = 106;
+            // 
+            // btnNewMenu
+            // 
+            this.btnNewMenu.Location = new System.Drawing.Point(19, 24);
+            this.btnNewMenu.Name = "btnNewMenu";
+            this.btnNewMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnNewMenu.TabIndex = 3;
+            this.btnNewMenu.Text = "Add Menu";
+            this.btnNewMenu.UseVisualStyleBackColor = true;
+            this.btnNewMenu.Click += new System.EventHandler(this.btnNewMenu_Click);
+            // 
+            // tabSchedule
+            // 
+            this.tabSchedule.Controls.Add(this.btnScheduleRemove);
+            this.tabSchedule.Controls.Add(this.lvSchedule);
+            this.tabSchedule.Controls.Add(this.btnAddSchedule);
+            this.tabSchedule.Location = new System.Drawing.Point(4, 22);
+            this.tabSchedule.Name = "tabSchedule";
+            this.tabSchedule.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSchedule.Size = new System.Drawing.Size(669, 359);
+            this.tabSchedule.TabIndex = 7;
+            this.tabSchedule.Text = "Schedule";
+            this.tabSchedule.UseVisualStyleBackColor = true;
+            // 
+            // btnAddSchedule
+            // 
+            this.btnAddSchedule.Location = new System.Drawing.Point(16, 19);
+            this.btnAddSchedule.Name = "btnAddSchedule";
+            this.btnAddSchedule.Size = new System.Drawing.Size(100, 23);
+            this.btnAddSchedule.TabIndex = 5;
+            this.btnAddSchedule.Text = "Add Schedule";
+            this.btnAddSchedule.UseVisualStyleBackColor = true;
+            this.btnAddSchedule.Click += new System.EventHandler(this.btnAddSchedule_Click);
+            // 
             // Btn_Close
             // 
             this.Btn_Close.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -686,7 +857,7 @@ namespace SMS_Gateway
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // InboxTimer
@@ -696,6 +867,171 @@ namespace SMS_Gateway
             // OutboxTimer
             // 
             this.OutboxTimer.Tick += new System.EventHandler(this.OutboxTimer_Tick);
+            // 
+            // lvCustomer
+            // 
+            this.lvCustomer.CheckBoxes = true;
+            this.lvCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
+            this.lvCustomer.FullRowSelect = true;
+            this.lvCustomer.GridLines = true;
+            this.lvCustomer.HideSelection = false;
+            this.lvCustomer.Location = new System.Drawing.Point(17, 61);
+            this.lvCustomer.Name = "lvCustomer";
+            this.lvCustomer.Size = new System.Drawing.Size(634, 237);
+            this.lvCustomer.TabIndex = 6;
+            this.lvCustomer.UseCompatibleStateImageBehavior = false;
+            this.lvCustomer.View = System.Windows.Forms.View.Details;
+            this.lvCustomer.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvCustomer_MouseDoubleClick);
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Customer ID";
+            this.columnHeader7.Width = 78;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Name";
+            this.columnHeader8.Width = 138;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Delivery Address";
+            this.columnHeader9.Width = 213;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Bill Address";
+            this.columnHeader10.Width = 198;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Mobile Number";
+            this.columnHeader11.Width = 89;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Email";
+            this.columnHeader12.Width = 106;
+            // 
+            // btnRemoveCustomer
+            // 
+            this.btnRemoveCustomer.Location = new System.Drawing.Point(121, 25);
+            this.btnRemoveCustomer.Name = "btnRemoveCustomer";
+            this.btnRemoveCustomer.Size = new System.Drawing.Size(96, 23);
+            this.btnRemoveCustomer.TabIndex = 7;
+            this.btnRemoveCustomer.Text = "Remove";
+            this.btnRemoveCustomer.UseVisualStyleBackColor = true;
+            this.btnRemoveCustomer.Click += new System.EventHandler(this.btnRemoveCustomer_Click);
+            // 
+            // lvSchedule
+            // 
+            this.lvSchedule.CheckBoxes = true;
+            this.lvSchedule.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader13,
+            this.columnHeader14,
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17});
+            this.lvSchedule.FullRowSelect = true;
+            this.lvSchedule.GridLines = true;
+            this.lvSchedule.HideSelection = false;
+            this.lvSchedule.Location = new System.Drawing.Point(17, 61);
+            this.lvSchedule.Name = "lvSchedule";
+            this.lvSchedule.Size = new System.Drawing.Size(634, 237);
+            this.lvSchedule.TabIndex = 7;
+            this.lvSchedule.UseCompatibleStateImageBehavior = false;
+            this.lvSchedule.View = System.Windows.Forms.View.Details;
+            this.lvSchedule.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvSchedule_MouseDoubleClick);
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Schedule ID";
+            this.columnHeader13.Width = 78;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Tanggal";
+            this.columnHeader14.Width = 138;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Menu A";
+            this.columnHeader15.Width = 135;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Menu B";
+            this.columnHeader16.Width = 136;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "Menu C";
+            this.columnHeader17.Width = 143;
+            // 
+            // btnScheduleRemove
+            // 
+            this.btnScheduleRemove.Location = new System.Drawing.Point(122, 19);
+            this.btnScheduleRemove.Name = "btnScheduleRemove";
+            this.btnScheduleRemove.Size = new System.Drawing.Size(100, 23);
+            this.btnScheduleRemove.TabIndex = 8;
+            this.btnScheduleRemove.Text = "Remove";
+            this.btnScheduleRemove.UseVisualStyleBackColor = true;
+            this.btnScheduleRemove.Click += new System.EventHandler(this.btnScheduleRemove_Click);
+            // 
+            // tabTransaction
+            // 
+            this.tabTransaction.Controls.Add(this.groupBox3);
+            this.tabTransaction.Controls.Add(this.btnBillingInformation);
+            this.tabTransaction.Controls.Add(this.btnDeliveryOrder);
+            this.tabTransaction.Location = new System.Drawing.Point(4, 22);
+            this.tabTransaction.Name = "tabTransaction";
+            this.tabTransaction.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTransaction.Size = new System.Drawing.Size(669, 359);
+            this.tabTransaction.TabIndex = 8;
+            this.tabTransaction.Text = "Transaction ";
+            this.tabTransaction.UseVisualStyleBackColor = true;
+            // 
+            // btnDeliveryOrder
+            // 
+            this.btnDeliveryOrder.Location = new System.Drawing.Point(17, 18);
+            this.btnDeliveryOrder.Name = "btnDeliveryOrder";
+            this.btnDeliveryOrder.Size = new System.Drawing.Size(122, 23);
+            this.btnDeliveryOrder.TabIndex = 0;
+            this.btnDeliveryOrder.Text = "Delivery Order";
+            this.btnDeliveryOrder.UseVisualStyleBackColor = true;
+            // 
+            // btnBillingInformation
+            // 
+            this.btnBillingInformation.Location = new System.Drawing.Point(17, 47);
+            this.btnBillingInformation.Name = "btnBillingInformation";
+            this.btnBillingInformation.Size = new System.Drawing.Size(122, 23);
+            this.btnBillingInformation.TabIndex = 1;
+            this.btnBillingInformation.Text = "Billing Information";
+            this.btnBillingInformation.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Location = new System.Drawing.Point(18, 98);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(556, 230);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Transaction Info";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 19);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(535, 205);
+            this.textBox1.TabIndex = 0;
             // 
             // FrmMain
             // 
@@ -730,8 +1066,14 @@ namespace SMS_Gateway
             this.tabSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridComands)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBroadcastSchedule)).EndInit();
+            this.tabCustomer.ResumeLayout(false);
+            this.tabMenu.ResumeLayout(false);
+            this.tabSchedule.ResumeLayout(false);
             this.statusBarMain.ResumeLayout(false);
             this.statusBarMain.PerformLayout();
+            this.tabTransaction.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -791,6 +1133,40 @@ namespace SMS_Gateway
         private System.Windows.Forms.Button Btn_Add_Cmd;
         private System.Windows.Forms.DataGridView gridBroadcastSchedule;
         private System.Windows.Forms.DataGridView gridComands;
+        private System.Windows.Forms.TabPage tabMenu;
+        private System.Windows.Forms.Button btnNewMenu;
+        private System.Windows.Forms.TabPage tabCustomer;
+        private System.Windows.Forms.Button btnAddCustomer;
+        private System.Windows.Forms.TabPage tabSchedule;
+        private System.Windows.Forms.Button btnAddSchedule;
+        private System.Windows.Forms.Button btnRemoveMenu;
+        private System.Windows.Forms.ListView lvMenu;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ListView lvCustomer;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.Button btnRemoveCustomer;
+        private System.Windows.Forms.ListView lvSchedule;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.Button btnScheduleRemove;
+        private System.Windows.Forms.TabPage tabTransaction;
+        private System.Windows.Forms.Button btnBillingInformation;
+        private System.Windows.Forms.Button btnDeliveryOrder;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

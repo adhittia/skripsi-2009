@@ -20,6 +20,7 @@ using MySql.Data.MySqlClient;
 using SMS_Gateway.FormDiagnostic;
 using SMS_Gateway.FormBroadcastSchedule;
 using SMS_Gateway.FormCommandRegister;
+using Castle.ActiveRecord;
 
 namespace SMS_Gateway
 {
@@ -165,6 +166,9 @@ namespace SMS_Gateway
             ConnectToDB();
             showCommandRegister();
             showBroadcastSchedule();
+            showMenu();
+            showCustomer();
+            showSchedule();
         }
 
         private void chkTab() 
@@ -402,7 +406,57 @@ namespace SMS_Gateway
             this.gridComands.EditMode = DataGridViewEditMode.EditProgrammatically;
         
         }
+        private void showSchedule()
+        {
 
+            lvSchedule.Items.Clear();
+
+            foreach (AppData.MenuSchedule ms in AppData.MenuSchedule.FindAll())
+            {
+                ListViewItem item = lvSchedule.Items.Add(ms.MenuScheduleId.ToString());
+                item.Tag = ms;
+                item.SubItems.Add(ms.MsDate);
+                item.SubItems.Add(AppData.Menu.Find(ms.MsMenuA).MName);
+                item.SubItems.Add(AppData.Menu.Find(ms.MsMenuB).MName);
+                item.SubItems.Add(AppData.Menu.Find(ms.MsMenuC).MName);
+                
+
+            }
+        }
+        private void showCustomer()
+        {
+
+            lvCustomer.Items.Clear();
+
+            foreach (AppData.CustomerProfile cp in AppData.CustomerProfile.FindAll())
+            {
+                ListViewItem item = lvCustomer.Items.Add(cp.CustomerId.ToString());
+                item.Tag = cp;
+                item.SubItems.Add(cp.CpName);
+                item.SubItems.Add(cp.CpDeliveryAddress);
+                item.SubItems.Add(cp.CpBillAddress);
+                item.SubItems.Add(cp.CpMobileNumber);
+                item.SubItems.Add(cp.CpEmail);
+
+            }
+        }
+        private void showMenu()
+        {
+
+            lvMenu.Items.Clear();
+            
+            foreach(AppData.Menu mn in AppData.Menu.FindAll())
+            {
+                ListViewItem item = lvMenu.Items.Add(mn.MenuId.ToString());
+                item.Tag = mn;
+                item.SubItems.Add(mn.MName);
+                item.SubItems.Add(mn.MDescription);
+                item.SubItems.Add(mn.MType);
+                item.SubItems.Add(mn.MCategory);
+                item.SubItems.Add(String.Format("{0:#.##0}",mn.MPrice.ToString()));
+                
+            }
+        }
         private void showBroadcastSchedule()
         {
             String sqlCmd = String.Empty;
@@ -438,6 +492,120 @@ namespace SMS_Gateway
             
             }
 
+        }
+
+        private void btnNewMenu_Click(object sender, EventArgs e)
+        {
+            FrmAddMenu frmAdd = new FrmAddMenu();
+            
+            if (frmAdd.ShowDialog() == DialogResult.OK)
+            {
+                showMenu();
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            FrmAddCustomer frmAddCust = new FrmAddCustomer();
+            if (frmAddCust.ShowDialog() == DialogResult.OK)
+            {
+                showCustomer();
+            }
+        }
+
+        private void btnAddSchedule_Click(object sender, EventArgs e)
+        {
+            FrmAddSchedule frmAddSche = new FrmAddSchedule();
+            if (frmAddSche.ShowDialog() == DialogResult.OK)
+            {
+                showSchedule();
+            }
+        }
+
+        private void btnRemoveMenu_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvMenu.CheckedItems.Count; i++)
+            {
+                AppData.Menu mn = (AppData.Menu)lvMenu.CheckedItems[i].Tag;
+                mn.Delete();
+            }
+            showMenu();
+        }
+
+       
+
+        private void lvMenu_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvMenu.SelectedItems.Count == 1)
+            {
+                AppData.Menu mn = (AppData.Menu)lvMenu.SelectedItems[0].Tag;
+
+                using (FrmAddMenu frmAddMenu = new FrmAddMenu(mn))
+                {
+                    if (frmAddMenu.ShowDialog(this) == DialogResult.OK)
+                    {
+                        showMenu();
+                    }
+                }
+            }
+        }
+
+        private void lvCustomer_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            if (lvCustomer.SelectedItems.Count == 1)
+            {
+                AppData.CustomerProfile cp = (AppData.CustomerProfile)lvCustomer.SelectedItems[0].Tag;
+
+                using (FrmAddCustomer frmAddCust = new FrmAddCustomer(cp))
+                {
+                    if (frmAddCust.ShowDialog(this) == DialogResult.OK)
+                    {
+                        showCustomer();
+                    }
+                }
+            }
+        }
+
+        private void btnRemoveCustomer_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvCustomer.CheckedItems.Count; i++)
+            {
+                AppData.CustomerProfile cp = (AppData.CustomerProfile)lvCustomer.CheckedItems[i].Tag;
+                cp.Delete();
+            }
+            showCustomer();
+        }
+
+        private void btnScheduleRemove_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvSchedule.CheckedItems.Count; i++)
+            {
+                AppData.MenuSchedule ms = (AppData.MenuSchedule)lvSchedule.CheckedItems[i].Tag;
+                ms.Delete();
+            }
+            showSchedule();
+        }
+
+        private void lvSchedule_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvSchedule.SelectedItems.Count == 1)
+            {
+                AppData.MenuSchedule ms = (AppData.MenuSchedule)lvSchedule.SelectedItems[0].Tag;
+
+                using (FrmAddSchedule frmAddSche = new FrmAddSchedule(ms))
+                {
+                    if (frmAddSche.ShowDialog(this) == DialogResult.OK)
+                    {
+                        showSchedule();
+                    }
+                }
+            }
         }
 
 
