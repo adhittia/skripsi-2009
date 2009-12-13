@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model dslVersion="1.0.0.0" Id="779f0d04-62cd-418f-8f57-b16788f9f8b8" xmlns="http://schemas.microsoft.com/dsltools/ActiveWriter">
+  <additionalImports>AAEAAAD/////AQAAAAAAAAAMAgAAAF1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkRzbCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTkwNTE0MTM5NmRkYjA3OTkEAQAAAKEBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydCwgQWx0aW5vcmVuLkFjdGl2ZVdyaXRlci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj05MDUxNDEzOTZkZGIwNzk5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAB9BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydFtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydAIAAAAL</additionalImports>
+  <classes>
+    <modelClass name="CustomerOrder" schema="catering" table="customer_order">
+      <properties>
+        <modelProperty Id="ee3d6ede-30ab-4ad9-b1f7-2962e3882247" name="ComSelected" column="COM_Selected" columnType="Int32" length="0" />
+        <modelProperty Id="8e436d85-38af-4625-a4e8-cd4615977c0e" name="ComOrderStatus" column="COM_Order_Status" length="0" />
+        <modelProperty Id="66e9b533-4b98-4878-a64b-9c022eee650c" name="ComOrderDate" column="COM_Order_Date" length="0" />
+        <modelProperty Id="ce92f00e-1318-48f6-aa6e-0d7f172f6a87" name="MenuScheduleCustomerS" column="Menu_Schedule_Customer_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="SmsOutput" schema="catering" table="sms_output">
+      <properties>
+        <modelProperty Id="5211f45b-a748-46f3-bf99-f0c9f1490be3" name="WaktuDiproses" column="Waktu_Diproses" columnType="DateTime" length="0" />
+        <modelProperty Id="98cc8815-a1d2-4556-bf24-b534001144c7" name="WaktuKirim" column="Waktu_Kirim" columnType="DateTime" length="0" />
+        <modelProperty Id="9bc4357e-59d8-4333-9c87-d8d92b118bea" name="NoTujuan" column="No_Tujuan" length="0" />
+        <modelProperty Id="8d50e6a2-2c13-433b-a2dd-da80c152fa20" name="PesanTeks" column="Pesan_Teks" length="0" />
+        <modelProperty Id="c508e0d9-9089-4ddc-aac3-c66bed73d0a3" name="Status" column="Status" length="0" />
+        <modelProperty Id="d36b5673-2cae-41cc-9d09-2cdb51f5687f" name="IdOutput" column="Id_Output" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="CustomerOrderDetail" schema="catering" table="customer_order_detail">
+      <properties>
+        <modelProperty Id="42d41e8d-6ec3-4f74-a9f0-405e326fdb31" name="Price" column="Price" length="0" />
+        <modelProperty Id="91e21cc4-9a36-478e-a815-d8a29800ed76" name="AdditionalOrderS" column="Additional_Order_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="CustomerProfile" schema="catering" table="customer_profile">
+      <properties>
+        <modelProperty Id="e4c94b24-ac99-40cf-b028-2d95a9642ec5" name="CpName" column="CP_Name" length="0" />
+        <modelProperty Id="1454b593-bca5-4927-8c2c-765f6ad0e2f6" name="CpDeliveryAddress" column="CP_Delivery_Address" length="0" />
+        <modelProperty Id="e20c062a-c530-495c-9d2f-491ae3600850" name="CpBillAddress" column="CP_Bill_Address" length="0" />
+        <modelProperty Id="fe1fac24-ca03-4ea9-ac1f-6c133904376e" name="CpMobileNumber" column="CP_Mobile_Number" length="0" />
+        <modelProperty Id="6a2c243e-6891-4f4a-8172-18670f74dfdb" name="CpEmail" column="CP_Email" length="0" />
+        <modelProperty Id="abef426a-5ee2-4574-8c1c-96ee5c1ae224" name="CustomerId" column="Customer_ID" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="DaftarRegister" schema="catering" table="daftar_register">
+      <properties>
+        <modelProperty Id="a4249e1c-7012-4a79-a20c-b23d7acf77f9" name="NamaClass" column="Nama_Class" length="0" />
+        <modelProperty Id="04b754a2-382b-4f91-b8e0-f40462809dd1" name="NamaAssembly" column="Nama_Assembly" length="0" />
+        <modelProperty Id="e1252f0c-0c68-4f1e-bb00-ab0379de99ff" name="RegType" column="Reg_Type" length="0" notNull="true" keyType="CompositeKey" compositeKeyName="DaftarRegisterCompositeKey" />
+        <modelProperty Id="4fb0c928-91e7-4a28-a80d-b319502fdd8c" name="RegName" column="Reg_Name" length="0" notNull="true" keyType="CompositeKey" compositeKeyName="DaftarRegisterCompositeKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="JadwalBroadcast" schema="catering" table="jadwal_broadcast">
+      <properties>
+        <modelProperty Id="5675b5ab-bdd8-4aa3-be82-2cba06360396" name="PengulanganMax" column="Pengulangan_Max" columnType="Int32" length="0" />
+        <modelProperty Id="999a060c-4cea-4c66-af8d-e8f93fc8419d" name="PengulanganHitung" column="Pengulangan_Hitung" columnType="Int32" length="0" />
+        <modelProperty Id="4d71995b-b570-4327-a9c2-f5ed099e0862" name="PengulanganJedaHari" column="Pengulangan_Jeda_Hari" columnType="Int32" length="0" />
+        <modelProperty Id="177837ef-2177-4a87-9c93-86def05a5c07" name="WaktuEksekusiBerikut" column="Waktu_Eksekusi_Berikut" length="0" />
+        <modelProperty Id="7faccc84-53ec-4263-af5a-7bad3e421966" name="WaktuEksekusiTerakhir" column="Waktu_Eksekusi_Terakhir" length="0" />
+        <modelProperty Id="21b821fc-c4bd-4872-8b3e-13cb147a047d" name="Status" column="Status" length="0" />
+        <modelProperty Id="fb5bfe83-4d36-4cd9-bea4-061379fd5bfb" name="IdJadwal" column="Id_Jadwal" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="Menu" schema="catering" table="menu">
+      <properties>
+        <modelProperty Id="6089599e-ab10-4f6d-8f99-fc18c9b0b51c" name="MName" column="M_Name" length="0" />
+        <modelProperty Id="13648f4f-600b-42d1-83fd-088c5ba76ba2" name="MDescription" column="M_Description" length="0" />
+        <modelProperty Id="de1d2209-5344-4f9e-bc87-d1cf44ed14bf" name="MPrice" column="M_Price" columnType="Decimal" length="0" />
+        <modelProperty Id="7e9f8391-c70b-4559-81e4-a0f28fa2fcd4" name="MType" column="M_Type" length="0" />
+        <modelProperty Id="0736bab1-1d20-440e-b46a-72483658be9a" name="MCategory" column="M_Category" length="0" />
+        <modelProperty Id="5190b52b-5b6b-49c2-8054-92d54d9dae11" name="MenuId" column="Menu_ID" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="MenuSchedule" schema="catering" table="menu_schedule">
+      <properties>
+        <modelProperty Id="40b365d9-5d69-40f1-abda-0465e3a8bf85" name="MsDate" column="MS_Date" length="0" />
+        <modelProperty Id="9d159fa5-fab9-460f-ab59-ff42b6f2dfb7" name="MsMenuA" column="MS_Menu_A" columnType="Int32" length="0" />
+        <modelProperty Id="e5e02672-5622-4ac9-b145-e7a2ec4133d5" name="MsMenuB" column="MS_Menu_B" columnType="Int32" length="0" />
+        <modelProperty Id="b7a2ba0f-e503-4e4d-b3d2-63b61f1b394c" name="MsMenuC" column="MS_Menu_C" columnType="Int32" length="0" />
+        <modelProperty Id="601ecb3f-feae-45cf-979c-427b2bbe08e2" name="MenuScheduleId" column="Menu_Schedule_Id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="SmsInput" schema="catering" table="sms_input">
+      <properties>
+        <modelProperty Id="45d91e1c-f752-49bd-8c28-336d842d0b06" name="TanggalTerima" column="Tanggal_Terima" columnType="DateTime" length="0" />
+        <modelProperty Id="3dd5eecc-9284-406b-b7ed-f166d51cec16" name="NoPengirim" column="No_Pengirim" length="0" />
+        <modelProperty Id="b54218fb-ea43-46f4-8aa7-9f953e846143" name="PesanTeks" column="Pesan_Teks" length="0" />
+        <modelProperty Id="9ae76fd7-bfc6-4ea7-907b-7a400e31f5e1" name="Status" column="Status" length="0" />
+        <modelProperty Id="5eb36685-f191-4ef7-8e4f-57a7bcf59e49" name="IdInput" column="Id_Input" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+  </classes>
+</model>

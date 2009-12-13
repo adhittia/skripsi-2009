@@ -29,16 +29,17 @@ namespace SMS_Gateway.FormCommandRegister
 
         public void showData(String regType , String regName) 
         {
+            DBProvider dbProvider = new DBProvider();
             MySqlCommand command = new MySqlCommand();
 
-            sqlCmd = "select * from daftar_register where reg_type=?reg_type and reg_name=?reg_name";
+            String sqlCmd = "select * from daftar_register where reg_type=?reg_type and reg_name=?reg_name";
 
-            command.commandText = "select * from daftar_register where reg_type=?reg_type and reg_name=?reg_name";
-            command.params.add(new MySqlParameter("reg_type",regType));
-            command.params.add(new MySqlParameter("reg_name",regName));
+            command.CommandText = "select * from daftar_register where reg_type=?reg_type and reg_name=?reg_name";
+            command.Parameters.Add(new MySqlParameter("reg_type",regType));
+            command.Parameters.Add(new MySqlParameter("reg_name", regName));
 
 
-            DataTable dtCommand = dbprovider.getData(command);
+            DataTable dtCommand = dbProvider.getData(command);
 
 
             

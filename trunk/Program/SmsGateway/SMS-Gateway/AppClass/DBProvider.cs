@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace Com.Martin.SMS.DB {
     class DBProvider {
-        private MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=;database=smsgolf;Allow Zero Datetime=true");
+        private MySqlConnection conn = new MySqlConnection("server=localhost;uid=admin;pwd=password;database=catering;Allow Zero Datetime=true");
 
         public void DBConn() {
 
