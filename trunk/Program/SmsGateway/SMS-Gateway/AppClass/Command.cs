@@ -63,4 +63,55 @@ namespace Com.Martin.SMS.Command {
             return this.param.ToArray();
         }
     }
+
+    public class GetMenuSchedule : AbstractRequest
+    {
+        public override string GetRegName()
+        {
+            return "Menu";
+        }
+
+        public override string GetRegType()
+        {
+            return "Get";
+        }
+
+        public override Com.Martin.SMS.Data.SMSOutgoing Execute()
+        {
+            SMS.Data.SMSOutgoing outgoing = new SMS.Data.SMSOutgoing();
+            outgoing.DateProcess = DateTime.Now;
+            outgoing.DateSent = DateTime.Now;
+            outgoing.DestinationNo = "085668494684";
+            outgoing.ID = "SMS1";
+            outgoing.MessageText = "Sukses";
+            outgoing.RegisterName = "Reg Name";
+            outgoing.RegisterType = "Reg Type";
+
+            return outgoing;
+        }
+    }
+
+    public class BroadcastNews : AbstractBroadcast
+    {
+        public override string GetRegName()
+        {
+            return "News";
+        }
+
+        public override string GetRegType()
+        {
+            return "BRC";
+        }
+
+        public override List<Com.Martin.SMS.Data.SMSOutgoing> Execute()
+        {
+            List<SMS.Data.SMSOutgoing> lst = new List<Com.Martin.SMS.Data.SMSOutgoing>;
+            // Query Number from customer_profile;
+            // while read
+            //   out = new smsoutgoing;
+            //   isi outgoing.dest = number customer
+            //   isi message.text = ngawur
+            // lst.add(out)
+        }
+    }
 }
