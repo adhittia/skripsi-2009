@@ -52,11 +52,12 @@ namespace Com.Martin.SMS.Common {
                 List<SMSOutgoing> lstOut = brc.Execute();
                 SMSHelper.SaveBroadcastMessage(lstOut);
 
-                lstBroadCastSch[i].CurrentLoop += 1;
-                lstBroadCastSch[i].LastExecuteTime = lstBroadCastSch[i].NextExecuteTime;
-                lstBroadCastSch[i].NextExecuteTime = lstBroadCastSch[i].NextExecuteTime.AddDays(lstBroadCastSch[i].IntervalDays);
+                BroadcastScheduler schd = lstBroadCastSch[i];
+                schd.CurrentLoop += 1;
+                schd.LastExecuteTime = schd.NextExecuteTime;
+                schd.NextExecuteTime = schd.NextExecuteTime.AddDays(schd.IntervalDays);
 
-                SMSHelper.SaveBroadcastScheduler(lstBroadCastSch[i]);
+                SMSHelper.SaveBroadcastScheduler( schd);
             }
         }
 
@@ -107,7 +108,37 @@ namespace Com.Martin.SMS.Common {
         }
 
         public static Com.Martin.SMS.Data.SMSIncoming GetIncomingMessage(String ID) {
-            return new SMS.Data.SMSIncoming();
+
+            SMSIncoming inc = new SMSIncoming();
+            try
+            {
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                command.CommandText = "SELECT Id_Input, Tanggal_Terima, No_Pengirim, Pesan_Teks, Status FROM catering.sms_input where ID_INPUT=?ID_INPUT";
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("ID_INPUT", ID);
+
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    
+                    if (!reader.IsDBNull(0))
+                        inc.ID = reader.GetString(0);
+                    if (!reader.IsDBNull(1))
+                        inc.DateReceive = reader.GetDateTime(1);
+                    if (!reader.IsDBNull(2))
+                        inc.Sender = reader.GetString(2);
+                    if (!reader.IsDBNull(3))
+                        inc.MessageText = reader.GetString(3);
+                }
+                reader.Close();
+            }
+            finally
+            {                
+                conn.Close();
+            }
+
+            return inc;
         }
 
         public static void SaveOutgoingMessage(Com.Martin.SMS.Data.SMSOutgoing Outgoing) {
@@ -115,7 +146,45 @@ namespace Com.Martin.SMS.Common {
         }
 
         public static Com.Martin.SMS.Data.SMSOutgoing GetOutgoingMessage(String ID) {
-            return new SMS.Data.SMSOutgoing();
+            SMSOutgoing outp = new SMSOutgoing();
+            try
+            {
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                command.CommandText = "SELECT Id_Output, Waktu_Diproses, Waktu_Kirim, No_Tujuan, Pesan_Teks, Status, Reg_Name, Reg_Type, Id_Input FROM catering.sms_output s where ID_OUTPUT=?ID_OUTPUT";
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("ID_OUTPUT", ID);
+
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+
+                    if (!reader.IsDBNull(0))
+                        outp.ID = reader.GetString(0);
+                    if (!reader.IsDBNull(1))
+                        outp.DateProcess = reader.GetDateTime(1);
+                    if (!reader.IsDBNull(2))
+                        outp.DateSent= reader.GetDateTime(2);
+                    if (!reader.IsDBNull(3))
+                        outp.DestinationNo = reader.GetString(3);
+                    if (!reader.IsDBNull(4))
+                        outp.MessageText = reader.GetString(4);
+                    if (!reader.IsDBNull(6))
+                        outp.RegisterName  = reader.GetString(6);
+                    if (!reader.IsDBNull(7))
+                        outp.RegisterType = reader.GetString(7);
+                    if (!reader.IsDBNull(8))
+                        outp.SMSRequest = GetIncomingMessage(reader.GetString(8));
+                
+                }
+                reader.Close();
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return outp;
         }
 
         public static void SaveBroadcastMessage(List<Com.Martin.SMS.Data.SMSOutgoing> OutgoingList) {
@@ -123,7 +192,7 @@ namespace Com.Martin.SMS.Common {
             //  insert into sms_output
         }
 
-        public static void SaveBroadcastScheduler(Com.Martin.SMS.Command.AbstractBroadcast brc)
+        public static void SaveBroadcastScheduler(Com.Martin.SMS.Data.BroadcastScheduler brc)
         {
             //update jadwal_broadcast where id=brc.id
         }
@@ -136,8 +205,8 @@ namespace Com.Martin.SMS.Common {
         }
 
         public static List<Com.Martin.SMS.Data.BroadcastScheduler> GetBroadcastScheduler(DateTime NextExecute) {
-            // SELECT j.`Id_Jadwal`, j.`Pengulangan_Max`, j.`Pengulangan_Hitung`, j.`Pengulangan_Jeda_Hari`, j.`Waktu_Eksekusi_Berikut`, 
-            //  j.`Waktu_Eksekusi_Terakhir`, j.`Status`, j.`Reg_Name`, j.`Reg_Type` FROM jadwal_broadcast j;
+            // SELECT j.Id_Jadwal j.Pengulangan_Max j.Pengulangan_Hitung j.Pengulangan_Jeda_Hari j.Waktu_Eksekusi_Berikut 
+            //  j.Waktu_Eksekusi_Terakhir j.Status j.Reg_Name j.Reg_Type FROM jadwal_broadcast j;
             // where current-loop<= maximum_loop and next_execute_time < now and status='enable'
             return new List<Com.Martin.SMS.Data.BroadcastScheduler>();
         }
