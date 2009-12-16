@@ -105,7 +105,7 @@ namespace Com.Martin.SMS.Command {
 
         public override List<Com.Martin.SMS.Data.SMSOutgoing> Execute()
         {
-            List<SMS.Data.SMSOutgoing> lst = new List<Com.Martin.SMS.Data.SMSOutgoing>;
+            List<SMS.Data.SMSOutgoing> lst = new List<Com.Martin.SMS.Data.SMSOutgoing>();
             // Query Number from customer_profile;
             // while read
             //   out = new smsoutgoing;
