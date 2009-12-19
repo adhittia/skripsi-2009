@@ -114,7 +114,7 @@ namespace Com.Martin.SMS.Common {
             {
                 conn.Open();
                 MySqlCommand command = conn.CreateCommand();
-                command.CommandText = "SELECT Id_Input, Tanggal_Terima, No_Pengirim, Pesan_Teks, Status FROM catering.sms_input where ID_INPUT=?ID_INPUT";
+                command.CommandText = "SELECT Id_Input, Tanggal_Terima, No_Pengirim, Pesan_Teks, Status FROM sms_input where ID_INPUT=?ID_INPUT";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("ID_INPUT", ID);
 
@@ -151,7 +151,7 @@ namespace Com.Martin.SMS.Common {
             {
                 conn.Open();
                 MySqlCommand command = conn.CreateCommand();
-                command.CommandText = "SELECT Id_Output, Waktu_Diproses, Waktu_Kirim, No_Tujuan, Pesan_Teks, Status, Reg_Name, Reg_Type, Id_Input FROM catering.sms_output s where ID_OUTPUT=?ID_OUTPUT";
+                command.CommandText = "SELECT Id_Output, Waktu_Diproses, Waktu_Kirim, No_Tujuan, Pesan_Teks, Status, Reg_Name, Reg_Type, Id_Input FROM sms_output where ID_OUTPUT=?ID_OUTPUT";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("ID_OUTPUT", ID);
 
@@ -188,27 +188,201 @@ namespace Com.Martin.SMS.Common {
         }
 
         public static void SaveBroadcastMessage(List<Com.Martin.SMS.Data.SMSOutgoing> OutgoingList) {
-            //while list
-            //  insert into sms_output
+
+            try
+            {
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                int rows = 0;
+
+                for (int i = 0; i < OutgoingList.Count; i++ )
+                {
+                    SMSOutgoing outPut = OutgoingList[i];
+                    if (outPut.ID == String.Empty)
+                    {
+                        outPut.ID = CreateIdNumber(TypeSMS.Output);
+                        command.CommandText = "INSERT INTO sms_output (Id_Output, Waktu_Diproses, Waktu_Kirim, No_Tujuan, Pesan_Teks, Status, Reg_Name, Reg_Type, Id_Input ) values ";
+                        command.CommandText += "(?Id_Output, ?Waktu_Diproses, ?Waktu_Kirim, ?No_Tujuan, ?Pesan_Teks, ?Status, ?Reg_Name, ?Reg_Type, ?Id_Input ) ";
+
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("Id_Output", outPut.ID);
+                        command.Parameters.AddWithValue("Waktu_Diproses", outPut.DateProcess.ToString("yyyy-mm-dd hh:mm:ss"));
+                        command.Parameters.AddWithValue("Waktu_Kirim", outPut.DateSent.ToString("yyyy-mm-dd hh:mm:ss"));
+                        command.Parameters.AddWithValue("No_Tujuan", outPut.DestinationNo);
+                        command.Parameters.AddWithValue("Pesan_Teks", outPut.MessageText);
+                        command.Parameters.AddWithValue("Status", "NOK");
+                        command.Parameters.AddWithValue("Reg_Name", outPut.RegisterName);
+                        command.Parameters.AddWithValue("Reg_Type", outPut.RegisterType);
+                        command.Parameters.AddWithValue("Id_Input", outPut.SMSRequest.ID);
+                    }
+                    else
+                    {
+                        command.CommandText = "update sms_output set ";
+                        command.CommandText += "Id_Output=?Id_Output, ";
+                        command.CommandText += "Waktu_Diproses=?Waktu_Diproses, ";
+                        command.CommandText += "Waktu_Kirim=?Waktu_Kirim, ";
+                        command.CommandText += "No_Tujuan=?No_Tujuan, ";
+                        command.CommandText += "Pesan_Teks=?Pesan_Teks, ";
+                        command.CommandText += "Status=?Status, ";
+                        command.CommandText += "Reg_Name=?Reg_Name, ";
+                        command.CommandText += "Reg_Type=?Reg_Type, ";
+                        command.CommandText += "Id_Input=?Id_Input ";
+                        command.CommandText += "where Id_Output=?Id_Output";
+
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("Id_Output", outPut.ID);
+                        command.Parameters.AddWithValue("Waktu_Diproses", outPut.DateProcess.ToString("yyyy-mm-dd hh:mm:ss"));
+                        command.Parameters.AddWithValue("Waktu_Kirim", outPut.DateSent.ToString("yyyy-mm-dd hh:mm:ss"));
+                        command.Parameters.AddWithValue("No_Tujuan", outPut.DestinationNo);
+                        command.Parameters.AddWithValue("Pesan_Teks", outPut.MessageText);
+                        command.Parameters.AddWithValue("Status", "NOK");
+                        command.Parameters.AddWithValue("Reg_Name", outPut.RegisterName);
+                        command.Parameters.AddWithValue("Reg_Type", outPut.RegisterType);
+                        command.Parameters.AddWithValue("Id_Input", outPut.SMSRequest.ID);
+                    }
+                    rows = command.ExecuteNonQuery();
+                }
+            }
+            catch (System.Exception ex) { }
+            finally 
+            {
+                conn.Close();
+            }
+
+            
         }
 
         public static void SaveBroadcastScheduler(Com.Martin.SMS.Data.BroadcastScheduler brc)
         {
             //update jadwal_broadcast where id=brc.id
+
+            try
+            {
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                int rows = 0;
+                command.CommandText = "update jadwal_broadcast set ";
+                command.CommandText += "Id_Jadwal=?Id_Jadwal, ";
+                command.CommandText += "Pengulangan_Max=?Pengulangan_Max, ";
+                command.CommandText += "Pengulangan_Hitung=?Pengulangan_Hitung, ";
+                command.CommandText += "Pengulangan_Jeda_Hari=?Pengulangan_Jeda_Hari, ";
+                command.CommandText += "Waktu_Eksekusi_Berikut=?Waktu_Eksekusi_Berikut, ";
+                command.CommandText += "Waktu_Eksekusi_Terakhir=?Waktu_Eksekusi_Terakhir, ";
+                command.CommandText += "Reg_Name=?Reg_Name, ";
+                command.CommandText += "Reg_Type=?Reg_Type ";
+                command.CommandText += "where Id_Jadwal=?Id_Jadwal";
+
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("Id_Jadwal", brc.ID);
+                command.Parameters.AddWithValue("Pengulangan_Max", brc.MaximumLoop);
+                command.Parameters.AddWithValue("Pengulangan_Hitung", brc.CurrentLoop);
+                command.Parameters.AddWithValue("Pengulangan_Jeda_Hari", brc.IntervalDays);
+                command.Parameters.AddWithValue("Waktu_Eksekusi_Berikut", brc.NextExecuteTime.ToString("yyyy-mm-dd hh:mm:ss"));
+                command.Parameters.AddWithValue("Waktu_Eksekusi_Terakhir", brc.LastExecuteTime.ToString("yyyy-mm-dd hh:mm:ss"));
+                command.Parameters.AddWithValue("Reg_Name", brc.RegisterName);
+                command.Parameters.AddWithValue("Reg_Type", brc.RegisterType);
+                rows = command.ExecuteNonQuery();
+                
+            }
+            catch (System.Exception ex) { }
+            finally 
+            {
+                conn.Close();
+            }
         }
 
-
         public static List<Com.Martin.SMS.Data.SMSOutgoing> GetOutgoingSMSList() {
-            // SELECT * from sms_output where status = wait and limit = 5 offset 1
 
-            return new List<Com.Martin.SMS.Data.SMSOutgoing>();
+            List<Com.Martin.SMS.Data.SMSOutgoing> lst = new List<SMSOutgoing>();
+
+            try
+            {
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                command.CommandText = "SELECT Id_Output , Waktu_Diproses, Waktu_Kirim, No_Tujuan, Pesan_Teks, Reg_Name, Reg_Type, Id_Input FROM sms_output s where status='NOK' limit  5  offset 1";
+                command.Parameters.Clear();
+
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    SMSOutgoing outSMS = new SMSOutgoing();
+                    if (!reader.IsDBNull(0))
+                        outSMS.ID = reader.GetString("Id_Output");
+                    if (!reader.IsDBNull(1))
+                        outSMS.DateProcess = reader.GetDateTime("Waktu_Diproses");
+                    if (!reader.IsDBNull(2))
+                        outSMS.DateSent = reader.GetDateTime("Waktu_Kirim");
+                    if (!reader.IsDBNull(3))
+                        outSMS.DestinationNo = reader.GetString("No_Tujuan");
+                    if (!reader.IsDBNull(4))
+                        outSMS.MessageText = reader.GetString("Pesan_Teks");
+                    if (!reader.IsDBNull(5))
+                        outSMS.RegisterName = reader.GetString("Reg_Name");
+                    if (!reader.IsDBNull(6))
+                        outSMS.RegisterType = reader.GetString("Reg_Type");
+                    if (!reader.IsDBNull(7))
+                        outSMS.SMSRequest.ID = reader.GetString("Id_Input");
+
+                    lst.Add(outSMS);
+                }
+                reader.Close();
+            }
+            catch (System.Exception ex) { }
+            finally
+            {
+                conn.Close();
+            }
+            return lst;
         }
 
         public static List<Com.Martin.SMS.Data.BroadcastScheduler> GetBroadcastScheduler(DateTime NextExecute) {
             // SELECT j.Id_Jadwal j.Pengulangan_Max j.Pengulangan_Hitung j.Pengulangan_Jeda_Hari j.Waktu_Eksekusi_Berikut 
             //  j.Waktu_Eksekusi_Terakhir j.Status j.Reg_Name j.Reg_Type FROM jadwal_broadcast j;
             // where current-loop<= maximum_loop and next_execute_time < now and status='enable'
-            return new List<Com.Martin.SMS.Data.BroadcastScheduler>();
+
+            List<Com.Martin.SMS.Data.BroadcastScheduler> lst = new List<BroadcastScheduler>();
+            try
+            {
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                command.CommandText = "SELECT Id_Jadwal, Pengulangan_Max , Pengulangan_Hitung , Pengulangan_Jeda_Hari , Waktu_Eksekusi_Berikut , ";
+                command.CommandText += "Waktu_Eksekusi_Terakhir , Status , Reg_Name , Reg_Type FROM jadwal_broadcast ";
+                command.CommandText += "where Pengulangan_Hitung <= Pengulangan_Max and Waktu_Eksekusi_Berikut < CURDATE() and status='ENABLE' ";
+
+                command.Parameters.Clear();
+
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    BroadcastScheduler brcSchd = new BroadcastScheduler();
+                    if (!reader.IsDBNull(0))
+                        brcSchd.ID = reader.GetInt32("Id_Jadwal");
+                    if (!reader.IsDBNull(1))
+                        brcSchd.MaximumLoop = reader.GetInt32("Pengulangan_Max");
+                    if (!reader.IsDBNull(2))
+                        brcSchd.CurrentLoop = reader.GetInt32("Pengulangan_Hitung");
+                    if (!reader.IsDBNull(3))
+                        brcSchd.IntervalDays = reader.GetInt32("Pengulangan_Jeda_Hari");
+                    if (!reader.IsDBNull(4))
+                        brcSchd.NextExecuteTime = reader.GetDateTime("Waktu_Eksekusi_Berikut");
+                    if (!reader.IsDBNull(5))
+                        brcSchd.LastExecuteTime = reader.GetDateTime("Waktu_Eksekusi_Terakhir");
+                    //if (!reader.IsDBNull(6))
+                        //brcSchd.RegisterType = reader.GetString("Status");
+                    if (!reader.IsDBNull(7))
+                        brcSchd.RegisterName = reader.GetString("Reg_Name");
+                    if (!reader.IsDBNull(7))
+                        brcSchd.RegisterType = reader.GetString("Reg_Type");
+                    lst.Add(brcSchd);
+                }
+                reader.Close();
+            }
+            catch (System.Exception ex) { }
+            finally
+            {
+                conn.Close();
+            }
+            return lst;
         }
 
         private static String CreateIdNumber(TypeSMS type) {

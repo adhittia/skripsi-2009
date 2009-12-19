@@ -112,6 +112,7 @@ namespace Com.Martin.SMS.Command {
             //   isi outgoing.dest = number customer
             //   isi message.text = ngawur
             // lst.add(out)
+            return lst;
         }
     }
 }
