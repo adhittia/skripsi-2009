@@ -29,9 +29,8 @@ namespace SMS_Gateway.FormCommandRegister
 
         public void showData(String regType , String regName) 
         {
-            DBProvider dbProvider = new DBProvider();
+            DBProvider db = new DBProvider();
             MySqlCommand command = new MySqlCommand();
-
             String sqlCmd = "select * from daftar_register where reg_type=?reg_type and reg_name=?reg_name";
 
             command.CommandText = "select * from daftar_register where reg_type=?reg_type and reg_name=?reg_name";
@@ -39,12 +38,8 @@ namespace SMS_Gateway.FormCommandRegister
             command.Parameters.Add(new MySqlParameter("reg_name", regName));
 
 
-            DataTable dtCommand = dbProvider.getData(command);
 
-
-            
-        
-        
+            DataTable dtCommand = db.getData(command);
         }
 
         private void Btn_Save_Click(object sender, EventArgs e)
