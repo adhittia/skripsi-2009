@@ -143,6 +143,63 @@ namespace Com.Martin.SMS.Common {
 
         public static void SaveOutgoingMessage(Com.Martin.SMS.Data.SMSOutgoing Outgoing) {
             // update sms_output where id = outgoing.id;
+            try
+            {
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                int rows = 0;
+
+
+                SMSOutgoing outPut = Outgoing;
+                if (outPut.ID == String.Empty)
+                {
+                    outPut.ID = CreateIdNumber(TypeSMS.Output);
+                    command.CommandText = "INSERT INTO sms_output (Id_Output, Waktu_Diproses, Waktu_Kirim, No_Tujuan, Pesan_Teks, Status, Reg_Name, Reg_Type, Id_Input ) values ";
+                    command.CommandText += "(?Id_Output, ?Waktu_Diproses, ?Waktu_Kirim, ?No_Tujuan, ?Pesan_Teks, ?Status, ?Reg_Name, ?Reg_Type, ?Id_Input ) ";
+
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("Id_Output", outPut.ID);
+                    command.Parameters.AddWithValue("Waktu_Diproses", outPut.DateProcess.ToString("yyyy-mm-dd hh:mm:ss"));
+                    command.Parameters.AddWithValue("Waktu_Kirim", outPut.DateSent.ToString("yyyy-mm-dd hh:mm:ss"));
+                    command.Parameters.AddWithValue("No_Tujuan", outPut.DestinationNo);
+                    command.Parameters.AddWithValue("Pesan_Teks", outPut.MessageText);
+                    command.Parameters.AddWithValue("Status", "NOK");
+                    command.Parameters.AddWithValue("Reg_Name", outPut.RegisterName);
+                    command.Parameters.AddWithValue("Reg_Type", outPut.RegisterType);
+                    command.Parameters.AddWithValue("Id_Input", outPut.SMSRequest.ID);
+                }
+                else
+                {
+                    command.CommandText = "update sms_output set ";
+                    command.CommandText += "Id_Output=?Id_Output, ";
+                    command.CommandText += "Waktu_Diproses=?Waktu_Diproses, ";
+                    command.CommandText += "Waktu_Kirim=?Waktu_Kirim, ";
+                    command.CommandText += "No_Tujuan=?No_Tujuan, ";
+                    command.CommandText += "Pesan_Teks=?Pesan_Teks, ";
+                    command.CommandText += "Status=?Status, ";
+                    command.CommandText += "Reg_Name=?Reg_Name, ";
+                    command.CommandText += "Reg_Type=?Reg_Type, ";
+                    command.CommandText += "Id_Input=?Id_Input ";
+                    command.CommandText += "where Id_Output=?Id_Output";
+
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("Id_Output", outPut.ID);
+                    command.Parameters.AddWithValue("Waktu_Diproses", outPut.DateProcess.ToString("yyyy-mm-dd hh:mm:ss"));
+                    command.Parameters.AddWithValue("Waktu_Kirim", outPut.DateSent.ToString("yyyy-mm-dd hh:mm:ss"));
+                    command.Parameters.AddWithValue("No_Tujuan", outPut.DestinationNo);
+                    command.Parameters.AddWithValue("Pesan_Teks", outPut.MessageText);
+                    command.Parameters.AddWithValue("Status", "NOK");
+                    command.Parameters.AddWithValue("Reg_Name", outPut.RegisterName);
+                    command.Parameters.AddWithValue("Reg_Type", outPut.RegisterType);
+                    command.Parameters.AddWithValue("Id_Input", outPut.SMSRequest.ID);
+                }
+                rows = command.ExecuteNonQuery();
+            }
+            catch (System.Exception ex) { }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public static Com.Martin.SMS.Data.SMSOutgoing GetOutgoingMessage(String ID) {
