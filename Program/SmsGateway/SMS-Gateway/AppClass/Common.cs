@@ -494,8 +494,8 @@ namespace Com.Martin.SMS.Common {
                 throw new Com.Martin.SMS.Exception.SMSException("Register tidak ditemukan.");
             }
 
-            Com.Martin.SMS.Command.GetMenuSchedule mn = new Com.Martin.SMS.Command.GetMenuSchedule();
-            Type tp = mn.GetType();
+            //Com.Martin.SMS.Command.GetMenuSchedule mn = new Com.Martin.SMS.Command.GetMenuSchedule();
+            //Type tp = mn.GetType();
 
             Com.Martin.SMS.Command.AbstractRequest request = Activator.CreateInstance(nama_assembly, nama_class).Unwrap() as Com.Martin.SMS.Command.AbstractRequest;
             return request;
