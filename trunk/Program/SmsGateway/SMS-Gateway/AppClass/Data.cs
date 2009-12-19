@@ -21,6 +21,7 @@ namespace Com.Martin.SMS.Data {
         public String RegisterName;
         public String RegisterType;
         public SMSIncoming SMSRequest;
+        public String status;
     }
 
     public struct BroadcastScheduler {
