@@ -1,0 +1,8 @@
+Inisialisasi modem
+Buka koneksi modem
+Cek koneksi modem
+If koneksi = buka then
+	baca attribut modem
+Else
+	Tampilan konfirmasi kesalahan
+End If

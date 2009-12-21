@@ -1,0 +1,10 @@
+Inisialisasi modem
+Buka koneksi modem
+Cek koneksi modem
+If koneksi = buka Then
+	Start Broadcast Timer
+	Start Sender Timer
+	Start SMS Listener
+	Set Tombol Disconnect Available
+	Set Menu Tab Available
+End If

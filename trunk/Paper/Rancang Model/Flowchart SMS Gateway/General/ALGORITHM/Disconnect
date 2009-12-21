@@ -1,0 +1,9 @@
+Inisialisasi modem
+Cek koneksi modem
+If koneksi = buka Then
+	Stop Broadcast Timer
+	Stop Sender Timer
+	Stop SMS Listener
+	Set Tombol Disconnect Disable
+	Set Menu Tab Disable
+End If
