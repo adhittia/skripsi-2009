@@ -13,6 +13,9 @@ using ATSMS.Common;
 using ATSMS.SMS.Decoder;
 using ATSMS.SMS.Encoder;
 
+using Com.Martin.SMS.Command;
+using Com.Martin.SMS.Common;
+using Com.Martin.SMS.Data;
 using Com.Martin.SMS.DB;
 
 using MySql.Data.MySqlClient;
@@ -36,14 +39,39 @@ namespace SMS_Gateway
 
         public FrmMain()
         {
+            
             InitializeComponent();
             this.oGsmModem.NewMessageReceived += new GSMModem.NewMessageReceivedEventHandler(this.oGsmModem_NewMessageReceived);
+            //Com.Martin.SMS.Command.GetMenuSchedule mn = new Com.Martin.SMS.Command.GetMenuSchedule();
+            //Type tp = mn.GetType();
+            //System.Diagnostics.Debug.WriteLine(tp.Assembly.FullName);
         }
 
 
         private void oGsmModem_NewMessageReceived(ATSMS.NewMessageReceivedEventArgs e)
         {
-            MessageBox.Show("Message from " + e.MSISDN + ". Message - " + e.TextMessage, dialogCaption, MessageBoxButtons.OK);
+            //Com.Martin.SMS.Data.SMSIncoming smsInput = new Com.Martin.SMS.Data.SMSIncoming();
+
+            //Com.Martin.SMS.Command.GetMenuSchedule mn = new Com.Martin.SMS.Command.GetMenuSchedule();
+            //Type tp = mn.GetType();
+            //MessageBox.Show(tp.Assembly.FullName);
+
+            // helper = new smsHelper
+            // smsincoming = helper.SaveIncomingMessage(
+
+
+            //kalo sudah menggunakan data realtime dari modem
+            //SMSIncoming smsInput = SMSHelper.SaveIncomingMessage(e.MSISDN, "02191848465", e.TextMessage);
+
+            SMSIncoming smsInput = SMSHelper.SaveIncomingMessage("085668495684", "02191848465", "GET;MENU;NASI AYAM");
+            smsInput = CommandProcessor.ProcessRequest(smsInput);
+
+               
+            //update tab inbox (txtInbo & gridInbox)
+
+            txtInboxLog.Text += smsInput.MessageText + "\n";
+            
+            //MessageBox.Show("Message from " + e.MSISDN + ". Message - " + e.TextMessage, dialogCaption, MessageBoxButtons.OK);
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -494,6 +522,10 @@ namespace SMS_Gateway
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            oGsmModem_NewMessageReceived(new NewMessageReceivedEventArgs());
+        }
         private void btnNewMenu_Click(object sender, EventArgs e)
         {
             FrmAddMenu frmAdd = new FrmAddMenu();
@@ -501,6 +533,35 @@ namespace SMS_Gateway
             if (frmAdd.ShowDialog() == DialogResult.OK)
             {
                 showMenu();
+            }
+        }
+
+        private void BroadcastTimer_Tick(object sender, EventArgs e)
+        {
+            CommandProcessor.ProcessBroadcast();
+
+        }
+
+        private void SendingTimer_Tick(object sender, EventArgs e)
+        {
+            List<SMSOutgoing> lstOutGoing = SMSHelper.GetOutgoingSMSList();
+            for (int i = 0; i < lstOutGoing.Count; i++)
+            {
+                SMSOutgoing outSms = lstOutGoing[i];
+                try
+                {
+                    oGsmModem.SendSMS(outSms.DestinationNo, outSms.MessageText);
+                    outSms.DateSent = DateTime.Now;
+                    SMSHelper.SaveOutgoingMessage(outSms);
+                    // tulis ke outbox tab
+                }
+                catch (Exception ex)
+                {
+                    // tulis ke outbox tab
+
+                    //MessageBox.Show(ex.Message, dialogCaption, MessageBoxButtons.OK);
+
+                }
             }
         }
 
