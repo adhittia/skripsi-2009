@@ -191,12 +191,18 @@ namespace SMS_Gateway
             cmbInboxFilter.SelectedIndex = 0;
             cmbOutBoxFilter.SelectedIndex = 0;
 
+            cmbReportFilter.Items.Add("Show All");
+            cmbReportFilter.Items.Add("Broadcast");
+            cmbReportFilter.Items.Add("Request");
+            cmbReportFilter.SelectedIndex = 0;
+
             ConnectToDB();
-            showCommandRegister();
-            showBroadcastSchedule();
+            showCommandRegister(false);
+            showBroadcastSchedule(false);
             showMenu();
             showCustomer();
             showSchedule();
+
         }
 
         private void chkTab() 
@@ -331,13 +337,21 @@ namespace SMS_Gateway
         private void Btn_Add_Broadcast_Click(object sender, EventArgs e)
         {
             FrmBroadcastSchedule frmBroadcast = new FrmBroadcastSchedule();
-            frmBroadcast.ShowDialog(this);
+            DialogResult hasil = frmBroadcast.ShowDialog(this);
+            if (hasil == DialogResult.OK)
+            {
+                showBroadcastSchedule(true);
+            }     
         }
 
         private void Btn_Add_Cmd_Click(object sender, EventArgs e)
         {
             FrmCommandRegister frmCmdReg = new FrmCommandRegister();
-            frmCmdReg.ShowDialog();
+            DialogResult hasil = frmCmdReg.ShowDialog(this);
+            if (hasil == DialogResult.OK)
+            {
+                showCommandRegister(true);
+            }
         }
 
         private void cmbOutBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -398,41 +412,43 @@ namespace SMS_Gateway
             this.gridInbox.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
 
-        private void showCommandRegister() 
-        { 
+        private void showCommandRegister(bool justRefresh)
+        {
             String sqlCmd = String.Empty;
 
             sqlCmd = "select * from daftar_register";
 
             DataTable dtCommand = dbprovider.getData(sqlCmd);
-                
+
             this.gridComands.DataSource = dtCommand;
-            
-            DataGridViewLinkColumn editLink = new DataGridViewLinkColumn();
-            editLink.Text = "edit";
-            editLink.UseColumnTextForLinkValue = true;
-            editLink.ToolTipText = "Edit Data";
-            editLink.Width = 40;
-            editLink.LinkColor = Color.Blue;
-            
 
-            DataGridViewLinkColumn deleteLink = new DataGridViewLinkColumn();
-            deleteLink.Text = "delete";
-            deleteLink.UseColumnTextForLinkValue = true;
-            deleteLink.ToolTipText = "Delete Data";
-            deleteLink.Width = 40;
-            deleteLink.LinkColor = Color.Red;
-
-            this.gridComands.Columns.Add(editLink);
-            this.gridComands.Columns.Add(deleteLink);
+            if (!justRefresh)
+            {
+                DataGridViewLinkColumn editLink = new DataGridViewLinkColumn();
+                editLink.Text = "edit";
+                editLink.UseColumnTextForLinkValue = true;
+                editLink.ToolTipText = "Edit Data";
+                editLink.Width = 40;
+                editLink.LinkColor = Color.Blue;
 
 
+                DataGridViewLinkColumn deleteLink = new DataGridViewLinkColumn();
+                deleteLink.Text = "delete";
+                deleteLink.UseColumnTextForLinkValue = true;
+                deleteLink.ToolTipText = "Delete Data";
+                deleteLink.Width = 40;
+                deleteLink.LinkColor = Color.Red;
+
+                this.gridComands.Columns.Add(editLink);
+                this.gridComands.Columns.Add(deleteLink);
+
+            }
             this.gridComands.AllowUserToAddRows = false;
             this.gridComands.AllowUserToDeleteRows = false;
             this.gridComands.AllowUserToResizeColumns = true;
             this.gridComands.AllowUserToResizeRows = false;
             this.gridComands.EditMode = DataGridViewEditMode.EditProgrammatically;
-        
+
         }
         private void showSchedule()
         {
@@ -465,7 +481,6 @@ namespace SMS_Gateway
                 item.SubItems.Add(cp.CpBillAddress);
                 item.SubItems.Add(cp.CpMobileNumber);
                 item.SubItems.Add(cp.CpEmail);
-
             }
         }
         private void showMenu()
@@ -485,7 +500,7 @@ namespace SMS_Gateway
                 
             }
         }
-        private void showBroadcastSchedule()
+        private void showBroadcastSchedule(bool justRefresh )
         {
             String sqlCmd = String.Empty;
 
@@ -494,14 +509,34 @@ namespace SMS_Gateway
             DataTable dtCommand = dbprovider.getData(sqlCmd);
 
             this.gridBroadcastSchedule.DataSource = dtCommand;
-            
+
+            if (!justRefresh)
+            {
+                DataGridViewLinkColumn editLink = new DataGridViewLinkColumn();
+                editLink.Text = "edit";
+                editLink.UseColumnTextForLinkValue = true;
+                editLink.ToolTipText = "Edit Data";
+                editLink.Width = 40;
+                editLink.LinkColor = Color.Blue;
+
+
+                DataGridViewLinkColumn deleteLink = new DataGridViewLinkColumn();
+                deleteLink.Text = "delete";
+                deleteLink.UseColumnTextForLinkValue = true;
+                deleteLink.ToolTipText = "Delete Data";
+                deleteLink.Width = 40;
+                deleteLink.LinkColor = Color.Red;
+
+                this.gridBroadcastSchedule.Columns.Add(editLink);
+                this.gridBroadcastSchedule.Columns.Add(deleteLink);
+
+            }
+
             this.gridBroadcastSchedule.AllowUserToAddRows = false;
             this.gridBroadcastSchedule.AllowUserToDeleteRows = false;
             this.gridBroadcastSchedule.AllowUserToResizeColumns = true;
             this.gridBroadcastSchedule.AllowUserToResizeRows = false;
             this.gridBroadcastSchedule.EditMode = DataGridViewEditMode.EditProgrammatically;
-
-
         }
 
         private void gridComands_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -511,15 +546,34 @@ namespace SMS_Gateway
 
             DataGridViewLinkCell linkCell = this.gridComands.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewLinkCell;
 
-            if (linkCell != null) 
+            if (linkCell != null)
             {
-                String s = this.gridComands.Rows[e.RowIndex].Cells[0].Value.ToString();
-                String s2 = this.gridComands.Rows[e.RowIndex].Cells[1].Value.ToString(); 
+                String regType = this.gridComands.Rows[e.RowIndex].Cells[2].Value.ToString();
+                String regName = this.gridComands.Rows[e.RowIndex].Cells[3].Value.ToString();
 
-                MessageBox.Show("ada : " + s + "-" + s2); 
-            
+                if (linkCell.Value.Equals("edit"))
+                {
+
+                    FrmCommandRegister frmCmdReg = new FrmCommandRegister();
+                    frmCmdReg.showData(regType, regName);
+                    DialogResult hasil = frmCmdReg.ShowDialog(this);
+                    if (hasil == DialogResult.OK)
+                    {
+                        showCommandRegister(true);
+                    }
+                }
+                else if (linkCell.Value.Equals("delete"))
+                {
+                    if (MessageBox.Show("Are you sure?", "Delete Data", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        FrmCommandRegister frmCmdReg = new FrmCommandRegister();
+
+                        frmCmdReg.deleteData(regType, regName);
+                        showCommandRegister(true);
+                    }
+                }
+                //MessageBox.Show("ada : " + regType + "-" + regName); 
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -669,7 +723,180 @@ namespace SMS_Gateway
             }
         }
 
+        private void cmbReportFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            initGridReport();
+        }
 
+        private void dtReportFilter_ValueChanged(object sender, EventArgs e)
+        {
+            initGridReport();
+        }
+
+        private void initGridReport() 
+        {
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = " SELECT Id_Output, Waktu_Kirim AS 'Sent Date', No_Tujuan as 'Receiver No', Pesan_Teks as 'Text Message', Status FROM catering.sms_output  ";
+
+            cmd.CommandText += " where Waktu_Diproses =?Waktu_Diproses ";
+
+            switch (cmbReportFilter.SelectedIndex) 
+            { 
+                case 0:
+                    
+                    break;
+                case 1:
+                    cmd.CommandText += " and id_input is null or id_input ='' ";
+                    break;
+                case 2:
+                    cmd.CommandText += " and     id_input is not null and id_input <> ''";
+                    break;
+            }
+
+            
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("Waktu_Diproses", dtReportFilter.Value.ToString("yyyy-MM-dd"));
+
+            DataTable dtReport = dbprovider.getData(cmd);
+
+            this.gridReport.DataSource = dtReport;
+
+
+            this.gridReport.AllowUserToAddRows = false;
+            this.gridReport.AllowUserToDeleteRows = false;
+            this.gridReport.AllowUserToResizeColumns = true;
+            this.gridReport.AllowUserToResizeRows = false;
+            this.gridReport.EditMode = DataGridViewEditMode.EditProgrammatically;
+            if (dtReport.Rows.Count > 0) 
+            {
+                this.gridReport.Columns[0].Visible = false;
+            }
+            gridReport.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        private void gridBroadcastSchedule_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= this.gridComands.Rows.Count || e.ColumnIndex < 0 || e.ColumnIndex >= this.gridComands.Columns.Count)
+                return;
+
+            DataGridViewLinkCell linkCell = this.gridBroadcastSchedule.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewLinkCell;
+
+            if (linkCell != null)
+            {
+                string jadwalID = this.gridBroadcastSchedule.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+                if (linkCell.Value.Equals("edit"))
+                {
+
+                    FrmBroadcastSchedule frmBroadcast = new FrmBroadcastSchedule();
+                    frmBroadcast.showData(int.Parse(jadwalID));
+
+                    DialogResult hasil = frmBroadcast.ShowDialog(this);
+                    if (hasil == DialogResult.OK)
+                    {
+                        showBroadcastSchedule(true);
+                    }
+                }
+                else if (linkCell.Value.Equals("delete"))
+                {
+                    if (MessageBox.Show("Are you sure?", "Delete Data", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        FrmBroadcastSchedule frmBroadcast = new FrmBroadcastSchedule();
+
+                        frmBroadcast.showData(int.Parse(jadwalID));
+                        frmBroadcast.deleteData(int.Parse(jadwalID));
+                        showBroadcastSchedule(true);
+                    }
+                }
+                //MessageBox.Show("ada : " + regType + "-" + regName); 
+            }
+        }
+
+        private void gridReport_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= this.gridComands.Rows.Count)
+                return;
+
+            composeReportDetail(this.gridReport.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+        }
+
+        private void composeReportDetail(String id)
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select * from sms_output where id_output=?id_output";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("id_output", id);
+            DataTable dt = dbprovider.getData(cmd);
+            String s = String.Empty;
+            if (dt.Rows.Count > 0) 
+            {  
+                DataRow r = dt.Rows[0];
+                if (r["ID_INPUT"].ToString() == String.Empty)
+                {
+                    s = "SMS TYPE : BROADCAST";
+                    s += "\r\n";
+                    for (int i = 0; i < 200; i++ )
+                        s += "-";
+
+                    s += "\r\n";
+                    s += "Res ID : " + r["ID_OUTPUT"].ToString() + " , Process At : " + r["Waktu_Diproses"].ToString() + " , Sent at : " + r["Waktu_Kirim"].ToString();
+                    s += "\r\n";
+                    s += "Text : " + r["Pesan_Teks"].ToString();
+                    s += "\r\n";
+                    for (int i = 0; i < 100; i++)
+                        s += "=";
+                }
+                else 
+                {
+                    s = "SMS TYPE : REQUEST-RESPONE";
+                    s += "\r\n";
+                    for (int i = 0; i < 200; i++)
+                        s += "-";
+                   
+                    cmd.CommandText = "select * from sms_input where ID_INPUT=?ID_INPUT";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("ID_INPUT", r["ID_INPUT"].ToString());
+
+                    DataTable dtInput = dbprovider.getData(cmd);
+
+                    String reqID = String.Empty;
+                    String recieveDate=  String.Empty; 
+                    String sender =  String.Empty ;
+                    String text=  String.Empty;
+                   
+                    if (dtInput.Rows.Count > 0) 
+                    { 
+                        DataRow rr = dtInput.Rows[0];
+                        reqID = rr["Id_Input"].ToString();
+                        recieveDate = rr["Tanggal_Terima"].ToString();
+                        sender = rr["No_Pengirim"].ToString();
+                        text = rr["Pesan_Teks"].ToString();
+
+                    }
+
+                    s += "\r\n";
+                    s += "Req ID : " + reqID + " , Received : " + recieveDate + " , Sender : " + sender;
+                    s += "\r\n";
+                    s += "Command Type : " + r["Reg_Type"].ToString() + " , Command Name : " + r["Reg_Name"].ToString();
+                    s += "\r\n";
+                    s += "Text : " + text;
+                    
+                    s += "\r\n";
+                    s += "\r\n";
+
+                   
+                    s += "Res ID : " + r["ID_OUTPUT"].ToString() + " , Process At : " + r["Waktu_Diproses"].ToString() + " , Sent at : " + r["Waktu_Kirim"].ToString();
+                    s += "\r\n";
+                    s += "Text : " + r["Pesan_Teks"].ToString();
+                    s += "\r\n";
+                    for (int i = 0; i < 100; i++)
+                        s += "=";
+                }
+            }
+            this.txtReportDetail.Text  = s;
         
+        }
     }
 }

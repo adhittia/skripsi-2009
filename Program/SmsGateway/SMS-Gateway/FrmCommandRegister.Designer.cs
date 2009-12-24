@@ -128,6 +128,7 @@ namespace SMS_Gateway.FormCommandRegister
             // 
             // Btn_Save
             // 
+            this.Btn_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Btn_Save.Location = new System.Drawing.Point(274, 172);
             this.Btn_Save.Name = "Btn_Save";
             this.Btn_Save.Size = new System.Drawing.Size(75, 23);
