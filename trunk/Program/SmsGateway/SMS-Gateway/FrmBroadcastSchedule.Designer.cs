@@ -29,8 +29,6 @@ namespace SMS_Gateway.FormBroadcastSchedule
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dtReportFilter = new System.Windows.Forms.DateTimePicker();
             this.Cmb_Status = new System.Windows.Forms.ComboBox();
             this.Txt_Interval = new System.Windows.Forms.TextBox();
             this.Txt_CurrLoop = new System.Windows.Forms.TextBox();
@@ -43,15 +41,17 @@ namespace SMS_Gateway.FormBroadcastSchedule
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.dtLastExecute = new System.Windows.Forms.DateTimePicker();
+            this.dtNextExecute = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.dtReportFilter);
+            this.groupBox1.Controls.Add(this.dtLastExecute);
+            this.groupBox1.Controls.Add(this.dtNextExecute);
             this.groupBox1.Controls.Add(this.Cmb_Status);
             this.groupBox1.Controls.Add(this.Txt_Interval);
             this.groupBox1.Controls.Add(this.Txt_CurrLoop);
@@ -69,26 +69,6 @@ namespace SMS_Gateway.FormBroadcastSchedule
             this.groupBox1.Size = new System.Drawing.Size(308, 220);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dateTimePicker1.CustomFormat = "dd-MM-yyyy";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(111, 157);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(126, 20);
-            this.dateTimePicker1.TabIndex = 15;
-            // 
-            // dtReportFilter
-            // 
-            this.dtReportFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtReportFilter.CustomFormat = "dd-MM-yyyy";
-            this.dtReportFilter.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtReportFilter.Location = new System.Drawing.Point(111, 130);
-            this.dtReportFilter.Name = "dtReportFilter";
-            this.dtReportFilter.Size = new System.Drawing.Size(126, 20);
-            this.dtReportFilter.TabIndex = 14;
             // 
             // Cmb_Status
             // 
@@ -199,16 +179,6 @@ namespace SMS_Gateway.FormBroadcastSchedule
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(245, 238);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "&Add / Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(161, 238);
@@ -219,13 +189,44 @@ namespace SMS_Gateway.FormBroadcastSchedule
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSave.Location = new System.Drawing.Point(242, 238);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "&Add / Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            // 
+            // dtLastExecute
+            // 
+            this.dtLastExecute.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtLastExecute.CustomFormat = "dd-MM-yyyy";
+            this.dtLastExecute.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtLastExecute.Location = new System.Drawing.Point(111, 157);
+            this.dtLastExecute.Name = "dtLastExecute";
+            this.dtLastExecute.Size = new System.Drawing.Size(126, 20);
+            this.dtLastExecute.TabIndex = 15;
+            // 
+            // dtNextExecute
+            // 
+            this.dtNextExecute.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtNextExecute.CustomFormat = "dd-MM-yyyy";
+            this.dtNextExecute.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtNextExecute.Location = new System.Drawing.Point(111, 130);
+            this.dtNextExecute.Name = "dtNextExecute";
+            this.dtNextExecute.Size = new System.Drawing.Size(126, 20);
+            this.dtNextExecute.TabIndex = 14;
+            // 
             // FrmBroadcastSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(333, 271);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmBroadcastSchedule";
@@ -250,14 +251,14 @@ namespace SMS_Gateway.FormBroadcastSchedule
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox Cmb_Name;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox Txt_Interval;
         private System.Windows.Forms.TextBox Txt_CurrLoop;
         private System.Windows.Forms.TextBox Txt_MaxLoop;
         private System.Windows.Forms.ComboBox Cmb_Status;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dtReportFilter;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.DateTimePicker dtLastExecute;
+        private System.Windows.Forms.DateTimePicker dtNextExecute;
 
     }
 }
