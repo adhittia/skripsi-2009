@@ -655,14 +655,14 @@ namespace Com.Martin.SMS.Command {
             outgoing.DateProcess = DateTime.Now;
             outgoing.RegisterName = "Request";
             outgoing.RegisterType = "Test";
-            outgoing.MessageText = "Success Request" + DateTime.Now.ToString("dd-mm-yyyy");
+            outgoing.MessageText = "Success Request" + DateTime.Now.ToString("dd-MM-yyyy");
             outgoing.SMSRequest = this.RequestSMS;
 
             return outgoing;
         }
     }
 
-    public class TestBroadast : AbstractBroadcast {
+    public class TestBroadcast : AbstractBroadcast {
         public override string GetRegName() {
             return "Broadcast";
         }
@@ -679,15 +679,15 @@ namespace Com.Martin.SMS.Command {
             outgoing.DateProcess = DateTime.Now;
             outgoing.RegisterName = "Broadcast";
             outgoing.RegisterType = "Test";
-            outgoing.MessageText = "Success Broadcast" + DateTime.Now.ToString("dd-mm-yyyy");
+            outgoing.MessageText = "Success Broadcast" + DateTime.Now.ToString("dd-MM-yyyy");
             lstOutgoing.Add(outgoing);
 
             SMS.Data.SMSOutgoing outgoing1 = new SMS.Data.SMSOutgoing();
-            outgoing.DestinationNo = "02191848465";
-            outgoing.DateProcess = DateTime.Now;
-            outgoing.RegisterName = "Broadcast";
-            outgoing.RegisterType = "Test";
-            outgoing.MessageText = "Success Broadcast1" + DateTime.Now.ToString("dd-mm-yyyy");
+            outgoing1.DestinationNo = "02191848465";
+            outgoing1.DateProcess = DateTime.Now;
+            outgoing1.RegisterName = "Broadcast";
+            outgoing1.RegisterType = "Test";
+            outgoing1.MessageText = "Success Broadcast1" + DateTime.Now.ToString("dd-MM-yyyy");
             lstOutgoing.Add(outgoing1);
 
             return lstOutgoing;

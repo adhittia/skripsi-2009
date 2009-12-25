@@ -31,7 +31,7 @@ namespace SMS_Gateway
     {
 
         private DBProvider dbprovider = new DBProvider();
-      
+
         private GSMModem oGsmModem = new GSMModem();
 
         private String dialogCaption = "SMS Gateway";
@@ -41,36 +41,18 @@ namespace SMS_Gateway
         {
             
             InitializeComponent();
-            this.oGsmModem.NewMessageReceived += new GSMModem.NewMessageReceivedEventHandler(this.oGsmModem_NewMessageReceived);
-            //Com.Martin.SMS.Command.GetMenuSchedule mn = new Com.Martin.SMS.Command.GetMenuSchedule();
-            //Type tp = mn.GetType();
-            //System.Diagnostics.Debug.WriteLine(tp.Assembly.FullName);
+            this.oGsmModem.NewMessageReceived += new GSMModem.NewMessageReceivedEventHandler(oGsmModem_NewMessageReceived);
         }
 
 
-        private void oGsmModem_NewMessageReceived(ATSMS.NewMessageReceivedEventArgs e)
-        {
-            //Com.Martin.SMS.Data.SMSIncoming smsInput = new Com.Martin.SMS.Data.SMSIncoming();
-
-            //Com.Martin.SMS.Command.GetMenuSchedule mn = new Com.Martin.SMS.Command.GetMenuSchedule();
-            //Type tp = mn.GetType();
-            //MessageBox.Show(tp.Assembly.FullName);
-
-            // helper = new smsHelper
-            // smsincoming = helper.SaveIncomingMessage(
-
-
-            //kalo sudah menggunakan data realtime dari modem
-            //SMSIncoming smsInput = SMSHelper.SaveIncomingMessage(e.MSISDN, "02191848465", e.TextMessage);
-
-            SMSIncoming smsInput = SMSHelper.SaveIncomingMessage("085668495684", "02191848465", "GET;MENU;NASI AYAM");
-            smsInput = CommandProcessor.ProcessRequest(smsInput);
-
+        private void oGsmModem_NewMessageReceived(ATSMS.NewMessageReceivedEventArgs e) 
+        {   
+            SMSIncoming smsInput = SMSHelper.SaveIncomingMessage(e.MSISDN, "02191848465", e.TextMessage);
+            SMSOutgoing smsOut = CommandProcessor.ProcessRequest(smsInput);
                
-            //update tab inbox (txtInbo & gridInbox)
-
-            txtInboxLog.Text += smsInput.MessageText + "\n";
-            
+            txtInboxLog.Text += Com.Martin.Function.InputLog.composeReportDetail(smsOut.SMSRequest, smsOut);
+            cmbInboxFilter_SelectedIndexChanged(cmbInboxFilter, new EventArgs());
+            cmbOutBoxFilter_SelectedIndexChanged(this.cmbOutBoxFilter, new EventArgs());
             //MessageBox.Show("Message from " + e.MSISDN + ". Message - " + e.TextMessage, dialogCaption, MessageBoxButtons.OK);
         }
 
@@ -133,6 +115,11 @@ namespace SMS_Gateway
             try
             {
                 oGsmModem.Connect();
+                BroadcastTimer.Enabled = true;
+                SendingTimer.Enabled = true;
+                this.oGsmModem.SendDelay = 10;
+                this.oGsmModem.NewMessageIndication = true;
+                labelStatus.Text = "Modem is connected. Model: " + oGsmModem.Model;
             }
             catch (Exception ex)
             {
@@ -149,6 +136,10 @@ namespace SMS_Gateway
             if (oGsmModem.IsConnected)
             {
                 oGsmModem.Disconnect();
+                BroadcastTimer.Enabled = false;
+                SendingTimer.Enabled = false;
+                labelStatus.Text = "Modem is disconnected.";
+
             }
             btnConnect.Enabled = true; 
             btnDisconnect.Enabled = false;
@@ -185,7 +176,13 @@ namespace SMS_Gateway
             btnConnect.Enabled = true;
             btnDisconnect.Enabled = false;
             btnDiagnostic.Enabled = false;
-            
+
+            this.cboBaudRate.SelectedIndex = 7;
+            this.cboComPort.SelectedIndex = 3;
+            this.cboDataBit.SelectedIndex = 3;
+            this.cboFlowControl.SelectedIndex = 0;
+            this.cboStopBit.SelectedIndex = 0;
+
             cmbInboxTimeInterval.SelectedIndex = 0;
             cmbOutboxTimeInterval.SelectedIndex = 0;
             cmbInboxFilter.SelectedIndex = 0;
@@ -215,22 +212,13 @@ namespace SMS_Gateway
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String Receiver = "085668495684";
-            String Msg = "Test doank";
-            try
-            {
-                oGsmModem.SendSMS(Receiver, Msg);
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show( ex.Message , dialogCaption , MessageBoxButtons.OK);           
-            }
+            this.oGsmModem.CheckATCommands();
 
         }
 
         private void btnInboxClearLog_Click(object sender, EventArgs e)
         {
-            txtInboxLog.Text = String.Empty;
+            txtInboxLog.Clear();
         }
 
         private void chkInboxTimeInterval_CheckedChanged(object sender, EventArgs e)
@@ -279,7 +267,7 @@ namespace SMS_Gateway
 
         private void InboxTimer_Tick(object sender, EventArgs e)
         {
-            this.txtInboxLog.Text += DateTime.Now + " ";
+            this.txtInboxLog.Clear();
         }
 
         private void cmbInboxTimeInterval_SelectedIndexChanged(object sender, EventArgs e)
@@ -593,7 +581,7 @@ namespace SMS_Gateway
         private void BroadcastTimer_Tick(object sender, EventArgs e)
         {
             CommandProcessor.ProcessBroadcast();
-
+            cmbOutBoxFilter_SelectedIndexChanged(this.cmbOutBoxFilter, new EventArgs());
         }
 
         private void SendingTimer_Tick(object sender, EventArgs e)
@@ -604,19 +592,21 @@ namespace SMS_Gateway
                 SMSOutgoing outSms = lstOutGoing[i];
                 try
                 {
+                    //sleep
                     oGsmModem.SendSMS(outSms.DestinationNo, outSms.MessageText);
+                    
                     outSms.DateSent = DateTime.Now;
-                    SMSHelper.SaveOutgoingMessage(outSms);
-                    // tulis ke outbox tab
+                    SMSHelper.SaveOutgoingMessage(ref outSms);
+                    this.txtOutBoxLog.Text += Com.Martin.Function.InputLog.composeOutBoxDetail(outSms);
                 }
                 catch (Exception ex)
                 {
                     // tulis ke outbox tab
 
                     //MessageBox.Show(ex.Message, dialogCaption, MessageBoxButtons.OK);
-
                 }
             }
+            cmbOutBoxFilter_SelectedIndexChanged(this.cmbOutBoxFilter, new EventArgs());
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -897,6 +887,21 @@ namespace SMS_Gateway
             }
             this.txtReportDetail.Text  = s;
         
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            BroadcastTimer_Tick(BroadcastTimer, new EventArgs());
+        }
+
+        private void gridOutbox_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SendingTimer_Tick(SendingTimer, new EventArgs());
         }
     }
 }

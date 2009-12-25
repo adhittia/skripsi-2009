@@ -39,7 +39,7 @@ namespace SMS_Gateway.FormBroadcastSchedule
             MySqlCommand command = new MySqlCommand();
 
 
-            String sqlCmd = "select reg_type,reg_name  from daftar_register order by reg_name";
+            String sqlCmd = "select concat(reg_type, '-', reg_name) as hasil  from daftar_register order by reg_name";
 
             command.CommandText = sqlCmd;
             
@@ -48,8 +48,8 @@ namespace SMS_Gateway.FormBroadcastSchedule
             if (dtCommand.Rows.Count > 0) {
               
                 this.Cmb_Name.DataSource = dtCommand.DefaultView;
-                this.Cmb_Name.DisplayMember = "reg_name";
-                this.Cmb_Name.ValueMember = "reg_type";
+                this.Cmb_Name.DisplayMember = "hasil";
+                this.Cmb_Name.ValueMember = "hasil";
 
                 this.Cmb_Name.SelectedIndex = 0;
             }
@@ -76,8 +76,7 @@ namespace SMS_Gateway.FormBroadcastSchedule
             {
                 DataRow row = dtCommand.Rows[0];
 
-                Cmb_Name.SelectedValue = row["reg_type"].ToString();
-                Cmb_Name.Text = row["reg_name"].ToString();
+                Cmb_Name.SelectedValue = row["reg_type"].ToString() + "-" + row["reg_name"].ToString();
                 this.Txt_MaxLoop.Text = row["pengulangan_max"].ToString();
                 this.Txt_CurrLoop.Text = row["pengulangan_hitung"].ToString();
 
@@ -160,8 +159,9 @@ namespace SMS_Gateway.FormBroadcastSchedule
                 command.CommandText += "VALUES ( ?id_jadwal,?reg_type , ?reg_name , ?pengulangan_max, ?pengulangan_hitung, ?Pengulangan_Jeda_Hari,?Waktu_Eksekusi_Berikut ,?Waktu_Eksekusi_Terakhir,?status )";
             }
 
-            command.Parameters.Add(new MySqlParameter("reg_type", this.Cmb_Name.SelectedValue.ToString()));
-            command.Parameters.Add(new MySqlParameter("reg_name", this.Cmb_Name.Text));
+            String[] register = this.Cmb_Name.SelectedValue.ToString().Split('-');
+            command.Parameters.Add(new MySqlParameter("reg_type", register[0]));
+            command.Parameters.Add(new MySqlParameter("reg_name", register[1]));
             command.Parameters.Add(new MySqlParameter("pengulangan_max", this.Txt_MaxLoop.Text));
             command.Parameters.Add(new MySqlParameter("pengulangan_hitung", this.Txt_CurrLoop.Text));
             command.Parameters.Add(new MySqlParameter("Pengulangan_Jeda_Hari", this.Txt_Interval.Text));
