@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Com.Martin.Function
 {
-    static class Function
+    public static class InputLog
     {
-        static String composeReportDetail(Com.Martin.SMS.Data.SMSIncoming incoming,Com.Martin.SMS.Data.SMSOutgoing outgoing)
+        public static String composeReportDetail(Com.Martin.SMS.Data.SMSIncoming incoming,Com.Martin.SMS.Data.SMSOutgoing outgoing)
         {   
             String s = String.Empty;
 
@@ -18,7 +18,7 @@ namespace Com.Martin.Function
                     s += "-";
 
                 s += "\r\n";
-                s += "Res ID : " + outgoing.ID.ToString() + " , Process At : " + outgoing.DateProcess.ToString("dd-MMM-yyyy") + " , Sent at : " + outgoing.DateSent.ToString("dd-MMM-yyyy");
+                s += "Res ID : " + outgoing.ID + " , Process At : " + outgoing.DateProcess.ToString("dd-MMM-yyyy") + " , Sent at : " + outgoing.DateSent.ToString("dd-MMM-yyyy");
                 s += "\r\n";
                 s += "Text : " + outgoing.MessageText;
                 s += "\r\n";
@@ -50,5 +50,44 @@ namespace Com.Martin.Function
             }
             return s;
         }
+
+        public static String composeOutBoxDetail(Com.Martin.SMS.Data.SMSOutgoing outgoing)
+        {
+            String s = String.Empty;
+
+            if (outgoing.SMSRequest.ID == String.Empty)
+            {
+                s = "SMS TYPE : BROADCAST";
+                s += "\r\n";
+                for (int i = 0; i < 200; i++)
+                    s += "-";
+
+                s += "\r\n";
+                s += "Res ID : " + outgoing.ID + " , Process At : " + outgoing.DateProcess.ToString("dd-MMM-yyyy") + " , Sent at : " + outgoing.DateSent.ToString("dd-MMM-yyyy");
+                s += "\r\n";
+                s += "Text : " + outgoing.MessageText;
+                s += "\r\n";
+                for (int i = 0; i < 100; i++)
+                    s += "=";
+            }
+            else
+            {
+                s = "SMS TYPE : REQUEST-RESPONE";
+                s += "\r\n";
+                for (int i = 0; i < 200; i++)
+                    s += "-";
+
+                s += "\r\n";
+                s += "\r\n";
+                s += "Res ID : " + outgoing.ID.ToString() + " , Process At : " + outgoing.DateProcess.ToString("dd-MMM-yyyy") + " , Sent at : " + outgoing.DateSent.ToString("dd-MMM-yyyy");
+                s += "\r\n";
+                s += "Text : " + outgoing.MessageText;
+                s += "\r\n";
+                for (int i = 0; i < 100; i++)
+                    s += "=";
+            }
+            return s;
+        }
+    
     }
 }

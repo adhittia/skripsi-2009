@@ -29,6 +29,8 @@ namespace SMS_Gateway.FormBroadcastSchedule
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtLastExecute = new System.Windows.Forms.DateTimePicker();
+            this.dtNextExecute = new System.Windows.Forms.DateTimePicker();
             this.Cmb_Status = new System.Windows.Forms.ComboBox();
             this.Txt_Interval = new System.Windows.Forms.TextBox();
             this.Txt_CurrLoop = new System.Windows.Forms.TextBox();
@@ -43,8 +45,6 @@ namespace SMS_Gateway.FormBroadcastSchedule
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.dtLastExecute = new System.Windows.Forms.DateTimePicker();
-            this.dtNextExecute = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,13 +70,33 @@ namespace SMS_Gateway.FormBroadcastSchedule
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // dtLastExecute
+            // 
+            this.dtLastExecute.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtLastExecute.CustomFormat = "dd-MM-yyyy";
+            this.dtLastExecute.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtLastExecute.Location = new System.Drawing.Point(111, 157);
+            this.dtLastExecute.Name = "dtLastExecute";
+            this.dtLastExecute.Size = new System.Drawing.Size(126, 20);
+            this.dtLastExecute.TabIndex = 15;
+            // 
+            // dtNextExecute
+            // 
+            this.dtNextExecute.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dtNextExecute.CustomFormat = "dd-MM-yyyy";
+            this.dtNextExecute.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtNextExecute.Location = new System.Drawing.Point(111, 130);
+            this.dtNextExecute.Name = "dtNextExecute";
+            this.dtNextExecute.Size = new System.Drawing.Size(126, 20);
+            this.dtNextExecute.TabIndex = 14;
+            // 
             // Cmb_Status
             // 
             this.Cmb_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Cmb_Status.FormattingEnabled = true;
             this.Cmb_Status.Items.AddRange(new object[] {
-            "Active",
-            "Deactive"});
+            "ACTIVE",
+            "DEACTIVE"});
             this.Cmb_Status.Location = new System.Drawing.Point(111, 187);
             this.Cmb_Status.Name = "Cmb_Status";
             this.Cmb_Status.Size = new System.Drawing.Size(126, 21);
@@ -199,26 +219,6 @@ namespace SMS_Gateway.FormBroadcastSchedule
             this.btnSave.Text = "&Add / Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
-            // 
-            // dtLastExecute
-            // 
-            this.dtLastExecute.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtLastExecute.CustomFormat = "dd-MM-yyyy";
-            this.dtLastExecute.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtLastExecute.Location = new System.Drawing.Point(111, 157);
-            this.dtLastExecute.Name = "dtLastExecute";
-            this.dtLastExecute.Size = new System.Drawing.Size(126, 20);
-            this.dtLastExecute.TabIndex = 15;
-            // 
-            // dtNextExecute
-            // 
-            this.dtNextExecute.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtNextExecute.CustomFormat = "dd-MM-yyyy";
-            this.dtNextExecute.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtNextExecute.Location = new System.Drawing.Point(111, 130);
-            this.dtNextExecute.Name = "dtNextExecute";
-            this.dtNextExecute.Size = new System.Drawing.Size(126, 20);
-            this.dtNextExecute.TabIndex = 14;
             // 
             // FrmBroadcastSchedule
             // 
