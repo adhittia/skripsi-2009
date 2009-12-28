@@ -112,6 +112,7 @@ namespace SMS_Gateway
             this.btnDeliveryOrder = new System.Windows.Forms.Button();
             this.Btn_Close = new System.Windows.Forms.Button();
             this.statusBarMain = new System.Windows.Forms.StatusStrip();
+            this.labelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.InboxTimer = new System.Windows.Forms.Timer(this.components);
             this.OutboxTimer = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
@@ -119,7 +120,7 @@ namespace SMS_Gateway
             this.SendingTimer = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.labelStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.InputWorker = new System.ComponentModel.BackgroundWorker();
             this.tabMain.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -842,6 +843,7 @@ namespace SMS_Gateway
             this.lvMenu.UseCompatibleStateImageBehavior = false;
             this.lvMenu.View = System.Windows.Forms.View.Details;
             this.lvMenu.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvMenu_MouseDoubleClick);
+            this.lvMenu.SelectedIndexChanged += new System.EventHandler(this.lvMenu_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -1030,6 +1032,11 @@ namespace SMS_Gateway
             this.statusBarMain.TabIndex = 2;
             this.statusBarMain.Text = "Not Connected";
             // 
+            // labelStatus
+            // 
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(0, 17);
+            // 
             // InboxTimer
             // 
             this.InboxTimer.Interval = 10000;
@@ -1079,10 +1086,10 @@ namespace SMS_Gateway
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // labelStatus
+            // InputWorker
             // 
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(0, 17);
+            this.InputWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.InputWorker_DoWork);
+            this.InputWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.InputWorker_Complete);
             // 
             // FrmMain
             // 
@@ -1228,6 +1235,7 @@ namespace SMS_Gateway
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolStripStatusLabel labelStatus;
+        private System.ComponentModel.BackgroundWorker InputWorker;
 
     }
 }

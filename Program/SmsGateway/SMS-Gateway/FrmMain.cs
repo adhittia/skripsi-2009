@@ -35,26 +35,42 @@ namespace SMS_Gateway
         private GSMModem oGsmModem = new GSMModem();
 
         private String dialogCaption = "SMS Gateway";
-     
+
 
         public FrmMain()
         {
             
             InitializeComponent();
             this.oGsmModem.NewMessageReceived += new GSMModem.NewMessageReceivedEventHandler(oGsmModem_NewMessageReceived);
+
         }
 
+        private void InputWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            e.Result = e.Argument.ToString();
+        }
+
+        private void InputWorker_Complete(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            this.txtInboxLog.Text += e.Result.ToString();
+            cmbInboxFilter_SelectedIndexChanged(cmbInboxFilter, new EventArgs());
+            cmbOutBoxFilter_SelectedIndexChanged(cmbOutBoxFilter, new EventArgs());
+        }
 
         private void oGsmModem_NewMessageReceived(ATSMS.NewMessageReceivedEventArgs e) 
-        {   
+        {
             SMSIncoming smsInput = SMSHelper.SaveIncomingMessage(e.MSISDN, "02191848465", e.TextMessage);
             SMSOutgoing smsOut = CommandProcessor.ProcessRequest(smsInput);
-               
-            txtInboxLog.Text += Com.Martin.Function.InputLog.composeReportDetail(smsOut.SMSRequest, smsOut);
-            cmbInboxFilter_SelectedIndexChanged(cmbInboxFilter, new EventArgs());
-            cmbOutBoxFilter_SelectedIndexChanged(this.cmbOutBoxFilter, new EventArgs());
-            //MessageBox.Show("Message from " + e.MSISDN + ". Message - " + e.TextMessage, dialogCaption, MessageBoxButtons.OK);
-        }
+            
+            Com.Martin.Function.InputLog log = new Com.Martin.Function.InputLog();
+            string text = log.composeReportDetail(smsOut.SMSRequest, smsOut);
+
+            
+            
+            //InputWorker.RunWorkerAsync(text);
+
+       }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
@@ -597,7 +613,8 @@ namespace SMS_Gateway
                     
                     outSms.DateSent = DateTime.Now;
                     SMSHelper.SaveOutgoingMessage(ref outSms);
-                    this.txtOutBoxLog.Text += Com.Martin.Function.InputLog.composeOutBoxDetail(outSms);
+                    Com.Martin.Function.InputLog log = new Com.Martin.Function.InputLog();
+                    this.txtOutBoxLog.Text += log.composeOutBoxDetail(outSms);
                 }
                 catch (Exception ex)
                 {
@@ -641,8 +658,6 @@ namespace SMS_Gateway
             }
             showMenu();
         }
-
-       
 
         private void lvMenu_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -888,7 +903,6 @@ namespace SMS_Gateway
             this.txtReportDetail.Text  = s;
         
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             BroadcastTimer_Tick(BroadcastTimer, new EventArgs());
@@ -903,5 +917,11 @@ namespace SMS_Gateway
         {
             SendingTimer_Tick(SendingTimer, new EventArgs());
         }
+
+        private void lvMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
