@@ -178,12 +178,13 @@ Public Class MainForm
 
     Private Sub oGsmModem_NewMessageReceived(ByVal e As ATSMS.NewMessageReceivedEventArgs) Handles oGsmModem.NewMessageReceived
         txtMsg.Text = "Message from " & e.MSISDN & ". Message - " & e.TextMessage & ControlChars.CrLf
-        Dim dbstore_nemwsg As New System.Data.Odbc.OdbcCommand("insert into received values ('" & get_current_time() & "','" & e.MSISDN & "','" & e.TextMessage & ControlChars.CrLf & "')", conn)
-        Dim dbstore_autoreply As New System.Data.Odbc.OdbcCommand("insert into outbox values ('" & get_current_time() & "','server','" & e.MSISDN & "','Terima Kasih Atas SMS yang Anda Kirimkan.')", conn)
-        conn.Open()
-        dbstore_nemwsg.ExecuteReader()
-        dbstore_autoreply.ExecuteReader()
-        conn.Close()
+        MessageBox.Show(txtMsg.Text)
+        'Dim dbstore_nemwsg As New System.Data.Odbc.OdbcCommand("insert into received values ('" & get_current_time() & "','" & e.MSISDN & "','" & e.TextMessage & ControlChars.CrLf & "')", conn)
+        'Dim dbstore_autoreply As New System.Data.Odbc.OdbcCommand("insert into outbox values ('" & get_current_time() & "','server','" & e.MSISDN & "','Terima Kasih Atas SMS yang Anda Kirimkan.')", conn)
+        'conn.Open()
+        'dbstore_nemwsg.ExecuteReader()
+        'dbstore_autoreply.ExecuteReader()
+        'conn.Close()
     End Sub
 
     Private Sub btnCheckPhone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCheckPhone.Click

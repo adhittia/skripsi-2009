@@ -49,6 +49,7 @@ Public Class SerialDriver : Inherits SerialPort
             iCount = 0
             callCommand = portEncoding.GetBytes(callText)
             isSendingCommand = True
+            System.Diagnostics.Debug.WriteLine("Write Socket:" + commandString)
             Me.Write(callCommand, 0, callCommand.Length)
             While Me.BytesToRead <= 0
                 Thread.Sleep(1000)
@@ -107,6 +108,7 @@ Public Class SerialDriver : Inherits SerialPort
         Send(commandString)
         If BytesToRead > 0 Then
             response = ReadExisting()
+            System.Diagnostics.Debug.WriteLine("SendCmdByRes:" + response)
             If response Is Nothing Or response.IndexOf(expectedResponse) < 0 Then
                 If Not response Is Nothing Then
                     If response.Trim = ATHandler.RESPONSE_ERROR Then
@@ -136,6 +138,7 @@ Public Class SerialDriver : Inherits SerialPort
                 For iCount = 1 To 100
                     Thread.Sleep(1000)
                     response = response + ReadExisting()
+                    System.Diagnostics.Debug.WriteLine("SendCmdByRes1:" + response)
                     If response.IndexOf(expectedResponse) >= 0 Then
                         Exit For
                     End If
@@ -212,6 +215,7 @@ Public Class SerialDriver : Inherits SerialPort
         response = ""
         For iCount = 1 To 60
             response = ReadExisting()
+            System.Diagnostics.Debug.WriteLine("Read Response:" + response)
             If response.Trim = ATHandler.RESPONSE_ERROR Then
                 Throw New UnknownException("Unknown exception in retrieving data")
             End If

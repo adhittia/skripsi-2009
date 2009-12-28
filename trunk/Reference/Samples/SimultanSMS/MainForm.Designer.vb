@@ -267,12 +267,10 @@ Partial Class MainForm
         '
         'Timer1
         '
-        Me.Timer1.Enabled = True
         Me.Timer1.Interval = 10000
         '
         'Timer2
         '
-        Me.Timer2.Enabled = True
         Me.Timer2.Interval = 60000
         '
         'MainForm
