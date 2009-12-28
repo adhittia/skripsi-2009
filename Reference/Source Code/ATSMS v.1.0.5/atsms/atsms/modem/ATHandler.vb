@@ -172,7 +172,7 @@ Public Class ATHandler
         'VTSResponse = "VTS"
         'CNUMResponse = "+CNUM"
 
-        MsgIndication = "2,1,0,0,0"
+        MsgIndication = "2,1,2,2,0"
         'MsgIndication = "2,1"
 
         HangUpCommand = HANG_UP_COMMAND

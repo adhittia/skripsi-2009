@@ -6,7 +6,12 @@ ATSMS
 </name>
 </assembly>
 <members>
-<member name="M:ATSMS.GSMModem.#ctor">
+<member name="T:ATSMS.Rssi">
+	<summary>
+ RSSI class
+ </summary>
+	<remarks></remarks>
+</member><member name="M:ATSMS.GSMModem.#ctor">
 	<summary>
  Constructor
  </summary>
@@ -75,6 +80,29 @@ ATSMS
  Analyze phone capabilities
  </summary>
 	<remarks></remarks>
+</member><member name="T:ATSMS.Battery">
+	<summary>
+ Battery class
+ </summary>
+	<remarks></remarks>
+</member><member name="T:ATSMS.Storage">
+	<summary>
+ Storage class
+ </summary>
+	<remarks></remarks>
+</member><member name="P:ATSMS.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:ATSMS.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:ATSMS.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
 </member><member name="M:ATSMS.SMS.WapPushMessage.#ctor">
 	<summary>
  Constructor
@@ -98,11 +126,6 @@ ATSMS
  WAP push message class.
  </summary>
 	<remarks></remarks>
-</member><member name="T:ATSMS.Rssi">
-	<summary>
- RSSI class
- </summary>
-	<remarks></remarks>
 </member><member name="M:ATSMS.Common.Resource.#cctor">
 	<summary>
  Static constructor
@@ -118,6 +141,16 @@ ATSMS
 </member><member name="T:ATSMS.Common.Resource">
 	<summary>
  Library resource string class
+ </summary>
+	<remarks></remarks>
+</member><member name="T:ATSMS.Location">
+	<summary>
+ Location class
+ </summary>
+	<remarks></remarks>
+</member><member name="T:ATSMS.SMS.Outbox">
+	<summary>
+ Message outbox
  </summary>
 	<remarks></remarks>
 </member><member name="M:ATSMS.SerialDriver.#ctor">
@@ -174,24 +207,6 @@ ATSMS
  </summary>
 	<value></value>
 	<returns></returns>
-	<remarks></remarks>
-</member><member name="P:ATSMS.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:ATSMS.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:ATSMS.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member><member name="T:ATSMS.Location">
-	<summary>
- Location class
- </summary>
 	<remarks></remarks>
 </member><member name="M:ATSMS.Modem.#ctor">
 	<summary>
@@ -268,21 +283,6 @@ ATSMS
 </member><member name="M:ATSMS.Modem.Disconnect">
 	<summary>
  Disconnect serial port
- </summary>
-	<remarks></remarks>
-</member><member name="T:ATSMS.Battery">
-	<summary>
- Battery class
- </summary>
-	<remarks></remarks>
-</member><member name="T:ATSMS.Storage">
-	<summary>
- Storage class
- </summary>
-	<remarks></remarks>
-</member><member name="T:ATSMS.SMS.Outbox">
-	<summary>
- Message outbox
  </summary>
 	<remarks></remarks>
 </member><member name="F:ATSMS.ATHandler.RESPONSE_ERROR">

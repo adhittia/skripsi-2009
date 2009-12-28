@@ -161,7 +161,7 @@ namespace Com.Martin.SMS.Command {
                 conn.Open();
 
                 MySqlCommand command = conn.CreateCommand();
-                command.CommandText = "UPDATE com_order-status = 'CANCEL' where com_order_date = ?orderDate and customer_id = ?customer";
+                command.CommandText = "UPDATE customer_order set com_order_status = 'CANCEL' where com_order_date = ?orderDate and customer_id = ?customer";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?orderDate", orderDate);
                 command.Parameters.AddWithValue("?customer", customer);

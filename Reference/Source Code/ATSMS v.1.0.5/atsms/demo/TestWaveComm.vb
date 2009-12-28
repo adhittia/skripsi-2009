@@ -6,11 +6,11 @@ Public Class TestWaveComm
 
     Private Sub TestWaveComm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         oGsmModem = New GSMModem
-        oGsmModem.Port = "COM6"
+        oGsmModem.Port = "COM4"
         oGsmModem.BaudRate = 115200
         oGsmModem.Parity = Common.EnumParity.None
         oGsmModem.StopBits = Common.EnumStopBits.One
-        oGsmModem.FlowControl = Common.EnumFlowControl.Hardware
+        oGsmModem.FlowControl = Common.EnumFlowControl.None
         oGsmModem.DataBits = 8
 
         Try
