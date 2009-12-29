@@ -31,7 +31,7 @@ namespace SMS_Gateway
             this.components = new System.ComponentModel.Container();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnDiagnostic = new System.Windows.Forms.Button();
@@ -107,7 +107,7 @@ namespace SMS_Gateway
             this.btnAddSchedule = new System.Windows.Forms.Button();
             this.tabTransaction = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTransactionInfo = new System.Windows.Forms.TextBox();
             this.btnBillingInformation = new System.Windows.Forms.Button();
             this.btnDeliveryOrder = new System.Windows.Forms.Button();
             this.Btn_Close = new System.Windows.Forms.Button();
@@ -120,7 +120,6 @@ namespace SMS_Gateway
             this.SendingTimer = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.InputWorker = new System.ComponentModel.BackgroundWorker();
             this.tabMain.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -161,7 +160,7 @@ namespace SMS_Gateway
             // 
             // tabGeneral
             // 
-            this.tabGeneral.Controls.Add(this.button1);
+            this.tabGeneral.Controls.Add(this.label11);
             this.tabGeneral.Controls.Add(this.label8);
             this.tabGeneral.Controls.Add(this.label6);
             this.tabGeneral.Controls.Add(this.btnDiagnostic);
@@ -177,16 +176,15 @@ namespace SMS_Gateway
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // label11
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(392, 277);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Send Test Message";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(389, 103);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(127, 32);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Catering";
             // 
             // label8
             // 
@@ -202,11 +200,11 @@ namespace SMS_Gateway
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(389, 108);
+            this.label6.Location = new System.Drawing.Point(389, 67);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 32);
+            this.label6.Size = new System.Drawing.Size(219, 32);
             this.label6.TabIndex = 4;
-            this.label6.Text = "IJGC";
+            this.label6.Text = "Cha-cha && Yopi";
             // 
             // btnDiagnostic
             // 
@@ -459,6 +457,7 @@ namespace SMS_Gateway
             this.txtInboxLog.Multiline = true;
             this.txtInboxLog.Name = "txtInboxLog";
             this.txtInboxLog.ReadOnly = true;
+            this.txtInboxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtInboxLog.Size = new System.Drawing.Size(627, 87);
             this.txtInboxLog.TabIndex = 3;
             // 
@@ -525,7 +524,6 @@ namespace SMS_Gateway
             this.gridOutbox.Name = "gridOutbox";
             this.gridOutbox.Size = new System.Drawing.Size(627, 150);
             this.gridOutbox.TabIndex = 13;
-            this.gridOutbox.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutbox_CellContentClick);
             // 
             // cmbOutBoxFilter
             // 
@@ -558,6 +556,7 @@ namespace SMS_Gateway
             this.txtOutBoxLog.Multiline = true;
             this.txtOutBoxLog.Name = "txtOutBoxLog";
             this.txtOutBoxLog.ReadOnly = true;
+            this.txtOutBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtOutBoxLog.Size = new System.Drawing.Size(627, 87);
             this.txtOutBoxLog.TabIndex = 10;
             // 
@@ -843,7 +842,6 @@ namespace SMS_Gateway
             this.lvMenu.UseCompatibleStateImageBehavior = false;
             this.lvMenu.View = System.Windows.Forms.View.Details;
             this.lvMenu.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvMenu_MouseDoubleClick);
-            this.lvMenu.SelectedIndexChanged += new System.EventHandler(this.lvMenu_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -977,7 +975,7 @@ namespace SMS_Gateway
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.txtTransactionInfo);
             this.groupBox3.Location = new System.Drawing.Point(18, 98);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(556, 230);
@@ -985,13 +983,13 @@ namespace SMS_Gateway
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Transaction Info";
             // 
-            // textBox1
+            // txtTransactionInfo
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(535, 205);
-            this.textBox1.TabIndex = 0;
+            this.txtTransactionInfo.Location = new System.Drawing.Point(6, 19);
+            this.txtTransactionInfo.Multiline = true;
+            this.txtTransactionInfo.Name = "txtTransactionInfo";
+            this.txtTransactionInfo.Size = new System.Drawing.Size(535, 205);
+            this.txtTransactionInfo.TabIndex = 0;
             // 
             // btnBillingInformation
             // 
@@ -1085,11 +1083,6 @@ namespace SMS_Gateway
             this.button4.Text = "Test Sending";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // InputWorker
-            // 
-            this.InputWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.InputWorker_DoWork);
-            this.InputWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.InputWorker_Complete);
             // 
             // FrmMain
             // 
@@ -1185,7 +1178,6 @@ namespace SMS_Gateway
         private System.Windows.Forms.StatusStrip statusBarMain;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtReportDetail;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer InboxTimer;
         private System.Windows.Forms.Timer OutboxTimer;
         private System.Windows.Forms.TabPage tabSettings;
@@ -1231,12 +1223,11 @@ namespace SMS_Gateway
         private System.Windows.Forms.Button btnBillingInformation;
         private System.Windows.Forms.Button btnDeliveryOrder;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTransactionInfo;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolStripStatusLabel labelStatus;
-        private System.ComponentModel.BackgroundWorker InputWorker;
-
+        private System.Windows.Forms.Label label11;
     }
 }
 

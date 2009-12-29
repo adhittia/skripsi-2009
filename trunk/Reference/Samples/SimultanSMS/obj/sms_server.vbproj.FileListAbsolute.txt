@@ -9,3 +9,7 @@ D:\Projects\SMSGateway\sms_server\obj\Debug\sms_server.vbproj.GenerateResource.C
 D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.exe
 D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.xml
 D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.pdb
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\bin\Debug\Demo.exe.config
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\obj\Debug\Demo.exe
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\obj\Debug\Demo.xml
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\obj\Debug\Demo.pdb
