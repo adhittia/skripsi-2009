@@ -78,7 +78,95 @@ namespace Com.Martin.SMS.Command {
     }
     #endregion
 
-    #region Request Command
+    #region Cutomer Request Command
+    public class MainGetMenu : AbstractRequest {
+        public override string GetRegName() {
+            return "Get";
+        }
+
+        public override string GetRegType() {
+            return "MAIN";
+        }
+
+        public override Com.Martin.SMS.Data.SMSOutgoing Execute() {
+            MySqlConnection conn = new MySqlConnection(CommandHelper.ConnectionString);
+            SMS.Data.SMSOutgoing outgoing = new Com.Martin.SMS.Data.SMSOutgoing();
+            try {
+                String orderDate = this.Parameters.Get(0);
+
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                command.CommandText = "SELECT (select m_name from menu b where b.menu_id = m.ms_menu_a) as Menu_A , ";
+                command.CommandText += "  (select m_name from menu b where b.menu_id = m.ms_menu_b) as Menu_B, ";
+                command.CommandText += "  (select m_name from menu b where b.menu_id = m.ms_menu_c) as Menu_C ";
+                command.CommandText += " FROM catering.menu_schedule m where date_format(ms_date, '%d-%m-%Y')=?schedule";
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("?schedule", orderDate);
+
+                String teks = "";
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read()) {
+                    teks = "Menu tgl " + orderDate + " sbb, A:" + reader.GetString(0) + ",";
+                    teks += " B:" + reader.GetString(1) + ",";
+                    teks += " C:" + reader.GetString(2);
+                }
+                reader.Close();
+
+                outgoing.RegisterType = this.GetRegType();
+                outgoing.RegisterName = this.GetRegName();
+                outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
+                outgoing.SMSRequest = this.RequestSMS;
+                outgoing.DateProcess = DateTime.Now;
+                outgoing.MessageText = teks;
+            } finally {
+                conn.Close();
+            }
+            return outgoing; ;
+        }
+    }
+
+    public class AdditionalMenuList : AbstractRequest {
+        public override string GetRegName() {
+            return "Get";
+        }
+
+        public override string GetRegType() {
+            return "ADDT";
+        }
+
+        public override Com.Martin.SMS.Data.SMSOutgoing Execute() {
+            MySqlConnection conn = new MySqlConnection(CommandHelper.ConnectionString);
+            SMS.Data.SMSOutgoing outgoing = new Com.Martin.SMS.Data.SMSOutgoing();
+            try {
+                String kategori = this.Parameters.Get(0);
+
+                conn.Open();
+                MySqlCommand command = conn.CreateCommand();
+                command.CommandText = "select menu_id, m_name from menu where m_type='ADDT' and m_category=?category limit 5 offset 1";
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("?category", kategori);
+
+                String teks = "Menu Tambahan (kode-nama):";
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read()) {
+                    teks += reader.GetString(0) + "-" + reader.GetString(1) + ",";
+                }
+                reader.Close();
+                teks = teks.Substring(0, teks.Length - 1);
+
+                outgoing.RegisterType = this.GetRegType();
+                outgoing.RegisterName = this.GetRegName();
+                outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
+                outgoing.SMSRequest = this.RequestSMS;
+                outgoing.DateProcess = DateTime.Now;
+                outgoing.MessageText = teks;
+            } finally {
+                conn.Close();
+            }
+            return outgoing; ;
+        }
+    }
+
     public class MainChangeMenu : AbstractRequest {
         public override string GetRegName() {
             return "Change";
@@ -173,94 +261,6 @@ namespace Com.Martin.SMS.Command {
                 outgoing.SMSRequest = this.RequestSMS;
                 outgoing.DateProcess = DateTime.Now;
                 outgoing.MessageText = "Anda telah membatalkan menu tgl " + orderDate;
-            } finally {
-                conn.Close();
-            }
-            return outgoing; ;
-        }
-    }
-
-    public class MainGetMenu : AbstractRequest {
-        public override string GetRegName() {
-            return "Get";
-        }
-
-        public override string GetRegType() {
-            return "MAIN";
-        }
-
-        public override Com.Martin.SMS.Data.SMSOutgoing Execute() {
-            MySqlConnection conn = new MySqlConnection(CommandHelper.ConnectionString);
-            SMS.Data.SMSOutgoing outgoing = new Com.Martin.SMS.Data.SMSOutgoing();
-            try {
-                String orderDate = this.Parameters.Get(0);
-
-                conn.Open();
-                MySqlCommand command = conn.CreateCommand();
-                command.CommandText = "SELECT (select m_name from menu b where b.menu_id = m.ms_menu_a) as Menu_A , ";
-                command.CommandText += "  (select m_name from menu b where b.menu_id = m.ms_menu_b) as Menu_B, ";
-                command.CommandText += "  (select m_name from menu b where b.menu_id = m.ms_menu_c) as Menu_C ";
-                command.CommandText += " FROM catering.menu_schedule m where ms_date=?schedule";
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue("?schedule", orderDate);
-
-                String teks = "";
-                MySqlDataReader reader = command.ExecuteReader();
-                if (reader.Read()) {
-                    teks = "Menu tgl " + orderDate + " sbb, A:" + reader.GetString(0) + ",";
-                    teks += " B:" + reader.GetString(1) + ",";
-                    teks += " C:" + reader.GetString(2);
-                }
-                reader.Close();
-
-                outgoing.RegisterType = this.GetRegType();
-                outgoing.RegisterName = this.GetRegName();
-                outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
-                outgoing.SMSRequest = this.RequestSMS;
-                outgoing.DateProcess = DateTime.Now;
-                outgoing.MessageText = teks;
-            } finally {
-                conn.Close();
-            }
-            return outgoing; ;
-        }
-    }
-
-    public class AdditionalMenuList : AbstractRequest {
-        public override string GetRegName() {
-            return "Get";
-        }
-
-        public override string GetRegType() {
-            return "ADDT";
-        }
-
-        public override Com.Martin.SMS.Data.SMSOutgoing Execute() {
-            MySqlConnection conn = new MySqlConnection(CommandHelper.ConnectionString);
-            SMS.Data.SMSOutgoing outgoing = new Com.Martin.SMS.Data.SMSOutgoing();
-            try {
-                String kategori = this.Parameters.Get(0);
-
-                conn.Open();
-                MySqlCommand command = conn.CreateCommand();
-                command.CommandText = "select menu_id, m_name from menu where m_type='ADDT' and m_category=?category limit 5 offset 1";
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue("?category", kategori);
-
-                String teks = "Menu Tambahan (kode-nama):";
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read()) {
-                    teks += reader.GetString(0) + "-" + reader.GetString(1) + ",";
-                }
-                reader.Close();
-                teks = teks.Substring(0, teks.Length - 1);
-
-                outgoing.RegisterType = this.GetRegType();
-                outgoing.RegisterName = this.GetRegName();
-                outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
-                outgoing.SMSRequest = this.RequestSMS;
-                outgoing.DateProcess = DateTime.Now;
-                outgoing.MessageText = teks;
             } finally {
                 conn.Close();
             }
@@ -418,7 +418,9 @@ namespace Com.Martin.SMS.Command {
             return outgoing; ;
         }
     }
+    #endregion
 
+    #region Administrator Request Command
     public class AdmMenuAdd : AbstractRequest {
         public override string GetRegName() {
             return "Add";
@@ -581,7 +583,6 @@ namespace Com.Martin.SMS.Command {
             return outgoing; ;
         }
     }
-
     #endregion
 
     #region Broadcast Command
@@ -651,7 +652,7 @@ namespace Com.Martin.SMS.Command {
 
         public override Com.Martin.SMS.Data.SMSOutgoing Execute() {
             SMS.Data.SMSOutgoing outgoing = new SMS.Data.SMSOutgoing();
-            outgoing.DestinationNo = "02191848465";
+            outgoing.DestinationNo = this.RequestSMS.Sender;
             outgoing.DateProcess = DateTime.Now;
             outgoing.RegisterName = "Request";
             outgoing.RegisterType = "Test";

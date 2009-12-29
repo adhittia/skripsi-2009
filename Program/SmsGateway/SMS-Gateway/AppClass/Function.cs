@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Com.Martin.Function
 {
-    public static class InputLog
+    public class InputLog
     {
-        public static String composeReportDetail(Com.Martin.SMS.Data.SMSIncoming incoming,Com.Martin.SMS.Data.SMSOutgoing outgoing)
+        public String composeReportDetail(Com.Martin.SMS.Data.SMSIncoming incoming,Com.Martin.SMS.Data.SMSOutgoing outgoing)
         {   
             String s = String.Empty;
 
@@ -51,7 +51,7 @@ namespace Com.Martin.Function
             return s;
         }
 
-        public static String composeOutBoxDetail(Com.Martin.SMS.Data.SMSOutgoing outgoing)
+        public String composeOutBoxDetail(Com.Martin.SMS.Data.SMSOutgoing outgoing)
         {
             String s = String.Empty;
 
