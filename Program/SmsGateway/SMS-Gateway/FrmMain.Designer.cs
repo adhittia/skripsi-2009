@@ -1018,6 +1018,7 @@ namespace SMS_Gateway
             this.Btn_Close.TabIndex = 1;
             this.Btn_Close.Text = "&Close";
             this.Btn_Close.UseVisualStyleBackColor = true;
+            this.Btn_Close.Visible = false;
             this.Btn_Close.Click += new System.EventHandler(this.Btn_Close_Click);
             // 
             // statusBarMain
@@ -1052,6 +1053,7 @@ namespace SMS_Gateway
             this.button2.TabIndex = 3;
             this.button2.Text = "Test Message Received";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // BroadcastTimer
@@ -1072,6 +1074,7 @@ namespace SMS_Gateway
             this.button3.TabIndex = 4;
             this.button3.Text = "Test Broadcast ";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
@@ -1082,6 +1085,7 @@ namespace SMS_Gateway
             this.button4.TabIndex = 5;
             this.button4.Text = "Test Sending";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // FrmMain

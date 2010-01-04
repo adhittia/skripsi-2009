@@ -148,7 +148,7 @@ namespace SMS_Gateway {
                 SendingTimer.Enabled = true;
                 this.oGsmModem.SendDelay = 10;
                 this.oGsmModem.NewMessageIndication = true;
-                labelStatus.Text = "Modem is connected. Model: " + oGsmModem.Model;
+                labelStatus.Text = "Modem is connected. Model: " + oGsmModem.PhoneModel;
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, dialogCaption, MessageBoxButtons.OK);
                 return;
@@ -293,7 +293,7 @@ namespace SMS_Gateway {
         private void FrmMainClose(object sender, FormClosingEventArgs e) {
             try {
                 if (oGsmModem.IsConnected) {
-                    MessageBox.Show("disconnecting");
+                    MessageBox.Show("Disconnecting modem.");
                     oGsmModem.Disconnect();
                 }
             } catch (Exception ex) {
