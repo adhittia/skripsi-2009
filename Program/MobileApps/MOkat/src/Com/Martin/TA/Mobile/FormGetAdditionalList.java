@@ -5,10 +5,28 @@
 
 package Com.Martin.TA.Mobile;
 
+import javax.microedition.lcdui.Command;
+import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.Form;
+
 /**
  *
  * @author UserXP
  */
-public class FormGetAdditionalList {
+public class FormGetAdditionalList extends Form implements CommandListener, Runnable {
+
+    public FormGetAdditionalList(MOkat midlet, Display display){
+        super("Form Additional Menu List");
+    }
+
+    public void commandAction(Command c, Displayable d) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }
