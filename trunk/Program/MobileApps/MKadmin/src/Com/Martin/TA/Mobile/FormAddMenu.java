@@ -44,6 +44,9 @@ public class FormAddMenu extends Form implements CommandListener, Runnable {
     public FormAddMenu(MKAdmin midlet, Display display) {
         super("Form Add Menu");
 
+        this.midlet = midlet;
+        this.display = display;
+
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
         info.setText("Add Menu.");
 

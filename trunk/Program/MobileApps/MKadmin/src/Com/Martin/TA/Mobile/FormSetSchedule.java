@@ -41,6 +41,9 @@ public class FormSetSchedule extends Form implements CommandListener, Runnable {
     public FormSetSchedule(MKAdmin midlet, Display display){
         super("Form Set Menu Schedule");
 
+        this.midlet = midlet;
+        this.display = display;
+        
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
         info.setText("Set Menu Schedule");
 

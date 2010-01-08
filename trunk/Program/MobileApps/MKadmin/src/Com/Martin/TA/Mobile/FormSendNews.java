@@ -35,6 +35,9 @@ public class FormSendNews extends Form implements CommandListener, Runnable {
     public FormSendNews(MKAdmin midlet, Display display){
         super("Form Sending News");
 
+        this.midlet = midlet;
+        this.display = display;
+
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
         info.setText("Set Menu Schedule");
 
