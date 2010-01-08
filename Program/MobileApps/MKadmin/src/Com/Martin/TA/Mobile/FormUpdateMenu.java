@@ -45,6 +45,9 @@ public class FormUpdateMenu extends Form implements CommandListener, Runnable {
     public FormUpdateMenu(MKAdmin midlet, Display display){
         super("Form Update Menu");
 
+        this.midlet = midlet;
+        this.display = display;
+
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
         info.setText("Update Menu.");
 
