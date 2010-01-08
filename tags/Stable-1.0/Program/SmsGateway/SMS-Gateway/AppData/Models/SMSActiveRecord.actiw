@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model dslVersion="1.0.0.0" Id="fc27091f-2a46-490d-82dd-24d7a9bbcd76" xmlns="http://schemas.microsoft.com/dsltools/ActiveWriter">
+  <additionalImports>AAEAAAD/////AQAAAAAAAAAMAgAAAF1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkRzbCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTkwNTE0MTM5NmRkYjA3OTkEAQAAAKEBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydCwgQWx0aW5vcmVuLkFjdGl2ZVdyaXRlci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj05MDUxNDEzOTZkZGIwNzk5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAB9BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydFtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydAIAAAAL</additionalImports>
+  <classes>
+    <modelClass name="CustomerOrder" schema="catering" table="customer_order">
+      <targets>
+        <manyToOneRelation Id="da846984-480e-4185-a1de-6e4bbe5590f7" targetColumnKey="Menu_Schedule_Id" targetTable="customer_order" targetPropertyName="CustomerOrders" sourceColumn="Menu_Schedule_Id">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/MenuSchedule" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="09fe7bd9-474e-4cbd-adce-235ae9893539" targetColumnKey="Customer_ID" targetTable="customer_order" targetPropertyName="CustomerOrders" sourceColumn="Customer_ID">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/CustomerProfile" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="172f63ae-d0fe-4e2b-b8dc-d2c97921fa36" targetColumnKey="Id_Input" targetTable="customer_order" targetPropertyName="CustomerOrders" sourceColumn="Id_Input">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/SmsInput" />
+        </manyToOneRelation>
+      </targets>
+      <properties>
+        <modelProperty Id="f555ebc8-914d-42c3-a2b2-edb968659b3e" name="ComSelected" column="COM_Selected" columnType="Int32" length="0" />
+        <modelProperty Id="7f05027e-438b-400e-a3ea-6c9ea7990449" name="ComOrderStatus" column="COM_Order_Status" length="0" />
+        <modelProperty Id="ad474749-81d0-40e7-bd14-c5819d871229" name="ComOrderDate" column="COM_Order_Date" length="0" />
+        <modelProperty Id="031677dc-a6fe-4ad3-a7f9-7ee9675afcf4" name="MenuScheduleCustomerS" column="Menu_Schedule_Customer_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="SmsOutput" schema="catering" table="sms_output">
+      <targets>
+        <manyToOneRelation Id="8474076e-fa5f-4622-9ff2-d0c9240eaed7" targetColumnKey="Reg_Type" targetTable="sms_output" targetPropertyName="SmsOutputs" sourceColumn="Reg_Type">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/DaftarRegister" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="9a40e7a5-15d1-4dc8-9928-a964a7e435bb" targetColumnKey="Reg_Name" targetTable="sms_output" targetPropertyName="SmsOutputs" sourceColumn="Reg_Name">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/DaftarRegister" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="84b2e42c-4a7d-421b-b2df-79b0d04d63f6" targetColumnKey="Id_Input" targetTable="sms_output" targetPropertyName="SmsOutputs" sourceColumn="Id_Input">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/SmsInput" />
+        </manyToOneRelation>
+      </targets>
+      <properties>
+        <modelProperty Id="07d5e67c-3e3d-4701-b803-d2e512cebfd1" name="WaktuDiproses" column="Waktu_Diproses" columnType="DateTime" length="0" />
+        <modelProperty Id="6f96f13d-c1f3-434b-a2a8-d73e7911395d" name="WaktuKirim" column="Waktu_Kirim" columnType="DateTime" length="0" />
+        <modelProperty Id="0ffe25d9-423d-4e47-b1eb-d00a370f2f95" name="NoTujuan" column="No_Tujuan" length="0" />
+        <modelProperty Id="c55e3cb1-abfa-4d29-8786-5f46193666cb" name="PesanTeks" column="Pesan_Teks" length="0" />
+        <modelProperty Id="337b654d-88a0-4bbb-80c1-3ab10e4819ed" name="Status" column="Status" length="0" />
+        <modelProperty Id="26b4268a-3bcd-4c46-bc46-2b239e8b6793" name="IdOutput" column="Id_Output" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="CustomerOrderDetail" schema="catering" table="customer_order_detail">
+      <targets>
+        <manyToOneRelation Id="afa84ee5-6f79-46b4-883d-803276f2b938" targetColumnKey="Menu_Schedule_Customer_S" targetTable="customer_order_detail" targetPropertyName="CustomerOrderDetails" sourceColumn="Menu_Schedule_Customer_S">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/CustomerOrder" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="3274ea2c-1810-4760-ae54-475027ad6bdd" targetColumnKey="Menu_ID" targetTable="customer_order_detail" targetPropertyName="CustomerOrderDetails" sourceColumn="Menu_ID">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/Menu" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="f3d17ee6-2708-419b-ac1f-db1266f0c162" targetColumnKey="Id_Input" targetTable="customer_order_detail" targetPropertyName="CustomerOrderDetails" sourceColumn="Id_Input">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/SmsInput" />
+        </manyToOneRelation>
+      </targets>
+      <properties>
+        <modelProperty Id="e8268e5b-ba25-46bf-9a19-88cf14a8f4ad" name="Price" column="Price" length="0" />
+        <modelProperty Id="d2233e7b-04b9-4460-a2bf-158a4d580f69" name="AdditionalOrderS" column="Additional_Order_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="CustomerProfile" schema="catering" table="customer_profile">
+      <properties>
+        <modelProperty Id="f5959b70-9d59-480a-b67c-02a4138ef998" name="CpName" column="CP_Name" length="0" />
+        <modelProperty Id="593fc6cb-d5a8-4e25-878f-960cd24e3fde" name="CpDeliveryAddress" column="CP_Delivery_Address" length="0" />
+        <modelProperty Id="235ede98-780f-4275-9486-f05df1668870" name="CpBillAddress" column="CP_Bill_Address" length="0" />
+        <modelProperty Id="de1d5832-26cb-4160-89f1-73de8a89c413" name="CpMobileNumber" column="CP_Mobile_Number" length="0" />
+        <modelProperty Id="240e4126-8eb5-4491-8da2-5a86ff3ce370" name="CpEmail" column="CP_Email" length="0" />
+        <modelProperty Id="65f50d55-37a3-468c-af01-3b752360cc9a" name="CustomerId" column="Customer_ID" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="DaftarRegister" schema="catering" table="daftar_register">
+      <properties>
+        <modelProperty Id="8e7bc327-e454-4321-bbf1-b99236073d85" name="NamaClass" column="Nama_Class" length="0" />
+        <modelProperty Id="08e7f561-b124-4c1c-8118-a90ec7eaad0c" name="NamaAssembly" column="Nama_Assembly" length="0" />
+        <modelProperty Id="1be3122a-62b9-46de-b9ac-fd1ed205eeb0" name="RegType" column="Reg_Type" length="0" notNull="true" keyType="CompositeKey" compositeKeyName="DaftarRegisterCompositeKey" />
+        <modelProperty Id="1982daed-56c4-40c5-ba8a-99597030778c" name="RegName" column="Reg_Name" length="0" notNull="true" keyType="CompositeKey" compositeKeyName="DaftarRegisterCompositeKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="JadwalBroadcast" schema="catering" table="jadwal_broadcast">
+      <targets>
+        <manyToOneRelation Id="3db23287-d97e-4d8e-b16a-aa28c2ae24c3" targetColumnKey="Reg_Type" targetTable="jadwal_broadcast" targetPropertyName="JadwalBroadcasts" sourceColumn="Reg_Type">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/DaftarRegister" />
+        </manyToOneRelation>
+        <manyToOneRelation Id="875b644a-6d22-4d82-be03-1b6f8985a374" targetColumnKey="Reg_Name" targetTable="jadwal_broadcast" targetPropertyName="JadwalBroadcasts" sourceColumn="Reg_Name">
+          <modelClassMoniker name="/fc27091f-2a46-490d-82dd-24d7a9bbcd76/DaftarRegister" />
+        </manyToOneRelation>
+      </targets>
+      <properties>
+        <modelProperty Id="e9043e6b-cab1-4480-a5a9-f3833057ae6f" name="PengulanganMax" column="Pengulangan_Max" columnType="Int32" length="0" />
+        <modelProperty Id="7c40e8d4-b856-4c0b-bfa1-df8d7b95f787" name="PengulanganHitung" column="Pengulangan_Hitung" columnType="Int32" length="0" />
+        <modelProperty Id="41bb197e-4fa4-4659-ae6b-cbd1e074c58b" name="PengulanganJedaHari" column="Pengulangan_Jeda_Hari" columnType="Int32" length="0" />
+        <modelProperty Id="2c723dc9-eb95-4473-a871-2ed1ed07cf14" name="WaktuEksekusiBerikut" column="Waktu_Eksekusi_Berikut" length="0" />
+        <modelProperty Id="4768e7d1-5299-4b5d-bdd2-84f737d2f6ce" name="WaktuEksekusiTerakhir" column="Waktu_Eksekusi_Terakhir" length="0" />
+        <modelProperty Id="b6234f01-4496-43cf-a918-92133f5f2e7a" name="Status" column="Status" length="0" />
+        <modelProperty Id="44e2b943-399f-4533-a7cb-1742e3d7f878" name="IdJadwal" column="Id_Jadwal" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="Menu" schema="catering" table="menu">
+      <properties>
+        <modelProperty Id="3b00d450-aacf-4e96-a2ce-46258810837b" name="MName" column="M_Name" length="0" />
+        <modelProperty Id="d20df3eb-66e7-4015-ad07-1ec5f1486997" name="MDescription" column="M_Description" length="0" />
+        <modelProperty Id="d42254b8-44e4-41fd-bf5b-122eadf36ae5" name="MPrice" column="M_Price" columnType="Decimal" length="0" />
+        <modelProperty Id="79e6f863-f63e-485b-982d-bf8fbf3f12d5" name="MType" column="M_Type" length="0" />
+        <modelProperty Id="c26a93e6-99e9-4986-9d5c-b60ab914552f" name="MCategory" column="M_Category" length="0" />
+        <modelProperty Id="f8cf43a8-a416-4962-b919-91fd21e544fc" name="MenuId" column="Menu_ID" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="MenuSchedule" schema="catering" table="menu_schedule">
+      <properties>
+        <modelProperty Id="22b69bd6-ff56-44ae-b718-f873e942d0e5" name="MsDate" column="MS_Date" length="0" />
+        <modelProperty Id="d7185429-68d5-437c-bef5-61dc9138c3ab" name="MsMenuA" column="MS_Menu_A" columnType="Int32" length="0" />
+        <modelProperty Id="84d69aed-bb7e-447f-904f-6dbaec15c109" name="MsMenuB" column="MS_Menu_B" columnType="Int32" length="0" />
+        <modelProperty Id="b8e6c6b7-d6ba-45a5-96c7-a535d29195b1" name="MsMenuC" column="MS_Menu_C" columnType="Int32" length="0" />
+        <modelProperty Id="b8050b79-58b8-4ed1-9db1-6be8ddb5aa27" name="MenuScheduleId" column="Menu_Schedule_Id" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="SmsInput" schema="catering" table="sms_input">
+      <properties>
+        <modelProperty Id="02fbc6a8-5bfe-4734-9f8e-bd8983704683" name="TanggalTerima" column="Tanggal_Terima" columnType="DateTime" length="0" />
+        <modelProperty Id="52c21e1d-b251-4246-a943-5d0e49ac0679" name="NoPengirim" column="No_Pengirim" length="0" />
+        <modelProperty Id="57b558dd-9f8c-4848-9b2a-28a8218ba240" name="PesanTeks" column="Pesan_Teks" length="0" />
+        <modelProperty Id="5aead76d-b803-48db-882b-1fe503941200" name="Status" column="Status" length="0" />
+        <modelProperty Id="b45719da-5f2c-4f6a-a8ed-aaf1eff49f4e" name="IdInput" column="Id_Input" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+  </classes>
+</model>

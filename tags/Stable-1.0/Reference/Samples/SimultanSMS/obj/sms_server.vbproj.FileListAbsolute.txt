@@ -1,0 +1,15 @@
+D:\Projects\SMSGateway\sms_server\bin\Debug\Demo.exe.config
+D:\Projects\SMSGateway\sms_server\bin\Debug\Demo.exe
+D:\Projects\SMSGateway\sms_server\bin\Debug\Demo.pdb
+D:\Projects\SMSGateway\sms_server\bin\Debug\Demo.xml
+D:\Projects\SMSGateway\sms_server\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.MainForm.resources
+D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.Resources.resources
+D:\Projects\SMSGateway\sms_server\obj\Debug\sms_server.vbproj.GenerateResource.Cache
+D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.exe
+D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.xml
+D:\Projects\SMSGateway\sms_server\obj\Debug\Demo.pdb
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\bin\Debug\Demo.exe.config
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\obj\Debug\Demo.exe
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\obj\Debug\Demo.xml
+C:\Joshua_DC\Skripsi-2009 (Catering)\Reference\Samples\SimultanSMS\obj\Debug\Demo.pdb
