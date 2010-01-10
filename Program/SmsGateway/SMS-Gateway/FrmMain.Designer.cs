@@ -106,8 +106,22 @@ namespace SMS_Gateway
             this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
             this.btnAddSchedule = new System.Windows.Forms.Button();
             this.tabTransaction = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtTransactionInfo = new System.Windows.Forms.TextBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.dtc = new System.Windows.Forms.DateTimePicker();
+            this.lvCustomerOrderDetil = new System.Windows.Forms.ListView();
+            this.columnHeader23 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader24 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader25 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader26 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader27 = new System.Windows.Forms.ColumnHeader();
+            this.lvCustomerOrder = new System.Windows.Forms.ListView();
+            this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader22 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader28 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader29 = new System.Windows.Forms.ColumnHeader();
             this.btnBillingInformation = new System.Windows.Forms.Button();
             this.btnDeliveryOrder = new System.Windows.Forms.Button();
             this.Btn_Close = new System.Windows.Forms.Button();
@@ -137,7 +151,6 @@ namespace SMS_Gateway
             this.tabMenu.SuspendLayout();
             this.tabSchedule.SuspendLayout();
             this.tabTransaction.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.statusBarMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -924,6 +937,7 @@ namespace SMS_Gateway
             this.lvSchedule.UseCompatibleStateImageBehavior = false;
             this.lvSchedule.View = System.Windows.Forms.View.Details;
             this.lvSchedule.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvSchedule_MouseDoubleClick);
+            this.lvSchedule.SelectedIndexChanged += new System.EventHandler(this.lvSchedule_SelectedIndexChanged);
             // 
             // columnHeader13
             // 
@@ -962,7 +976,10 @@ namespace SMS_Gateway
             // 
             // tabTransaction
             // 
-            this.tabTransaction.Controls.Add(this.groupBox3);
+            this.tabTransaction.Controls.Add(this.btnRefresh);
+            this.tabTransaction.Controls.Add(this.dtc);
+            this.tabTransaction.Controls.Add(this.lvCustomerOrderDetil);
+            this.tabTransaction.Controls.Add(this.lvCustomerOrder);
             this.tabTransaction.Controls.Add(this.btnBillingInformation);
             this.tabTransaction.Controls.Add(this.btnDeliveryOrder);
             this.tabTransaction.Location = new System.Drawing.Point(4, 22);
@@ -973,23 +990,122 @@ namespace SMS_Gateway
             this.tabTransaction.Text = "Transaction ";
             this.tabTransaction.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // btnRefresh
             // 
-            this.groupBox3.Controls.Add(this.txtTransactionInfo);
-            this.groupBox3.Location = new System.Drawing.Point(18, 98);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(556, 230);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Transaction Info";
+            this.btnRefresh.Location = new System.Drawing.Point(145, 76);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(97, 23);
+            this.btnRefresh.TabIndex = 11;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // txtTransactionInfo
+            // dtc
             // 
-            this.txtTransactionInfo.Location = new System.Drawing.Point(6, 19);
-            this.txtTransactionInfo.Multiline = true;
-            this.txtTransactionInfo.Name = "txtTransactionInfo";
-            this.txtTransactionInfo.Size = new System.Drawing.Size(535, 205);
-            this.txtTransactionInfo.TabIndex = 0;
+            this.dtc.Location = new System.Drawing.Point(17, 76);
+            this.dtc.Name = "dtc";
+            this.dtc.Size = new System.Drawing.Size(122, 20);
+            this.dtc.TabIndex = 10;
+            // 
+            // lvCustomerOrderDetil
+            // 
+            this.lvCustomerOrderDetil.CheckBoxes = true;
+            this.lvCustomerOrderDetil.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader23,
+            this.columnHeader24,
+            this.columnHeader25,
+            this.columnHeader26,
+            this.columnHeader27});
+            this.lvCustomerOrderDetil.FullRowSelect = true;
+            this.lvCustomerOrderDetil.GridLines = true;
+            this.lvCustomerOrderDetil.HideSelection = false;
+            this.lvCustomerOrderDetil.Location = new System.Drawing.Point(17, 223);
+            this.lvCustomerOrderDetil.Name = "lvCustomerOrderDetil";
+            this.lvCustomerOrderDetil.Size = new System.Drawing.Size(636, 120);
+            this.lvCustomerOrderDetil.TabIndex = 9;
+            this.lvCustomerOrderDetil.UseCompatibleStateImageBehavior = false;
+            this.lvCustomerOrderDetil.View = System.Windows.Forms.View.Details;
+            this.lvCustomerOrderDetil.SelectedIndexChanged += new System.EventHandler(this.lvCustomerOrderDetil_SelectedIndexChanged);
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "Additional Order ID";
+            this.columnHeader23.Width = 111;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "Menu";
+            this.columnHeader24.Width = 138;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "Price";
+            this.columnHeader25.Width = 135;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "Order ID";
+            this.columnHeader26.Width = 136;
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "Id_Input";
+            this.columnHeader27.Width = 143;
+            // 
+            // lvCustomerOrder
+            // 
+            this.lvCustomerOrder.CheckBoxes = true;
+            this.lvCustomerOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader22,
+            this.columnHeader28,
+            this.columnHeader29});
+            this.lvCustomerOrder.FullRowSelect = true;
+            this.lvCustomerOrder.GridLines = true;
+            this.lvCustomerOrder.HideSelection = false;
+            this.lvCustomerOrder.Location = new System.Drawing.Point(17, 119);
+            this.lvCustomerOrder.Name = "lvCustomerOrder";
+            this.lvCustomerOrder.Size = new System.Drawing.Size(636, 73);
+            this.lvCustomerOrder.TabIndex = 8;
+            this.lvCustomerOrder.UseCompatibleStateImageBehavior = false;
+            this.lvCustomerOrder.View = System.Windows.Forms.View.Details;
+            this.lvCustomerOrder.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Order ID";
+            this.columnHeader18.Width = 78;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Selected Menu";
+            this.columnHeader19.Width = 138;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Order Status";
+            this.columnHeader20.Width = 135;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Order Date";
+            this.columnHeader21.Width = 136;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Schedule ID";
+            this.columnHeader22.Width = 143;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "Customer";
+            // 
+            // columnHeader29
+            // 
+            this.columnHeader29.Text = "Id_Input";
             // 
             // btnBillingInformation
             // 
@@ -999,6 +1115,7 @@ namespace SMS_Gateway
             this.btnBillingInformation.TabIndex = 1;
             this.btnBillingInformation.Text = "Billing Information";
             this.btnBillingInformation.UseVisualStyleBackColor = true;
+            this.btnBillingInformation.Click += new System.EventHandler(this.btnBillingInformation_Click);
             // 
             // btnDeliveryOrder
             // 
@@ -1008,6 +1125,7 @@ namespace SMS_Gateway
             this.btnDeliveryOrder.TabIndex = 0;
             this.btnDeliveryOrder.Text = "Delivery Order";
             this.btnDeliveryOrder.UseVisualStyleBackColor = true;
+            this.btnDeliveryOrder.Click += new System.EventHandler(this.btnDeliveryOrder_Click);
             // 
             // Btn_Close
             // 
@@ -1128,8 +1246,6 @@ namespace SMS_Gateway
             this.tabMenu.ResumeLayout(false);
             this.tabSchedule.ResumeLayout(false);
             this.tabTransaction.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.statusBarMain.ResumeLayout(false);
             this.statusBarMain.PerformLayout();
             this.ResumeLayout(false);
@@ -1226,12 +1342,26 @@ namespace SMS_Gateway
         private System.Windows.Forms.TabPage tabTransaction;
         private System.Windows.Forms.Button btnBillingInformation;
         private System.Windows.Forms.Button btnDeliveryOrder;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox txtTransactionInfo;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolStripStatusLabel labelStatus;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dtc;
+        private System.Windows.Forms.ListView lvCustomerOrderDetil;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.ColumnHeader columnHeader27;
+        private System.Windows.Forms.ListView lvCustomerOrder;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ColumnHeader columnHeader28;
+        private System.Windows.Forms.ColumnHeader columnHeader29;
     }
 }
 

@@ -41,11 +41,15 @@ namespace SMS_Gateway
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.txtMenuID = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtMenuID);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cmbCategory);
             this.groupBox1.Controls.Add(this.cmbType);
             this.groupBox1.Controls.Add(this.txtPrice);
@@ -58,7 +62,7 @@ namespace SMS_Gateway
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(344, 175);
+            this.groupBox1.Size = new System.Drawing.Size(344, 197);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
@@ -71,7 +75,7 @@ namespace SMS_Gateway
             "Drinks",
             "Snack",
             "Desert"});
-            this.cmbCategory.Location = new System.Drawing.Point(122, 102);
+            this.cmbCategory.Location = new System.Drawing.Point(122, 128);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(121, 21);
             this.cmbCategory.TabIndex = 10;
@@ -83,7 +87,7 @@ namespace SMS_Gateway
             this.cmbType.Items.AddRange(new object[] {
             "Main",
             "Additional"});
-            this.cmbType.Location = new System.Drawing.Point(122, 75);
+            this.cmbType.Location = new System.Drawing.Point(122, 101);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(121, 21);
             this.cmbType.TabIndex = 9;
@@ -91,7 +95,7 @@ namespace SMS_Gateway
             // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(122, 129);
+            this.txtPrice.Location = new System.Drawing.Point(122, 155);
             this.txtPrice.MaxLength = 50;
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -100,7 +104,7 @@ namespace SMS_Gateway
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(122, 49);
+            this.txtDescription.Location = new System.Drawing.Point(122, 75);
             this.txtDescription.MaxLength = 50;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(188, 20);
@@ -108,7 +112,7 @@ namespace SMS_Gateway
             // 
             // txtMenuName
             // 
-            this.txtMenuName.Location = new System.Drawing.Point(122, 23);
+            this.txtMenuName.Location = new System.Drawing.Point(122, 49);
             this.txtMenuName.MaxLength = 20;
             this.txtMenuName.Name = "txtMenuName";
             this.txtMenuName.Size = new System.Drawing.Size(108, 20);
@@ -117,7 +121,7 @@ namespace SMS_Gateway
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 132);
+            this.label5.Location = new System.Drawing.Point(20, 158);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 4;
@@ -126,7 +130,7 @@ namespace SMS_Gateway
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 105);
+            this.label4.Location = new System.Drawing.Point(20, 131);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 3;
@@ -135,7 +139,7 @@ namespace SMS_Gateway
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 78);
+            this.label3.Location = new System.Drawing.Point(20, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 2;
@@ -144,7 +148,7 @@ namespace SMS_Gateway
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 52);
+            this.label2.Location = new System.Drawing.Point(20, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 1;
@@ -153,7 +157,7 @@ namespace SMS_Gateway
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 26);
+            this.label1.Location = new System.Drawing.Point(20, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 0;
@@ -161,7 +165,7 @@ namespace SMS_Gateway
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(195, 192);
+            this.btnClose.Location = new System.Drawing.Point(200, 215);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 1;
@@ -171,7 +175,7 @@ namespace SMS_Gateway
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(281, 193);
+            this.btnSave.Location = new System.Drawing.Point(281, 215);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 2;
@@ -179,11 +183,29 @@ namespace SMS_Gateway
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // txtMenuID
+            // 
+            this.txtMenuID.Enabled = false;
+            this.txtMenuID.Location = new System.Drawing.Point(122, 23);
+            this.txtMenuID.MaxLength = 20;
+            this.txtMenuID.Name = "txtMenuID";
+            this.txtMenuID.Size = new System.Drawing.Size(108, 20);
+            this.txtMenuID.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Menu ID";
+            // 
             // FrmAddMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 227);
+            this.ClientSize = new System.Drawing.Size(368, 250);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox1);
@@ -212,5 +234,7 @@ namespace SMS_Gateway
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtMenuID;
+        private System.Windows.Forms.Label label6;
     }
 }

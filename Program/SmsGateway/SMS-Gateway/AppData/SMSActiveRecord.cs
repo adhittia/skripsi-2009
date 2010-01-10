@@ -15,58 +15,6 @@ namespace SMS_Gateway.AppData {
     using Castle.ActiveRecord;
     
     
-    [ActiveRecord("customer_order", Schema="catering")]
-    public partial class CustomerOrder : ActiveRecordBase<CustomerOrder> {
-        
-        private int _comSelected;
-        
-        private string _comOrderStatus;
-        
-        private string _comOrderDate;
-        
-        private int _menuScheduleCustomerS;
-        
-        [Property("COM_Selected", ColumnType="Int32")]
-        public virtual int ComSelected {
-            get {
-                return this._comSelected;
-            }
-            set {
-                this._comSelected = value;
-            }
-        }
-        
-        [Property("COM_Order_Status", ColumnType="String")]
-        public virtual string ComOrderStatus {
-            get {
-                return this._comOrderStatus;
-            }
-            set {
-                this._comOrderStatus = value;
-            }
-        }
-        
-        [Property("COM_Order_Date", ColumnType="String")]
-        public virtual string ComOrderDate {
-            get {
-                return this._comOrderDate;
-            }
-            set {
-                this._comOrderDate = value;
-            }
-        }
-        
-        [PrimaryKey(PrimaryKeyType.Native, "Menu_Schedule_Customer_S", ColumnType="Int32")]
-        public virtual int MenuScheduleCustomerS {
-            get {
-                return this._menuScheduleCustomerS;
-            }
-            set {
-                this._menuScheduleCustomerS = value;
-            }
-        }
-    }
-    
     [ActiveRecord("sms_output", Schema="catering")]
     public partial class SmsOutput : ActiveRecordBase<SmsOutput> {
         
@@ -139,34 +87,6 @@ namespace SMS_Gateway.AppData {
             }
             set {
                 this._idOutput = value;
-            }
-        }
-    }
-    
-    [ActiveRecord("customer_order_detail", Schema="catering")]
-    public partial class CustomerOrderDetail : ActiveRecordBase<CustomerOrderDetail> {
-        
-        private string _price;
-        
-        private int _additionalOrderS;
-        
-        [Property("Price", ColumnType="String")]
-        public virtual string Price {
-            get {
-                return this._price;
-            }
-            set {
-                this._price = value;
-            }
-        }
-        
-        [PrimaryKey(PrimaryKeyType.Native, "Additional_Order_S", ColumnType="Int32")]
-        public virtual int AdditionalOrderS {
-            get {
-                return this._additionalOrderS;
-            }
-            set {
-                this._additionalOrderS = value;
             }
         }
     }
@@ -634,6 +554,170 @@ namespace SMS_Gateway.AppData {
             }
             set {
                 this._idInput = value;
+            }
+        }
+    }
+    
+    [ActiveRecord("customer_order", Schema="catering")]
+    public partial class CustomerOrder : ActiveRecordBase<CustomerOrder> {
+        
+        private int _comSelected;
+        
+        private string _comOrderStatus;
+        
+        private string _comOrderDate;
+        
+        private int _menuScheduleId;
+        
+        private int _customerId;
+        
+        private string _idInput;
+        
+        private int _menuScheduleCustomerS;
+        
+        private IList<CustomerOrderDetail> _customerOrderDetails;
+        
+        [Property("COM_Selected", ColumnType="Int32")]
+        public virtual int ComSelected {
+            get {
+                return this._comSelected;
+            }
+            set {
+                this._comSelected = value;
+            }
+        }
+        
+        [Property("COM_Order_Status", ColumnType="String")]
+        public virtual string ComOrderStatus {
+            get {
+                return this._comOrderStatus;
+            }
+            set {
+                this._comOrderStatus = value;
+            }
+        }
+        
+        [Property("COM_Order_Date", ColumnType="String")]
+        public virtual string ComOrderDate {
+            get {
+                return this._comOrderDate;
+            }
+            set {
+                this._comOrderDate = value;
+            }
+        }
+        
+        [Property("Menu_Schedule_Id", ColumnType="Int32", NotNull=true)]
+        public virtual int MenuScheduleId {
+            get {
+                return this._menuScheduleId;
+            }
+            set {
+                this._menuScheduleId = value;
+            }
+        }
+        
+        [Property("Customer_ID", ColumnType="Int32")]
+        public virtual int CustomerId {
+            get {
+                return this._customerId;
+            }
+            set {
+                this._customerId = value;
+            }
+        }
+        
+        [Property("Id_Input", ColumnType="String", NotNull=true)]
+        public virtual string IdInput {
+            get {
+                return this._idInput;
+            }
+            set {
+                this._idInput = value;
+            }
+        }
+        
+        [PrimaryKey(PrimaryKeyType.Native, "Menu_Schedule_Customer_S", ColumnType="Int32")]
+        public virtual int MenuScheduleCustomerS {
+            get {
+                return this._menuScheduleCustomerS;
+            }
+            set {
+                this._menuScheduleCustomerS = value;
+            }
+        }
+        
+        [HasMany(typeof(CustomerOrderDetail), ColumnKey="Menu_Schedule_Customer_S", Table="customer_order_detail")]
+        public virtual IList<CustomerOrderDetail> CustomerOrderDetails {
+            get {
+                return this._customerOrderDetails;
+            }
+            set {
+                this._customerOrderDetails = value;
+            }
+        }
+    }
+    
+    [ActiveRecord("customer_order_detail", Schema="catering")]
+    public partial class CustomerOrderDetail : ActiveRecordBase<CustomerOrderDetail> {
+        
+        private int _menuId;
+        
+        private string _price;
+        
+        private string _idInput;
+        
+        private int _additionalOrderS;
+        
+        private CustomerOrder _customerOrder;
+        
+        [Property("Menu_ID", ColumnType="Int32")]
+        public virtual int MenuId {
+            get {
+                return this._menuId;
+            }
+            set {
+                this._menuId = value;
+            }
+        }
+        
+        [Property("Price", ColumnType="String")]
+        public virtual string Price {
+            get {
+                return this._price;
+            }
+            set {
+                this._price = value;
+            }
+        }
+        
+        [Property("Id_Input", ColumnType="String", NotNull=true)]
+        public virtual string IdInput {
+            get {
+                return this._idInput;
+            }
+            set {
+                this._idInput = value;
+            }
+        }
+        
+        [PrimaryKey(PrimaryKeyType.Native, "Additional_Order_S", ColumnType="Int32")]
+        public virtual int AdditionalOrderS {
+            get {
+                return this._additionalOrderS;
+            }
+            set {
+                this._additionalOrderS = value;
+            }
+        }
+        
+        [BelongsTo("Menu_Schedule_Customer_S")]
+        public virtual CustomerOrder CustomerOrder {
+            get {
+                return this._customerOrder;
+            }
+            set {
+                this._customerOrder = value;
             }
         }
     }

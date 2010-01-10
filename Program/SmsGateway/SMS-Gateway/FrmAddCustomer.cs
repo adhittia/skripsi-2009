@@ -19,6 +19,7 @@ namespace SMS_Gateway
         public FrmAddCustomer(AppData.CustomerProfile cpx) : this()
         {
             cp = cpx;
+            txtCustomerID.Text = cp.CustomerId.ToString();
             txtName.Text = cp.CpName;
             txtDileveryAddress.Text = cp.CpDeliveryAddress;
             txtBillAddress.Text = cp.CpBillAddress;

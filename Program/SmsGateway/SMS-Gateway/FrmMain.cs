@@ -441,6 +441,42 @@ namespace SMS_Gateway {
                 item.SubItems.Add(cp.CpEmail);
             }
         }
+        private int customerOrderId;
+
+        private void showCustomerOrder()
+        {
+            lvCustomerOrder.Items.Clear();
+
+
+            foreach (AppData.CustomerOrder co in AppData.CustomerOrder.FindAllByProperty("ComOrderDate", dtc.Value.Date.ToString("yyyy-MM-dd")))
+            {
+                ListViewItem item = lvCustomerOrder.Items.Add(co.MenuScheduleCustomerS.ToString());
+                item.Tag = co;
+                item.SubItems.Add(AppData.Menu.Find(co.ComSelected).MName);
+                item.SubItems.Add(co.ComOrderStatus);
+                item.SubItems.Add(co.ComOrderDate);
+                item.SubItems.Add(co.MenuScheduleId.ToString());
+                item.SubItems.Add(AppData.CustomerProfile.Find(co.CustomerId).CpName);
+                //item.SubItems.Add(co.IdInput.ToString());
+            }
+        }
+        private void showCustomerOrderDetil()
+        {
+            lvCustomerOrderDetil.Items.Clear();
+
+            foreach (AppData.CustomerOrderDetail co in AppData.CustomerOrder.Find(this.customerOrderId).CustomerOrderDetails)
+            {
+
+                ListViewItem item = lvCustomerOrderDetil.Items.Add(co.AdditionalOrderS.ToString());
+                item.Tag = co;
+                item.SubItems.Add(AppData.Menu.Find(co.MenuId).MName);
+                item.SubItems.Add(co.Price.ToString());
+                item.SubItems.Add(co.CustomerOrder.MenuScheduleCustomerS.ToString());
+                //item.SubItems.Add(co.IdInput);
+                //item.SubItems.Add(co.CustomerId.ToString());
+                //item.SubItems.Add(co.IdInput.ToString());
+            }
+        }
         private void showMenu() {
 
             lvMenu.Items.Clear();
@@ -798,6 +834,61 @@ namespace SMS_Gateway {
 
         private void button4_Click(object sender, EventArgs e) {
             SendingTimer_Tick(SendingTimer, new EventArgs());
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvCustomerOrder.SelectedItems.Count == 1)
+            {
+                AppData.CustomerOrder ms = (AppData.CustomerOrder)lvCustomerOrder.SelectedItems[0].Tag;
+
+                        this.customerOrderId = ms.CustomerId;
+                        showCustomerOrderDetil();
+                   
+                
+            }
+        }
+
+        private void lvSchedule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            
+            showCustomerOrder();
+        }
+
+        private void lvCustomerOrderDetil_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnDeliveryOrder_Click(object sender, EventArgs e)
+        {
+            using (FrmDeliveryOrder frmDO = new FrmDeliveryOrder())
+            {
+                if (frmDO.ShowDialog(this) == DialogResult.OK)
+                {
+                    //showSchedule();
+                }
+            }
+        }
+
+        private void btnBillingInformation_Click(object sender, EventArgs e)
+        {
+            using (FrmBillingInformation frmDO = new FrmBillingInformation())
+            {
+                if (frmDO.ShowDialog(this) == DialogResult.OK)
+                {
+                    //showSchedule();
+                }
+            }
         }
 
     }

@@ -21,7 +21,13 @@ namespace SMS_Gateway
         public FrmAddSchedule(AppData.MenuSchedule msx) : this()
         {
             ms = msx;
+            
             dateTimePicker1.Value = Convert.ToDateTime(ms.MsDate);
+            txtMenuA.Text = AppData.Menu.Find(ms.MsMenuA).MName;
+            txtMenuB.Text = AppData.Menu.Find(ms.MsMenuB).MName;
+            txtMenuC.Text = AppData.Menu.Find(ms.MsMenuC).MName;
+            txtScheduleID.Text = ms.MenuScheduleId.ToString();
+            
             
         }
         private void btnClose_Click(object sender, EventArgs e)

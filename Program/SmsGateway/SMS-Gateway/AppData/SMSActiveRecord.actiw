@@ -2,14 +2,6 @@
 <model dslVersion="1.0.0.0" Id="779f0d04-62cd-418f-8f57-b16788f9f8b8" xmlns="http://schemas.microsoft.com/dsltools/ActiveWriter">
   <additionalImports>AAEAAAD/////AQAAAAAAAAAMAgAAAF1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkRzbCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTkwNTE0MTM5NmRkYjA3OTkEAQAAAKEBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tBbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydCwgQWx0aW5vcmVuLkFjdGl2ZVdyaXRlci5Ec2wsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj05MDUxNDEzOTZkZGIwNzk5XV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAB9BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydFtdAgAAAAgICQMAAAAAAAAAAAAAAAcDAAAAAAEAAAAAAAAABB1BbHRpbm9yZW4uQWN0aXZlV3JpdGVyLkltcG9ydAIAAAAL</additionalImports>
   <classes>
-    <modelClass name="CustomerOrder" schema="catering" table="customer_order">
-      <properties>
-        <modelProperty Id="ee3d6ede-30ab-4ad9-b1f7-2962e3882247" name="ComSelected" column="COM_Selected" columnType="Int32" length="0" />
-        <modelProperty Id="8e436d85-38af-4625-a4e8-cd4615977c0e" name="ComOrderStatus" column="COM_Order_Status" length="0" />
-        <modelProperty Id="66e9b533-4b98-4878-a64b-9c022eee650c" name="ComOrderDate" column="COM_Order_Date" length="0" />
-        <modelProperty Id="ce92f00e-1318-48f6-aa6e-0d7f172f6a87" name="MenuScheduleCustomerS" column="Menu_Schedule_Customer_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
-      </properties>
-    </modelClass>
     <modelClass name="SmsOutput" schema="catering" table="sms_output">
       <properties>
         <modelProperty Id="5211f45b-a748-46f3-bf99-f0c9f1490be3" name="WaktuDiproses" column="Waktu_Diproses" columnType="DateTime" length="0" />
@@ -18,12 +10,6 @@
         <modelProperty Id="8d50e6a2-2c13-433b-a2dd-da80c152fa20" name="PesanTeks" column="Pesan_Teks" length="0" />
         <modelProperty Id="c508e0d9-9089-4ddc-aac3-c66bed73d0a3" name="Status" column="Status" length="0" />
         <modelProperty Id="d36b5673-2cae-41cc-9d09-2cdb51f5687f" name="IdOutput" column="Id_Output" length="0" notNull="true" keyType="PrimaryKey" />
-      </properties>
-    </modelClass>
-    <modelClass name="CustomerOrderDetail" schema="catering" table="customer_order_detail">
-      <properties>
-        <modelProperty Id="42d41e8d-6ec3-4f74-a9f0-405e326fdb31" name="Price" column="Price" length="0" />
-        <modelProperty Id="91e21cc4-9a36-478e-a815-d8a29800ed76" name="AdditionalOrderS" column="Additional_Order_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
       </properties>
     </modelClass>
     <modelClass name="CustomerProfile" schema="catering" table="customer_profile">
@@ -81,6 +67,30 @@
         <modelProperty Id="b54218fb-ea43-46f4-8aa7-9f953e846143" name="PesanTeks" column="Pesan_Teks" length="0" />
         <modelProperty Id="9ae76fd7-bfc6-4ea7-907b-7a400e31f5e1" name="Status" column="Status" length="0" />
         <modelProperty Id="5eb36685-f191-4ef7-8e4f-57a7bcf59e49" name="IdInput" column="Id_Input" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="CustomerOrder" schema="catering" table="customer_order">
+      <properties>
+        <modelProperty Id="feeff27c-7ae4-41d5-bd05-33aa0bd32572" name="ComSelected" column="COM_Selected" columnType="Int32" length="0" />
+        <modelProperty Id="7c5ac6d9-be8a-4896-b7e2-149b598a8635" name="ComOrderStatus" column="COM_Order_Status" length="0" />
+        <modelProperty Id="f7d27253-8416-4b85-bde8-978f3f9ca058" name="ComOrderDate" column="COM_Order_Date" length="0" />
+        <modelProperty Id="844c006e-77e3-4622-a2a6-b98fdf7e3c16" name="MenuScheduleId" column="Menu_Schedule_Id" columnType="Int32" length="0" notNull="true" />
+        <modelProperty Id="2fa95e16-4837-4c28-bde7-2881f78b660d" name="CustomerId" column="Customer_ID" columnType="Int32" length="0" />
+        <modelProperty Id="21b01480-1584-4b50-b1e1-6871d3b88d24" name="IdInput" column="Id_Input" length="0" notNull="true" />
+        <modelProperty Id="a2ff6fad-78c3-44ad-a18c-7dbb576dbc94" name="MenuScheduleCustomerS" column="Menu_Schedule_Customer_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
+      </properties>
+    </modelClass>
+    <modelClass name="CustomerOrderDetail" schema="catering" table="customer_order_detail">
+      <targets>
+        <manyToOneRelation Id="4e8d1d03-f612-4a10-bb39-4d046066e497" targetColumnKey="Menu_Schedule_Customer_S" targetTable="customer_order_detail" targetPropertyName="CustomerOrderDetails" sourceColumn="Menu_Schedule_Customer_S">
+          <modelClassMoniker name="/779f0d04-62cd-418f-8f57-b16788f9f8b8/CustomerOrder" />
+        </manyToOneRelation>
+      </targets>
+      <properties>
+        <modelProperty Id="2abd3b41-fdf1-4e4a-8af5-7a0d0db33210" name="MenuId" column="Menu_ID" columnType="Int32" length="0" />
+        <modelProperty Id="f143f451-4de9-497b-8f76-863091bbe023" name="Price" column="Price" length="0" />
+        <modelProperty Id="82c0f12a-90b6-4ba0-b5c4-3c1d729f9992" name="IdInput" column="Id_Input" length="0" notNull="true" />
+        <modelProperty Id="4aefb4b0-4ba6-4391-a6a2-1bf14e8166b1" name="AdditionalOrderS" column="Additional_Order_S" columnType="Int32" length="0" notNull="true" keyType="PrimaryKey" />
       </properties>
     </modelClass>
   </classes>

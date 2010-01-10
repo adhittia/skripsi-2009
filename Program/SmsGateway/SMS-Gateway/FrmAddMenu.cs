@@ -22,6 +22,7 @@ namespace SMS_Gateway
             //InitializeComponent();
             btnSave.Text = "Update";
             mn = mnx;
+            txtMenuID.Text = mn.MenuId.ToString();
             txtMenuName.Text = mn.MName;
             txtDescription.Text = mn.MDescription;
             txtPrice.Text = mn.MPrice.ToString();
