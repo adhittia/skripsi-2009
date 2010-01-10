@@ -42,6 +42,8 @@ namespace SMS_Gateway
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtScheduleID = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +69,8 @@ namespace SMS_Gateway
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtScheduleID);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
@@ -86,7 +90,7 @@ namespace SMS_Gateway
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(236, 102);
+            this.button3.Location = new System.Drawing.Point(236, 127);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(27, 23);
             this.button3.TabIndex = 17;
@@ -96,7 +100,7 @@ namespace SMS_Gateway
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(236, 76);
+            this.button2.Location = new System.Drawing.Point(236, 101);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(27, 23);
             this.button2.TabIndex = 16;
@@ -106,7 +110,7 @@ namespace SMS_Gateway
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(236, 50);
+            this.button1.Location = new System.Drawing.Point(236, 75);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(27, 23);
             this.button1.TabIndex = 15;
@@ -116,7 +120,7 @@ namespace SMS_Gateway
             // 
             // txtMenuB
             // 
-            this.txtMenuB.Location = new System.Drawing.Point(122, 78);
+            this.txtMenuB.Location = new System.Drawing.Point(122, 103);
             this.txtMenuB.MaxLength = 50;
             this.txtMenuB.Name = "txtMenuB";
             this.txtMenuB.Size = new System.Drawing.Size(108, 20);
@@ -124,7 +128,7 @@ namespace SMS_Gateway
             // 
             // txtMenuA
             // 
-            this.txtMenuA.Location = new System.Drawing.Point(122, 52);
+            this.txtMenuA.Location = new System.Drawing.Point(122, 77);
             this.txtMenuA.MaxLength = 50;
             this.txtMenuA.Name = "txtMenuA";
             this.txtMenuA.Size = new System.Drawing.Size(108, 20);
@@ -133,14 +137,14 @@ namespace SMS_Gateway
             // dateTimePicker1
             // 
             this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePicker1.Location = new System.Drawing.Point(122, 26);
+            this.dateTimePicker1.Location = new System.Drawing.Point(122, 51);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(121, 20);
             this.dateTimePicker1.TabIndex = 11;
             // 
             // txtMenuC
             // 
-            this.txtMenuC.Location = new System.Drawing.Point(122, 104);
+            this.txtMenuC.Location = new System.Drawing.Point(122, 129);
             this.txtMenuC.MaxLength = 50;
             this.txtMenuC.Name = "txtMenuC";
             this.txtMenuC.Size = new System.Drawing.Size(108, 20);
@@ -149,7 +153,7 @@ namespace SMS_Gateway
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 105);
+            this.label4.Location = new System.Drawing.Point(20, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 3;
@@ -158,7 +162,7 @@ namespace SMS_Gateway
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 78);
+            this.label3.Location = new System.Drawing.Point(20, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 2;
@@ -167,7 +171,7 @@ namespace SMS_Gateway
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 52);
+            this.label2.Location = new System.Drawing.Point(20, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 1;
@@ -176,11 +180,30 @@ namespace SMS_Gateway
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 26);
+            this.label1.Location = new System.Drawing.Point(20, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Date";
+            // 
+            // txtScheduleID
+            // 
+            this.txtScheduleID.AcceptsReturn = true;
+            this.txtScheduleID.Enabled = false;
+            this.txtScheduleID.Location = new System.Drawing.Point(122, 25);
+            this.txtScheduleID.MaxLength = 50;
+            this.txtScheduleID.Name = "txtScheduleID";
+            this.txtScheduleID.Size = new System.Drawing.Size(108, 20);
+            this.txtScheduleID.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Schedule ID";
             // 
             // FrmAddSchedule
             // 
@@ -216,6 +239,8 @@ namespace SMS_Gateway
         private System.Windows.Forms.TextBox txtMenuA;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txtScheduleID;
+        private System.Windows.Forms.Label label5;
 
     }
 }

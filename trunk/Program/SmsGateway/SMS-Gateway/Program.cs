@@ -15,7 +15,7 @@ namespace SMS_Gateway {
             XmlConfigurationSource source = new XmlConfigurationSource("appconfig.xml");
 
             ActiveRecordStarter.Initialize(source, typeof(AppData.Menu), typeof(AppData.CustomerProfile),
-                                           typeof(AppData.MenuSchedule));
+                                           typeof(AppData.MenuSchedule),typeof(AppData.CustomerOrder),typeof(AppData.CustomerOrderDetail));
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmMain());

@@ -41,12 +41,14 @@ namespace SMS_Gateway
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtCustomerID = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(321, 193);
+            this.btnSave.Location = new System.Drawing.Point(315, 229);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 5;
@@ -56,7 +58,7 @@ namespace SMS_Gateway
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(235, 192);
+            this.btnClose.Location = new System.Drawing.Point(234, 229);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 4;
@@ -66,6 +68,8 @@ namespace SMS_Gateway
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCustomerID);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtMobile);
             this.groupBox1.Controls.Add(this.txtBillAddress);
             this.groupBox1.Controls.Add(this.txtEmail);
@@ -78,14 +82,14 @@ namespace SMS_Gateway
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(384, 175);
+            this.groupBox1.Size = new System.Drawing.Size(384, 211);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtMobile
             // 
-            this.txtMobile.Location = new System.Drawing.Point(122, 101);
+            this.txtMobile.Location = new System.Drawing.Point(121, 134);
             this.txtMobile.MaxLength = 50;
             this.txtMobile.Name = "txtMobile";
             this.txtMobile.Size = new System.Drawing.Size(108, 20);
@@ -93,7 +97,7 @@ namespace SMS_Gateway
             // 
             // txtBillAddress
             // 
-            this.txtBillAddress.Location = new System.Drawing.Point(122, 75);
+            this.txtBillAddress.Location = new System.Drawing.Point(121, 108);
             this.txtBillAddress.MaxLength = 50;
             this.txtBillAddress.Name = "txtBillAddress";
             this.txtBillAddress.Size = new System.Drawing.Size(256, 20);
@@ -101,7 +105,7 @@ namespace SMS_Gateway
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(122, 129);
+            this.txtEmail.Location = new System.Drawing.Point(121, 162);
             this.txtEmail.MaxLength = 50;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(188, 20);
@@ -109,7 +113,7 @@ namespace SMS_Gateway
             // 
             // txtDileveryAddress
             // 
-            this.txtDileveryAddress.Location = new System.Drawing.Point(122, 49);
+            this.txtDileveryAddress.Location = new System.Drawing.Point(121, 82);
             this.txtDileveryAddress.MaxLength = 50;
             this.txtDileveryAddress.Name = "txtDileveryAddress";
             this.txtDileveryAddress.Size = new System.Drawing.Size(256, 20);
@@ -117,7 +121,7 @@ namespace SMS_Gateway
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(122, 23);
+            this.txtName.Location = new System.Drawing.Point(121, 56);
             this.txtName.MaxLength = 20;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(108, 20);
@@ -126,7 +130,7 @@ namespace SMS_Gateway
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 132);
+            this.label5.Location = new System.Drawing.Point(19, 165);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 4;
@@ -135,7 +139,7 @@ namespace SMS_Gateway
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 105);
+            this.label4.Location = new System.Drawing.Point(19, 138);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 3;
@@ -144,7 +148,7 @@ namespace SMS_Gateway
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 78);
+            this.label3.Location = new System.Drawing.Point(19, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 2;
@@ -153,7 +157,7 @@ namespace SMS_Gateway
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 52);
+            this.label2.Location = new System.Drawing.Point(19, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 1;
@@ -162,17 +166,35 @@ namespace SMS_Gateway
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 26);
+            this.label1.Location = new System.Drawing.Point(19, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
+            // txtCustomerID
+            // 
+            this.txtCustomerID.Enabled = false;
+            this.txtCustomerID.Location = new System.Drawing.Point(121, 30);
+            this.txtCustomerID.MaxLength = 20;
+            this.txtCustomerID.Name = "txtCustomerID";
+            this.txtCustomerID.Size = new System.Drawing.Size(108, 20);
+            this.txtCustomerID.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Customer ID";
+            // 
             // FrmAddCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 231);
+            this.ClientSize = new System.Drawing.Size(408, 262);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox1);
@@ -202,5 +224,7 @@ namespace SMS_Gateway
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMobile;
         private System.Windows.Forms.TextBox txtBillAddress;
+        private System.Windows.Forms.TextBox txtCustomerID;
+        private System.Windows.Forms.Label label6;
     }
 }

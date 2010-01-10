@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{22E94452-8F19-492E-9CDD-4043BE403399}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -61,6 +61,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Reference\ActiveRecord\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="MySql.Data, Version=6.0.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -78,6 +80,8 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -86,6 +90,24 @@
     <Compile Include="AppClass\Common.cs" />
     <Compile Include="AppClass\DBProvider.cs" />
     <Compile Include="AppClass\Function.cs" />
+    <Compile Include="AppData\DeliveryReport.cs">
+      <DependentUpon>DeliveryReport.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AppData\DeliveryReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\DeliveryReportDetil.cs">
+      <DependentUpon>DeliveryReportDetil.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AppData\DeliveryReportDetil.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryReportDetil.xsd</DependentUpon>
+    </Compile>
     <Compile Include="AppData\Models\SMSActiveRecord.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,6 +117,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SMSActiveRecord.actiw</DependentUpon>
+    </Compile>
+    <Compile Include="AppData\BillingInfo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillingInfo.xsd</DependentUpon>
     </Compile>
     <Compile Include="FrmAddCustomer.cs">
       <SubType>Form</SubType>
@@ -114,6 +141,12 @@
     <Compile Include="FrmAddSchedule.Designer.cs">
       <DependentUpon>FrmAddSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBillingInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBillingInformation.Designer.cs">
+      <DependentUpon>FrmBillingInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBroadcastSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +158,12 @@
     </Compile>
     <Compile Include="FrmCommandRegister.Designer.cs">
       <DependentUpon>FrmCommandRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDeliveryOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDeliveryOrder.Designer.cs">
+      <DependentUpon>FrmDeliveryOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmDiagnostic.cs">
       <SubType>Form</SubType>
@@ -148,6 +187,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BillingInformation.rdlc" />
+    <EmbeddedResource Include="DeliveryOrder.rdlc" />
+    <EmbeddedResource Include="DeliveryOrderDetil.rdlc" />
     <EmbeddedResource Include="FrmAddCustomer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmAddCustomer.cs</DependentUpon>
@@ -160,6 +202,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>FrmAddSchedule.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmBillingInformation.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmBillingInformation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmBroadcastSchedule.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmBroadcastSchedule.cs</DependentUpon>
@@ -167,6 +213,10 @@
     <EmbeddedResource Include="FrmCommandRegister.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FrmCommandRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDeliveryOrder.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FrmDeliveryOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDiagnostic.resx">
       <SubType>Designer</SubType>
@@ -185,11 +235,35 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
+    <None Include="AppData\DeliveryReport.xsc">
+      <DependentUpon>DeliveryReport.xsd</DependentUpon>
+    </None>
+    <None Include="AppData\DeliveryReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DeliveryReport.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="AppData\DeliveryReport.xss">
+      <DependentUpon>DeliveryReport.xsd</DependentUpon>
+    </None>
+    <None Include="AppData\DeliveryReportDetil.xsc">
+      <DependentUpon>DeliveryReportDetil.xsd</DependentUpon>
+    </None>
+    <None Include="AppData\DeliveryReportDetil.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DeliveryReportDetil.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="AppData\DeliveryReportDetil.xss">
+      <DependentUpon>DeliveryReportDetil.xsd</DependentUpon>
+    </None>
     <None Include="AppData\Models\SMSActiveRecord.actiw">
       <Generator>ActiveWriterCodeGenerator</Generator>
       <LastGenOutput>SMSActiveRecord.cs</LastGenOutput>
@@ -200,6 +274,17 @@
       <LastGenOutput>SMSActiveRecord.cs</LastGenOutput>
     </None>
     <None Include="AppData\SMSActiveRecord.actiw.diagram" />
+    <None Include="AppData\BillingInfo.xsc">
+      <DependentUpon>BillingInfo.xsd</DependentUpon>
+    </None>
+    <None Include="AppData\BillingInfo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BillingInfo.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="AppData\BillingInfo.xss">
+      <DependentUpon>BillingInfo.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
