@@ -44,6 +44,11 @@ public class FormOrderAdditional extends Form implements CommandListener, Runnab
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
         info.setText("Billing Information");
 
+        AppRecord apr = new AppRecord();
+        String customer = apr.ReadCustomerId();
+        apr.close();
+        this.custId.setString(customer);
+
         this.append(info);
         this.append(custId);
         this.append(field);

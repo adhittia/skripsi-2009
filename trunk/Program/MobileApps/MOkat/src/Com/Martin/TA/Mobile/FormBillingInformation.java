@@ -45,6 +45,11 @@ public class FormBillingInformation extends Form implements CommandListener, Run
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
         info.setText("Billing Information");
 
+        AppRecord apr = new AppRecord();
+        String customer = apr.ReadCustomerId();
+        apr.close();
+        this.custId.setString(customer);
+
         this.append(info);
         this.append(custId);
         this.append(typeCategory);
