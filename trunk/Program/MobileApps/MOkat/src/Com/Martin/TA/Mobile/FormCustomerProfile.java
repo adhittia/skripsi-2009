@@ -32,10 +32,10 @@ public class FormCustomerProfile extends Form implements CommandListener, Runnab
     private final Command cmdKembali = new Command("Back", Command.BACK, 1);
     private final Command cmdKirim = new Command("Send Request", Command.SCREEN, 2);
 
-    private TextField custId = new TextField("Menu ID", "", 11, TextField.NUMERIC);
-    private TextField value = new TextField("Menu ID", "", 80, TextField.ANY);
+    private TextField custId = new TextField("Customer ID", "", 11, TextField.NUMERIC);
+    private TextField value = new TextField("Value", "", 80, TextField.ANY);
     private String[] listCategory = {"Customer Name", "Delivery Address", "Billing Address", "Mobile No", "E-Mail"};
-    private ChoiceGroup typeCategory = new ChoiceGroup("Category", Choice.POPUP, listCategory, null);
+    private ChoiceGroup typeCategory = new ChoiceGroup("Field", Choice.POPUP, listCategory, null);
     
     public FormCustomerProfile(MOkat midlet, Display display){
         super("Form Update Profile");

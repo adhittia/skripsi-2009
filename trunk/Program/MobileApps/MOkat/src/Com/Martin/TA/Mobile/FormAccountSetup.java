@@ -26,7 +26,7 @@ public class FormAccountSetup extends Form implements CommandListener, Runnable 
     private Thread thread;
     private final Command cmdKembali = new Command("Back", Command.BACK, 1);
     private final Command cmdKirim = new Command("Save Account", Command.SCREEN, 2);
-    private TextField custId = new TextField("Menu ID", "", 11, TextField.NUMERIC);
+    private TextField custId = new TextField("Customer ID", "", 11, TextField.NUMERIC);
 
     public FormAccountSetup(MOkat midlet, Display display) {
         super("Form Setup Account");

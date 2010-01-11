@@ -32,7 +32,7 @@ public class FormOrderAdditional extends Form implements CommandListener, Runnab
     private String nodest = "081510649790";
     private final Command cmdKembali = new Command("Back", Command.BACK, 1);
     private final Command cmdKirim = new Command("Send Request", Command.SCREEN, 2);
-    private TextField custId = new TextField("Menu ID", "", 11, TextField.NUMERIC);
+    private TextField custId = new TextField("Customer ID", "", 11, TextField.NUMERIC);
     private DateField field = new DateField("Date", DateField.DATE);
     private TextField menuId = new TextField("Menu ID", "", 11, TextField.NUMERIC);
 

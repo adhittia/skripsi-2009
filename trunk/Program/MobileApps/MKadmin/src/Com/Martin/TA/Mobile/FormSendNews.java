@@ -30,7 +30,7 @@ public class FormSendNews extends Form implements CommandListener, Runnable {
     private final Command cmdKembali = new Command("Back", Command.BACK, 1);
     private final Command cmdKirim = new Command("Send Request", Command.SCREEN, 2);
 
-    private TextField news = new TextField("Menu Name", "", 160, TextField.ANY);
+    private TextField news = new TextField("News", "", 160, TextField.ANY);
     
     public FormSendNews(MKAdmin midlet, Display display){
         super("Form Sending News");
@@ -39,7 +39,7 @@ public class FormSendNews extends Form implements CommandListener, Runnable {
         this.display = display;
 
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
-        info.setText("Set Menu Schedule");
+        info.setText("Send News");
 
         this.append(info);
         this.append(news);
