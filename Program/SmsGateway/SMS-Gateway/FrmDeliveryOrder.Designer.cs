@@ -31,26 +31,46 @@ namespace SMS_Gateway
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.customerprofileBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.deliveryReport = new SMS_Gateway.AppData.DeliveryReport();
+            this.viewdeliveryorderdetilBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.deliveryReportDetil = new SMS_Gateway.AppData.DeliveryReportDetil();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.Gb1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
-            this.deliveryReport = new SMS_Gateway.AppData.DeliveryReport();
-            this.customerprofileBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.customer_profileTableAdapter = new SMS_Gateway.AppData.DeliveryReportTableAdapters.customer_profileTableAdapter();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deliveryReportDetil = new SMS_Gateway.AppData.DeliveryReportDetil();
-            this.viewdeliveryorderdetilBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.viewdeliveryorderdetilTableAdapter = new SMS_Gateway.AppData.DeliveryReportDetilTableAdapters.viewdeliveryorderdetilTableAdapter();
-            this.Gb1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deliveryReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerprofileBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deliveryReportDetil)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deliveryReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.viewdeliveryorderdetilBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deliveryReportDetil)).BeginInit();
+            this.Gb1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // customerprofileBindingSource
+            // 
+            this.customerprofileBindingSource.DataMember = "customer_profile";
+            this.customerprofileBindingSource.DataSource = this.deliveryReport;
+            // 
+            // deliveryReport
+            // 
+            this.deliveryReport.DataSetName = "DeliveryReport";
+            this.deliveryReport.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // viewdeliveryorderdetilBindingSource
+            // 
+            this.viewdeliveryorderdetilBindingSource.DataMember = "viewdeliveryorderdetil";
+            this.viewdeliveryorderdetilBindingSource.DataSource = this.deliveryReportDetil;
+            // 
+            // deliveryReportDetil
+            // 
+            this.deliveryReportDetil.DataSetName = "DeliveryReportDetil";
+            this.deliveryReportDetil.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
@@ -78,22 +98,6 @@ namespace SMS_Gateway
             this.Gb1.TabStop = false;
             this.Gb1.Text = "Control";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Delivery Date";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(117, 13);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(153, 20);
-            this.dateTimePicker1.TabIndex = 1;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(286, 13);
@@ -104,15 +108,22 @@ namespace SMS_Gateway
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // deliveryReport
+            // dateTimePicker1
             // 
-            this.deliveryReport.DataSetName = "DeliveryReport";
-            this.deliveryReport.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dateTimePicker1.Location = new System.Drawing.Point(117, 13);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(153, 20);
+            this.dateTimePicker1.TabIndex = 1;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // customerprofileBindingSource
+            // label1
             // 
-            this.customerprofileBindingSource.DataMember = "customer_profile";
-            this.customerprofileBindingSource.DataSource = this.deliveryReport;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Delivery Date";
             // 
             // customer_profileTableAdapter
             // 
@@ -136,16 +147,6 @@ namespace SMS_Gateway
             this.dataGridViewTextBoxColumn2.HeaderText = "id";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // deliveryReportDetil
-            // 
-            this.deliveryReportDetil.DataSetName = "DeliveryReportDetil";
-            this.deliveryReportDetil.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // viewdeliveryorderdetilBindingSource
-            // 
-            this.viewdeliveryorderdetilBindingSource.DataMember = "viewdeliveryorderdetil";
-            this.viewdeliveryorderdetilBindingSource.DataSource = this.deliveryReportDetil;
-            // 
             // viewdeliveryorderdetilTableAdapter
             // 
             this.viewdeliveryorderdetilTableAdapter.ClearBeforeFill = true;
@@ -161,12 +162,12 @@ namespace SMS_Gateway
             this.Name = "FrmDeliveryOrder";
             this.Text = "FrmDeliveryOrder";
             this.Load += new System.EventHandler(this.FrmDeliveryOrder_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.customerprofileBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deliveryReport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.viewdeliveryorderdetilBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deliveryReportDetil)).EndInit();
             this.Gb1.ResumeLayout(false);
             this.Gb1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deliveryReport)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerprofileBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deliveryReportDetil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.viewdeliveryorderdetilBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
