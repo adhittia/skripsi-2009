@@ -32,7 +32,7 @@ public class FormBillingInformation extends Form implements CommandListener, Run
     private final Command cmdKembali = new Command("Back", Command.BACK, 1);
     private final Command cmdKirim = new Command("Send Request", Command.SCREEN, 2);
 
-    private TextField custId = new TextField("Menu ID", "", 11, TextField.NUMERIC);
+    private TextField custId = new TextField("Customer ID", "", 11, TextField.NUMERIC);
 
     private String[] listCategory = {"Last Month", "Current Month"};
     private ChoiceGroup typeCategory = new ChoiceGroup("Category", Choice.EXCLUSIVE, listCategory, null);
