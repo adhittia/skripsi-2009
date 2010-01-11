@@ -19,7 +19,7 @@ namespace SMS_Gateway
         private void FrmDeliveryOrder_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'deliveryReport.customer_profile' table. You can move, or remove it, as needed.
-            this.customer_profileTableAdapter.Fill(this.deliveryReport.customer_profile);
+            this.customer_profileTableAdapter.Fill(this.deliveryReport.customer_profile,dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             //// TODO: This line of code loads data into the 'deliveryReport.customer_profile' table. You can move, or remove it, as needed.
             //this.customer_profileTableAdapter.Fill(this.deliveryReport.customer_profile);
             //// TODO: This line of code loads data into the 'deliveryReport.customer_profile' table. You can move, or remove it, as needed.
@@ -46,6 +46,23 @@ namespace SMS_Gateway
             this.reportViewer1.PrintDialog();
             //this.reportViewer1.RefreshReport();
            
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'deliveryReport.customer_profile' table. You can move, or remove it, as needed.
+            this.customer_profileTableAdapter.Fill(this.deliveryReport.customer_profile, dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
+            //// TODO: This line of code loads data into the 'deliveryReport.customer_profile' table. You can move, or remove it, as needed.
+            //this.customer_profileTableAdapter.Fill(this.deliveryReport.customer_profile);
+            //// TODO: This line of code loads data into the 'deliveryReport.customer_profile' table. You can move, or remove it, as needed.
+            //this.customer_profileTableAdapter.Fill(this.deliveryReport.customer_profile);
+
+
+            //this.reportViewer1.RefreshReport();
+            this.reportViewer1.LocalReport.SubreportProcessing += new Microsoft.Reporting.WinForms.SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
+            //object Dr
+            this.reportViewer1.LocalReport.Refresh();
+            this.reportViewer1.RefreshReport();
         }
 
        
