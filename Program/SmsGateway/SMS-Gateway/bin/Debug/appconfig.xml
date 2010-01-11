@@ -12,7 +12,7 @@
       value="NHibernate.Connection.DriverConnectionProvider" />
     <add 
       key="connection.connection_string" 
-      value="Database=catering;Data Source=localhost;User Id=admin;Password=password" />
+      value="Database=catering;Data Source=localhost;User Id=root;Password=rahasia" />
     <add 
       key="proxyfactory.factory_class"
       value="NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu" />
