@@ -42,7 +42,7 @@ public class FormCancelOrder extends Form implements CommandListener, Runnable {
         this.display = display;
 
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
-        info.setText("Billing Information");
+        info.setText("Cancel Order");
 
         AppRecord apr = new AppRecord();
         String customer = apr.ReadCustomerId();

@@ -41,7 +41,7 @@ namespace Com.Martin.Function
 
                 s += "\r\n";
                 s += "\r\n";
-                s += "Res ID : " + outgoing.ID.ToString() + " , Process At : " + outgoing.DateProcess.ToString("dd-MMM-yyyy") + " , Sent at : " + outgoing.DateSent.ToString("dd-MMM-yyyy");
+                s += "Res ID : " + (outgoing.ID == null? "" : outgoing.ID.ToString()) + " , Process At : " + outgoing.DateProcess.ToString("dd-MMM-yyyy") + " , Sent at : " + outgoing.DateSent.ToString("dd-MMM-yyyy");
                 s += "\r\n";
                 s += "Text : " + outgoing.MessageText;
                 s += "\r\n";

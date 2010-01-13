@@ -29,14 +29,10 @@ namespace Com.Martin.SMS.Common {
             {
                 command.Parameters.Add(arrMSG[i]);
             }
-
-            // set request.incoming = smsincoming
             command.RequestSMS= Request;
 
-            // smsoutgoing = request.execute
             SMSOutgoing outSMS = command.Execute();
 
-            // helper.SaveOutgoingMessage
             SMSHelper.SaveOutgoingMessage(ref outSMS);
 
             return outSMS;
@@ -405,7 +401,7 @@ namespace Com.Martin.SMS.Common {
                 MySqlCommand command = conn.CreateCommand();
                 command.CommandText = "SELECT Id_Jadwal, Pengulangan_Max , Pengulangan_Hitung , Pengulangan_Jeda_Hari , Waktu_Eksekusi_Berikut , ";
                 command.CommandText += "Waktu_Eksekusi_Terakhir , Status , Reg_Name , Reg_Type FROM jadwal_broadcast ";
-                command.CommandText += "where Pengulangan_Hitung <= Pengulangan_Max and Waktu_Eksekusi_Berikut <= CURDATE() and status='ACTIVE' ";
+                command.CommandText += "where ((Pengulangan_Hitung <= Pengulangan_Max) or (Pengulangan_Max = 0)) and Waktu_Eksekusi_Berikut <= CURDATE() and status='ACTIVE' ";
 
                 command.Parameters.Clear();
 

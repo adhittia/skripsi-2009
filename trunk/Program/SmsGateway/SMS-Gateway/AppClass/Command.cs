@@ -78,7 +78,7 @@ namespace Com.Martin.SMS.Command {
     }
     #endregion
 
-    #region Cutomer Request Command
+    #region Customer Request Command
     public class MainGetMenu : AbstractRequest {
         public override string GetRegName() {
             return "Get";
@@ -99,7 +99,7 @@ namespace Com.Martin.SMS.Command {
                 command.CommandText = "SELECT (select m_name from menu b where b.menu_id = m.ms_menu_a) as Menu_A , ";
                 command.CommandText += "  (select m_name from menu b where b.menu_id = m.ms_menu_b) as Menu_B, ";
                 command.CommandText += "  (select m_name from menu b where b.menu_id = m.ms_menu_c) as Menu_C ";
-                command.CommandText += " FROM catering.menu_schedule m where date_format(ms_date, '%d-%m-%Y')=?schedule";
+                command.CommandText += " FROM catering.menu_schedule m where date_format(ms_date, '%Y-%m-%d')=?schedule";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?schedule", orderDate);
 
@@ -189,7 +189,7 @@ namespace Com.Martin.SMS.Command {
                 decimal ScheduleID = 0;
 
                 MySqlCommand command = conn.CreateCommand();
-                command.CommandText = "select Menu_Schedule_Id, Ms_Date, Ms_Menu_A, Ms_Menu_B, Ms_Menu_C from Menu_Schedule where Ms_Date = ?Ms_Date";
+                command.CommandText = "select Menu_Schedule_Id, Ms_Date, Ms_Menu_A, Ms_Menu_B, Ms_Menu_C from Menu_Schedule where date_format(ms_date, '%Y-%m-%d') = ?Ms_Date";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?Ms_Date", orderDate);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -249,7 +249,7 @@ namespace Com.Martin.SMS.Command {
                 conn.Open();
 
                 MySqlCommand command = conn.CreateCommand();
-                command.CommandText = "UPDATE customer_order set com_order_status = 'CANCEL' where com_order_date = ?orderDate and customer_id = ?customer";
+                command.CommandText = "UPDATE customer_order set com_order_status = 'CANCEL' where date_format(com_order_date, '%Y-%m-%d') = ?orderDate and customer_id = ?customer";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?orderDate", orderDate);
                 command.Parameters.AddWithValue("?customer", customer);
@@ -293,7 +293,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?menu", menuID);
                 decimal price = (decimal)command.ExecuteScalar();
 
-                command.CommandText = "select menu_schedule_customer_s from customer_order where com_order_date=?order and customer_id=?customer";
+                command.CommandText = "select menu_schedule_customer_s from customer_order where date_format(com_order_date, '%Y-%m-%d')=?order and customer_id=?customer";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?order", orderDate);
                 command.Parameters.AddWithValue("?customer", customer);
