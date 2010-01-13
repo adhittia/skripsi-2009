@@ -43,7 +43,7 @@ public class FormCustomerProfile extends Form implements CommandListener, Runnab
         this.display = display;
 
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
-        info.setText("Billing Information");
+        info.setText("Update Customer Profile");
 
         AppRecord apr = new AppRecord();
         String customer = apr.ReadCustomerId();

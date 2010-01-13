@@ -52,6 +52,7 @@ public class FormUpdateMenu extends Form implements CommandListener, Runnable {
         info.setText("Update Menu.");
 
         this.append(info);
+        this.append(menuId);
         this.append(nameMenu);
         this.append(typeMenu);
         this.append(typeCategory);

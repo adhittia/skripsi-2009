@@ -71,7 +71,7 @@ namespace SMS_Gateway {
         }
 
         private void oGsmModem_NewMessageReceived(ATSMS.NewMessageReceivedEventArgs e) {
-            //SMSIncoming smsInput = SMSHelper.SaveIncomingMessage("02191848465", "02191848465", "Test;Request");
+            //SMSIncoming smsInput = SMSHelper.SaveIncomingMessage("02191848465", "02191848465", "ADDT;GET;FOOD");
             SMSIncoming smsInput = SMSHelper.SaveIncomingMessage(e.MSISDN, "02191848465", e.TextMessage);
             SMSOutgoing smsOut = CommandProcessor.ProcessRequest(smsInput);
 
@@ -416,6 +416,7 @@ namespace SMS_Gateway {
             this.gridComands.EditMode = DataGridViewEditMode.EditProgrammatically;
 
         }
+
         private void showSchedule() {
             lvSchedule.Items.Clear();
 
@@ -428,6 +429,7 @@ namespace SMS_Gateway {
                 item.SubItems.Add(AppData.Menu.Find(ms.MsMenuC).MName);
             }
         }
+
         private void showCustomer() {
             lvCustomer.Items.Clear();
 
@@ -441,6 +443,7 @@ namespace SMS_Gateway {
                 item.SubItems.Add(cp.CpEmail);
             }
         }
+
         private int customerOrderId;
 
         private void showCustomerOrder()
@@ -460,6 +463,7 @@ namespace SMS_Gateway {
                 //item.SubItems.Add(co.IdInput.ToString());
             }
         }
+
         private void showCustomerOrderDetil()
         {
             lvCustomerOrderDetil.Items.Clear();
@@ -477,6 +481,7 @@ namespace SMS_Gateway {
                 //item.SubItems.Add(co.IdInput.ToString());
             }
         }
+
         private void showMenu() {
 
             lvMenu.Items.Clear();
@@ -492,6 +497,7 @@ namespace SMS_Gateway {
 
             }
         }
+
         private void showBroadcastSchedule(bool justRefresh) {
             String sqlCmd = String.Empty;
 
@@ -560,6 +566,7 @@ namespace SMS_Gateway {
         private void button2_Click(object sender, EventArgs e) {
             oGsmModem_NewMessageReceived(new NewMessageReceivedEventArgs());
         }
+
         private void btnNewMenu_Click(object sender, EventArgs e) {
             FrmAddMenu frmAdd = new FrmAddMenu();
 

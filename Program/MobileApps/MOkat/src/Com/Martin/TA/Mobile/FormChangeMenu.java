@@ -47,7 +47,7 @@ public class FormChangeMenu extends Form implements CommandListener, Runnable {
         this.display = display;
 
         StringItem info = new StringItem("", "", StringItem.LAYOUT_LEFT);
-        info.setText("Billing Information");
+        info.setText("Change Menu Schedule");
 
         AppRecord apr = new AppRecord();
         String customer = apr.ReadCustomerId();
