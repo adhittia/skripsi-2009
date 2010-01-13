@@ -1,0 +1,450 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.0.24a-community-nt
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema catering
+--
+
+CREATE DATABASE IF NOT EXISTS catering;
+USE catering;
+
+--
+-- Temporary table structure for view `viewbilling`
+--
+DROP TABLE IF EXISTS `viewbilling`;
+DROP VIEW IF EXISTS `viewbilling`;
+CREATE TABLE `viewbilling` (
+  `customer_id` int(11),
+  `com_order_date` date,
+  `menu_name` varchar(20),
+  `price` decimal(10,2)
+);
+
+--
+-- Temporary table structure for view `viewdeliveryorderdetil`
+--
+DROP TABLE IF EXISTS `viewdeliveryorderdetil`;
+DROP VIEW IF EXISTS `viewdeliveryorderdetil`;
+CREATE TABLE `viewdeliveryorderdetil` (
+  `menu` varchar(20),
+  `price` varchar(3),
+  `id` int(11)
+);
+
+--
+-- Definition of table `customer_order`
+--
+
+DROP TABLE IF EXISTS `customer_order`;
+CREATE TABLE `customer_order` (
+  `Menu_Schedule_Customer_S` int(11) NOT NULL auto_increment,
+  `COM_Selected` int(11) default NULL,
+  `COM_Order_Status` varchar(20) default NULL,
+  `COM_Order_Date` date default NULL,
+  `Menu_Schedule_Id` int(11) NOT NULL,
+  `Customer_ID` int(11) default NULL,
+  `Id_Input` varchar(17) NOT NULL,
+  PRIMARY KEY  (`Menu_Schedule_Customer_S`),
+  KEY `R_1` (`Menu_Schedule_Id`),
+  KEY `R_5` (`Customer_ID`),
+  KEY `R_11` (`Id_Input`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_order`
+--
+
+/*!40000 ALTER TABLE `customer_order` DISABLE KEYS */;
+INSERT INTO `customer_order` (`Menu_Schedule_Customer_S`,`COM_Selected`,`COM_Order_Status`,`COM_Order_Date`,`Menu_Schedule_Id`,`Customer_ID`,`Id_Input`) VALUES 
+ (1,1,'ACTIVE','2009-12-19',1,1,'0'),
+ (2,2,'ACTIVE','2009-12-20',2,1,'0');
+/*!40000 ALTER TABLE `customer_order` ENABLE KEYS */;
+
+
+--
+-- Definition of table `customer_order_detail`
+--
+
+DROP TABLE IF EXISTS `customer_order_detail`;
+CREATE TABLE `customer_order_detail` (
+  `Additional_Order_S` int(11) NOT NULL auto_increment,
+  `Menu_ID` int(11) default NULL,
+  `Price` decimal(8,2) default NULL,
+  `Menu_Schedule_Customer_S` int(11) NOT NULL,
+  `Id_Input` varchar(17) NOT NULL,
+  PRIMARY KEY  (`Additional_Order_S`),
+  KEY `R_3` (`Menu_ID`),
+  KEY `R_6` (`Menu_Schedule_Customer_S`),
+  KEY `R_12` (`Id_Input`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_order_detail`
+--
+
+/*!40000 ALTER TABLE `customer_order_detail` DISABLE KEYS */;
+INSERT INTO `customer_order_detail` (`Additional_Order_S`,`Menu_ID`,`Price`,`Menu_Schedule_Customer_S`,`Id_Input`) VALUES 
+ (1,1,'13000.00',1,'1');
+/*!40000 ALTER TABLE `customer_order_detail` ENABLE KEYS */;
+
+
+--
+-- Definition of table `customer_profile`
+--
+
+DROP TABLE IF EXISTS `customer_profile`;
+CREATE TABLE `customer_profile` (
+  `Customer_ID` int(11) NOT NULL auto_increment,
+  `CP_Name` varchar(20) default NULL,
+  `CP_Delivery_Address` varchar(80) default NULL,
+  `CP_Bill_Address` varchar(80) default NULL,
+  `CP_Mobile_Number` varchar(15) default NULL,
+  `CP_Email` varchar(50) default NULL,
+  PRIMARY KEY  (`Customer_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_profile`
+--
+
+/*!40000 ALTER TABLE `customer_profile` DISABLE KEYS */;
+INSERT INTO `customer_profile` (`Customer_ID`,`CP_Name`,`CP_Delivery_Address`,`CP_Bill_Address`,`CP_Mobile_Number`,`CP_Email`) VALUES 
+ (1,'Martinus JW','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','02191848465','mjwahyudi@patranusa.com'),
+ (2,'Ismet SK','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','081386586574','ismet.sk@patranusa.com'),
+ (3,'Agung Suryo L','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','08138128128]','agung@patranusa.com'),
+ (4,'Nurul Amri','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','085613600677','namri@patranusa.com'),
+ (5,'Nurul Munfaatin','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','081789974561','nurul@patranusa.com'),
+ (6,'Putri Katon','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','088812888765','pkdari@patranusa.com'),
+ (7,'Aang Risdiana','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','02198654657','aang@patranusa.com'),
+ (8,'Ferry Widjaja','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','085213890900','fw@patranusa.com'),
+ (9,'Imam Maulana','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','085755678123','maulana@patranusa.com'),
+ (10,'Imam Wardani','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','081350015642','wardani@patranusa.com'),
+ (11,'Insan Aulia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','081387609123','iaulia@patranusa.com'),
+ (12,'Yahya Gunawan','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','Kompleks Taman Tekno Blok G2/1, BSD - Tangerang, Indonesia','085645009089','gunawan@patranusa.com');
+/*!40000 ALTER TABLE `customer_profile` ENABLE KEYS */;
+
+
+--
+-- Definition of table `daftar_register`
+--
+
+DROP TABLE IF EXISTS `daftar_register`;
+CREATE TABLE `daftar_register` (
+  `Reg_Type` varchar(5) NOT NULL default '',
+  `Reg_Name` varchar(15) NOT NULL default '',
+  `Nama_Class` varchar(255) default NULL,
+  `Nama_Assembly` varchar(255) default NULL,
+  PRIMARY KEY  (`Reg_Type`,`Reg_Name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `daftar_register`
+--
+
+/*!40000 ALTER TABLE `daftar_register` DISABLE KEYS */;
+INSERT INTO `daftar_register` (`Reg_Type`,`Reg_Name`,`Nama_Class`,`Nama_Assembly`) VALUES 
+ ('TEST','REQUEST','Com.Martin.SMS.Command.TestRequest','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('TEST','BROADCAST','Com.Martin.SMS.Command.TestBroadcast','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('MAIN','GET','Com.Martin.SMS.Command.MainGetMenu','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('ADDT','GET','Com.Martin.SMS.Command.AdditionalMenuList','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('MAIN','CHANGE','Com.Martin.SMS.Command.MainChangeMenu','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('MAIN','CANCEL','Com.Martin.SMS.Command.MainCancelOrder','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('ADDT','ORDER','Com.Martin.SMS.Command.AdditionalMenuOrder','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('BILL','GET','Com.Martin.SMS.Command.BillingInformation','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('CUST','PROFILE','Com.Martin.SMS.Command.ProfilUpdate','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('MENU','ADD','Com.Martin.SMS.Command.AdmMenuAdd','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('MENU','CHG','Com.Martin.SMS.Command.AdmMenuUpdate','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('MENU','SET','Com.Martin.SMS.Command.AdmMenuSet','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('ADD','NEWS','Com.Martin.SMS.Command.AdmSendNews','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'),
+ ('BRC','NEWS','Com.Martin.SMS.Command.BroadcastNews','SMS-Gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null');
+/*!40000 ALTER TABLE `daftar_register` ENABLE KEYS */;
+
+
+--
+-- Definition of table `jadwal_broadcast`
+--
+
+DROP TABLE IF EXISTS `jadwal_broadcast`;
+CREATE TABLE `jadwal_broadcast` (
+  `Id_Jadwal` int(11) NOT NULL auto_increment,
+  `Pengulangan_Max` int(11) default NULL,
+  `Pengulangan_Hitung` int(11) default NULL,
+  `Pengulangan_Jeda_Hari` int(11) default NULL,
+  `Waktu_Eksekusi_Berikut` date default NULL,
+  `Waktu_Eksekusi_Terakhir` date default NULL,
+  `Status` varchar(10) default NULL,
+  `Reg_Name` varchar(15) NOT NULL,
+  `Reg_Type` varchar(5) NOT NULL,
+  PRIMARY KEY  (`Id_Jadwal`),
+  KEY `R_7` (`Reg_Type`,`Reg_Name`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jadwal_broadcast`
+--
+
+/*!40000 ALTER TABLE `jadwal_broadcast` DISABLE KEYS */;
+INSERT INTO `jadwal_broadcast` (`Id_Jadwal`,`Pengulangan_Max`,`Pengulangan_Hitung`,`Pengulangan_Jeda_Hari`,`Waktu_Eksekusi_Berikut`,`Waktu_Eksekusi_Terakhir`,`Status`,`Reg_Name`,`Reg_Type`) VALUES 
+ (1,10,0,1,'2010-01-04','2010-01-03','ACTIVE','NEWS','BRC');
+/*!40000 ALTER TABLE `jadwal_broadcast` ENABLE KEYS */;
+
+
+--
+-- Definition of table `menu`
+--
+
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `Menu_ID` int(11) NOT NULL auto_increment,
+  `M_Name` varchar(20) default NULL,
+  `M_Description` varchar(50) default NULL,
+  `M_Price` decimal(8,2) default NULL,
+  `M_Type` varchar(20) default NULL,
+  `M_Category` varchar(20) default NULL,
+  PRIMARY KEY  (`Menu_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu`
+--
+
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` (`Menu_ID`,`M_Name`,`M_Description`,`M_Price`,`M_Type`,`M_Category`) VALUES 
+ (1,'AYM.PNKI-BYM-OSG.TMP','AYAM PANIKI, ORAK-ARIK BYM, OSENG TEMPE','16500.00','MAIN','FOOD'),
+ (2,'SMR.AYM-OSG.KCG-TH.M','SEMUR AYAM, OSENG KACANG PJG, TAHU MIE KUKUS','16500.00','MAIN','FOOD'),
+ (3,'ASM.AYM-KKG.TRS-MRTB','GARANG ASEM AYAN, KANGKUNG TERASI, MARTABAK','16500.00','MAIN','FOOD'),
+ (4,'AYM.KRI-ASM.BNCS-PRK','AYAM KARI, ASEM BUNCIS, PERKEDEL','16500.00','MAIN','FOOD'),
+ (5,'AYM.KNG-SYR.ASEM-TH','AYAM GRG KNG, SYR ASEM, ASEH THU & TEMPE','16500.00','MAIN','FOOD'),
+ (6,'AYM.GLG-BNCS.THU-KTG','AYAM GLG ASEM MNS, BUNCIS TAHU, KENTANG','16500.00','MAIN','FOOD'),
+ (7,'SAPI.LADA-CAH.SWI-TH','SAPI LADA HITAM, CAH SAWI HTM, TAHU MASAK','16500.00','MAIN','FOOD'),
+ (8,'AYM.TTRG-BAYEM-LMPIA','AYAM TTRGA, BAYEM BNG, LUMPIA','16500.00','MAIN','FOOD'),
+ (9,'SOP.ROLADE.AYM-MIE','SOP ROLADE AYM, MIE GRG, PERKEDEL','16500.00','MAIN','FOOD'),
+ (10,'TLR.MRH-JMR-ORIKTMP','TELUR MSK MRH, CAH JAMUR, ORIK TEMPE','16500.00','MAIN','FOOD'),
+ (11,'AYM.BAKMOY-TLR.KCP','AYM BAKMOY, TELOR KCP, BAKWAN SYR','16500.00','MAIN','FOOD'),
+ (12,'UDG.GRG-TOGE-TAHU','UDANG GRG TPG, TUMIS TOGE, TAHU ISI','16500.00','MAIN','FOOD'),
+ (13,'EMPAL-SYR.ASEM-TEMPE','EMPAL DAGING, SYR ASEM, TEMPE BACEM','16500.00','MAIN','FOOD'),
+ (14,'SOP.BSO.AYM.JMR-SOUN','SOP BASO AYM JMR, SOUN GRG, TH GR KERING','16500.00','MAIN','FOOD'),
+ (15,'TERIK.AYM-SYR-TAHU','TERIK AYM, ORIK SYR, TAHU KOMET GRG','16500.00','MAIN','FOOD'),
+ (16,'SOTO.KUDUS-TELOR-PRK','SOTO KUDUS, TELOR PINDANG, PERKEDEL','16500.00','MAIN','FOOD'),
+ (17,'AYM.RUJAK-JAGUNG-MRT','AYM RUJAK, ORIK JAGUNG, MARTABAK','16500.00','MAIN','FOOD'),
+ (18,'SAPO.TH-BIHUN-BAKWAN','SAPO TAHU AYM, OSENG BIHUN, BAKWAN SYR','16500.00','MAIN','FOOD'),
+ (19,'GLTN.AYM-SYR-TELOR','GALANTINE AYM, SAYURAN, TELOR KECAP','16500.00','MAIN','FOOD'),
+ (20,'RENDANG.AYM-URP.SYR','RENDANG AYM, URAP SYR, TAHU ISI','16500.00','MAIN','FOOD'),
+ (21,'SOP.AYM-MIE-KCG.PJG','SOP AYM, OSENG MIE, SYR KCG PANJANG','16500.00','MAIN','FOOD'),
+ (22,'UDG.CAH-SYR.LBU-BLDO','UDG CAH SYRAN, SYR LABU SIAM, BALADO KTG','16500.00','MAIN','FOOD'),
+ (23,'AYM.BALI-CAPCAY-TEMP','AYM BALI, CAP CAY, TEMPE BMB HIJAU','16500.00','MAIN','FOOD'),
+ (24,'AYM.KCP.ING-C.BYM-TM','AYM.KCP.INGGRIS, CAH BAYEM, TEMPE KCP','16500.00','MAIN','FOOD'),
+ (25,'DAGING.CNC-CAPCAY-KT','DAGING CINCANG, CAPCAY, BALADO KENTANG','16500.00','MAIN','FOOD'),
+ (26,'SOTO.SOKA-TLR.BLDO','SOTO SOKARAJA, TELOR BALDAO, PERKEDEL','16500.00','MAIN','FOOD'),
+ (27,'AYM.KLUYUK-ORIK.BYM','AYM.KLUYUK, ORIK AYM BYM, SMR TEMPE','16500.00','MAIN','FOOD'),
+ (28,'SAMBEL.GRG.ATI.AYM+','SAMBEL GRG ATI AYM, CAH SYR JAMUR, TEMPE GORENG','16500.00','MAIN','FOOD'),
+ (29,'KEMBUNG.GRG-D.SKG+','KEMBUNG GRG, GULAI D.SKG, ORIK TAHU','16500.00','MAIN','FOOD'),
+ (30,'AYM.KRMES, SYR.ASEM+','AYM KREMES, SYR ASEM, TAHU BACEM','16500.00','MAIN','FOOD'),
+ (31,'OTAK.IKAN','OTAK-OTAK IKAN','5500.00','ADDT','FOOD'),
+ (32,'CUMI.GRG.TEPUNG','CUMI GORENG TEPUNG','5500.00','ADDT','FOOD'),
+ (33,'TEMPE.MENDOAN','TEMPE MENDOAN','5500.00','ADDT','FOOD'),
+ (34,'TELOR.ASIN','TELOR ASIN','5500.00','ADDT','FOOD'),
+ (35,'ASINAN','ASINAN','5500.00','ADDT','FOOD'),
+ (36,'J.MANGGA','JUICE MANGGA','7000.00','ADDT','DRINKS'),
+ (37,'J.STRAWBERRY','JUICE STRAWBERRY','7000.00','ADDT','DRINKS'),
+ (38,'J.ALPUKAT','JUICE ALPUKAT','7000.00','ADDT','DRINKS'),
+ (39,'J.SIRSAK','JUICE SIRSAK','7000.00','ADDT','DRINKS'),
+ (40,'J.JERUK','JUICE JERUK','7000.00','ADDT','DRINKS'),
+ (41,'SUSU.KEDELAI','SUSU KEDELAI','7000.00','ADDT','DRINKS'),
+ (42,'ES.KACANG.HIJAU','ES KACANG HIJAU','7000.00','ADDT','DRINKS'),
+ (43,'ES.KLP.MUDA','ES KELAPA MUDA','7000.00','ADDT','DRINKS'),
+ (44,'ES.CINCAU','ES CINCAU','7000.00','ADDT','DRINKS'),
+ (45,'ES.CENDOL','ES CENDOL','7000.00','ADDT','DRINKS'),
+ (46,'KRUPUK.IKAN','KRUPUK IKAN','4000.00','ADDT','SNACKS'),
+ (47,'KRUPUK.KULIT','KRUPUK KULIT','4000.00','ADDT','SNACKS'),
+ (48,'KRUPUK.PUTIH','KRUPUK PUTIH','4000.00','ADDT','SNACKS'),
+ (49,'KRIPIK.BYM','KERIPIK BYM','4000.00','ADDT','SNACKS'),
+ (50,'KRIPIK.TEMPE','KERIPIK TEMPE','4000.00','ADDT','SNACKS'),
+ (51,'PUDING.KCG.MRH','PUDING KACANG MERAH','7800.00','ADDT','DESSERT'),
+ (52,'PUDING.KCG.HJAU','PUDING KACANG HIJAU','7800.00','ADDT','DESSERT'),
+ (53,'ES.KRIM.PUTER','ES KRIM PUTER','7800.00','ADDT','DESSERT'),
+ (54,'BROWNIES.KUKUS','BROWNIES KUKUS','7800.00','ADDT','DESSERT'),
+ (55,'KENTANG.GRG','KENTANG GORENG','7800.00','ADDT','DESSERT');
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+
+
+--
+-- Definition of table `menu_schedule`
+--
+
+DROP TABLE IF EXISTS `menu_schedule`;
+CREATE TABLE `menu_schedule` (
+  `Menu_Schedule_Id` int(11) NOT NULL auto_increment,
+  `MS_Date` date default NULL,
+  `MS_Menu_A` int(11) default NULL,
+  `MS_Menu_B` int(11) default NULL,
+  `MS_Menu_C` int(11) default NULL,
+  PRIMARY KEY  (`Menu_Schedule_Id`),
+  UNIQUE KEY `Index_2` (`MS_Date`)
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu_schedule`
+--
+
+/*!40000 ALTER TABLE `menu_schedule` DISABLE KEYS */;
+INSERT INTO `menu_schedule` (`Menu_Schedule_Id`,`MS_Date`,`MS_Menu_A`,`MS_Menu_B`,`MS_Menu_C`) VALUES 
+ (1,'2010-01-01',1,2,3),
+ (2,'2010-01-02',15,16,1),
+ (3,'2010-01-03',5,5,5),
+ (4,'2010-01-04',9,22,7),
+ (5,'2010-01-05',8,11,5),
+ (6,'2010-01-06',14,14,10),
+ (7,'2010-01-07',28,12,9),
+ (8,'2010-01-08',24,15,6),
+ (9,'2010-01-09',28,30,16),
+ (10,'2010-01-10',26,2,10),
+ (11,'2010-01-11',3,13,9),
+ (12,'2010-01-12',16,16,8),
+ (13,'2010-01-13',8,19,14),
+ (14,'2010-01-14',11,28,15),
+ (15,'2010-01-15',7,1,2),
+ (16,'2010-01-16',28,26,29),
+ (17,'2010-01-17',12,29,21),
+ (18,'2010-01-18',11,16,27),
+ (19,'2010-01-19',16,19,14),
+ (20,'2010-01-20',11,2,28),
+ (21,'2010-01-21',8,26,21),
+ (22,'2010-01-22',5,29,26),
+ (23,'2010-01-23',10,3,16),
+ (24,'2010-01-24',4,17,2),
+ (25,'2010-01-25',16,2,6),
+ (26,'2010-01-26',19,8,20),
+ (27,'2010-01-27',10,2,24),
+ (28,'2010-01-28',16,29,10),
+ (29,'2010-01-29',30,3,13),
+ (30,'2010-01-30',8,9,25);
+/*!40000 ALTER TABLE `menu_schedule` ENABLE KEYS */;
+
+
+--
+-- Definition of table `news_broadcast`
+--
+
+DROP TABLE IF EXISTS `news_broadcast`;
+CREATE TABLE `news_broadcast` (
+  `Id_News` int(10) unsigned NOT NULL auto_increment,
+  `News_Date` datetime NOT NULL,
+  `News` varchar(160) collate latin1_general_ci NOT NULL,
+  `Status` varchar(5) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`Id_News`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `news_broadcast`
+--
+
+/*!40000 ALTER TABLE `news_broadcast` DISABLE KEYS */;
+INSERT INTO `news_broadcast` (`Id_News`,`News_Date`,`News`,`Status`) VALUES 
+ (1,'2009-12-19 00:00:00','Ini adalah berita dari katering paling uenak.','NOK');
+/*!40000 ALTER TABLE `news_broadcast` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sms_input`
+--
+
+DROP TABLE IF EXISTS `sms_input`;
+CREATE TABLE `sms_input` (
+  `Id_Input` varchar(17) NOT NULL default '',
+  `Tanggal_Terima` datetime default NULL,
+  `No_Pengirim` varchar(15) default NULL,
+  `Pesan_Teks` varchar(160) default NULL,
+  `Status` varchar(5) default NULL,
+  PRIMARY KEY  (`Id_Input`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sms_input`
+--
+
+/*!40000 ALTER TABLE `sms_input` DISABLE KEYS */;
+INSERT INTO `sms_input` (`Id_Input`,`Tanggal_Terima`,`No_Pengirim`,`Pesan_Teks`,`Status`) VALUES 
+ ('i2009122901294301','2009-12-29 00:00:00','02191848465','Test;Request','OK'),
+ ('i2009122901304144','2009-12-29 00:00:00','02191848465','Test;Request','OK'),
+ ('i2009122901414302','2009-12-29 00:00:00','02191848465','Test;Request','OK'),
+ ('i2009122901430715','2009-12-29 00:00:00','02191848465','Test;Request','OK'),
+ ('i2010011314563950','2010-01-13 00:00:00','02191848465','MAIN;GET;2010-01-01','OK'),
+ ('i2010011314571862','2010-01-13 00:00:00','02191848465','MAIN;GET;2010-01-01','OK'),
+ ('i2010011314594471','2010-01-13 00:00:00','02191848465','MAIN;GET;2010-01-01','OK'),
+ ('i2010011315012014','2010-01-13 00:00:00','02191848465','MAIN;GET;2010-01-01','OK'),
+ ('i2010011315043362','2010-01-13 00:00:00','02191848465','MAIN;GET;2010-01-01','OK');
+/*!40000 ALTER TABLE `sms_input` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sms_output`
+--
+
+DROP TABLE IF EXISTS `sms_output`;
+CREATE TABLE `sms_output` (
+  `Id_Output` varchar(17) NOT NULL default '',
+  `Waktu_Diproses` datetime default NULL,
+  `Waktu_Kirim` datetime default NULL,
+  `No_Tujuan` varchar(15) default NULL,
+  `Pesan_Teks` varchar(160) default NULL,
+  `Status` varchar(5) default NULL,
+  `Reg_Name` varchar(15) NOT NULL,
+  `Reg_Type` varchar(5) NOT NULL,
+  `Id_Input` varchar(17) NOT NULL,
+  PRIMARY KEY  (`Id_Output`),
+  KEY `R_8` (`Reg_Type`,`Reg_Name`),
+  KEY `R_9` (`Id_Input`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sms_output`
+--
+
+/*!40000 ALTER TABLE `sms_output` DISABLE KEYS */;
+INSERT INTO `sms_output` (`Id_Output`,`Waktu_Diproses`,`Waktu_Kirim`,`No_Tujuan`,`Pesan_Teks`,`Status`,`Reg_Name`,`Reg_Type`,`Id_Input`) VALUES 
+ ('o2009122901294304','2009-12-29 01:29:43','2009-12-29 01:30:10','02191848465','Success Request29-12-2009','OK','Request','Test','i2009122901294301'),
+ ('o2009122901304146','2009-12-29 01:30:41','2009-12-29 01:39:27','02191848465','Success Request29-12-2009','OK','Request','Test','i2009122901304144'),
+ ('o2009122901414307','2009-12-29 01:41:43','2009-12-29 01:42:05','02191848465','Success Request29-12-2009','OK','Request','Test','i2009122901414302'),
+ ('o2009122901430715','2009-12-29 01:43:07','2009-12-29 01:43:34','02191848465','Success Request29-12-2009','OK','Request','Test','i2009122901430715');
+/*!40000 ALTER TABLE `sms_output` ENABLE KEYS */;
+
+
+--
+-- Definition of view `viewbilling`
+--
+
+DROP TABLE IF EXISTS `viewbilling`;
+DROP VIEW IF EXISTS `viewbilling`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewbilling` AS select `c`.`Customer_ID` AS `customer_id`,`c`.`COM_Order_Date` AS `com_order_date`,(select `b`.`M_Name` AS `m_name` from `menu` `b` where (`b`.`Menu_ID` = `a`.`Menu_ID`)) AS `menu_name`,cast(`a`.`Price` as decimal) AS `price` from (`customer_order_detail` `a` join `customer_order` `c`) where (`a`.`Menu_Schedule_Customer_S` = `c`.`Menu_Schedule_Customer_S`) union select `d`.`Customer_ID` AS `customer_id`,`d`.`COM_Order_Date` AS `com_order_date`,(select `e`.`M_Name` AS `m_name` from `menu` `e` where (`e`.`Menu_ID` = `d`.`COM_Selected`)) AS `menu_name`,cast((select `e`.`M_Price` AS `m_price` from `menu` `e` where (`e`.`Menu_ID` = `d`.`COM_Selected`)) as decimal) AS `price` from `customer_order` `d`;
+
+--
+-- Definition of view `viewdeliveryorderdetil`
+--
+
+DROP TABLE IF EXISTS `viewdeliveryorderdetil`;
+DROP VIEW IF EXISTS `viewdeliveryorderdetil`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewdeliveryorderdetil` AS select (select `menu`.`M_Name` AS `M_Name` from `menu` where (`menu`.`Menu_ID` = `customer_order`.`COM_Selected`)) AS `menu`,cast((select `menu`.`M_Price` AS `M_Price` from `menu` where (`menu`.`Menu_ID` = `customer_order`.`COM_Selected`)) as char charset utf8) AS `price`,`customer_order`.`Menu_Schedule_Customer_S` AS `id` from `customer_order` union select (select `menu`.`M_Name` AS `M_Name` from `menu` where (`menu`.`Menu_ID` = `customer_order_detail`.`Menu_ID`)) AS `menu`,cast(`customer_order_detail`.`Price` as char charset utf8) AS `price`,`customer_order_detail`.`Menu_Schedule_Customer_S` AS `id` from `customer_order_detail`;
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
