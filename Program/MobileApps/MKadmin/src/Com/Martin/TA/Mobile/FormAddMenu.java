@@ -65,7 +65,7 @@ public class FormAddMenu extends Form implements CommandListener, Runnable {
         if (command == cmdKembali) {
             this.display.setCurrent(this.midlet.list);
         } else if (command == cmdKirim) {
-            this.textsms = "MENU;ADD;" +  this.typeMenu.getString(this.typeMenu.getSelectedIndex()) + ";" + this.typeCategory.getString(this.typeCategory.getSelectedIndex()) + ";" + this.price.getString();
+            this.textsms = "MENU;ADD;" + this.nameMenu.getString() + ";" + this.typeMenu.getString(this.typeMenu.getSelectedIndex()) + ";" + this.typeCategory.getString(this.typeCategory.getSelectedIndex()) + ";" + this.price.getString();
 
             thread = new Thread(this);
             thread.start();

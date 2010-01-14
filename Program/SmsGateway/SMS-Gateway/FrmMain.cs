@@ -71,7 +71,7 @@ namespace SMS_Gateway {
         }
 
         private void oGsmModem_NewMessageReceived(ATSMS.NewMessageReceivedEventArgs e) {
-            //SMSIncoming smsInput = SMSHelper.SaveIncomingMessage("02191848465", "02191848465", "ADDT;GET;FOOD");
+            //SMSIncoming smsInput = SMSHelper.SaveIncomingMessage("02191848465", "02191848465", "MENU;SET;2010-02-01;1;2;3");
             SMSIncoming smsInput = SMSHelper.SaveIncomingMessage(e.MSISDN, "02191848465", e.TextMessage);
             SMSOutgoing smsOut = CommandProcessor.ProcessRequest(smsInput);
 
