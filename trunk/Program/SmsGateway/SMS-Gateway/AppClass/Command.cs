@@ -297,9 +297,9 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?order", orderDate);
                 command.Parameters.AddWithValue("?customer", customer);
-                decimal orderID = (decimal)command.ExecuteScalar();
+                Int32 orderID = (Int32)command.ExecuteScalar();
 
-                command.CommandText  = "insert into customer_order_detail(menu_id, price, menu_schedule_customer_s, id_input)";
+                command.CommandText = "insert into customer_order_detail(menu_id, price, menu_schedule_customer_s, id_input)";
                 command.CommandText += " values(?menu, ?price, ?schedule, ?input)";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?menu", menuID);
@@ -346,7 +346,8 @@ namespace Com.Martin.SMS.Command {
                         month = DateTime.Now.Month;
                         break;
                 }
-
+                if (month == 00) 
+                    month = 12;
                 conn.Open();
 
                 // Customer Order
@@ -357,7 +358,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?bln", month);
                 decimal master = (decimal)command.ExecuteScalar();
 
-                 command = conn.CreateCommand();
+                command = conn.CreateCommand();
                 command.CommandText = "SELECT sum(price) FROM customer_order_detail c where c.menu_schedule_customer_s in (select d.menu_schedule_customer_s from customer_order d where d.customer_id = ?customer and month(d.com_order_date) = ?bln)";
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?customer", customer);
@@ -404,14 +405,19 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("?value", nilai);
                 command.Parameters.AddWithValue("?customer", customer);
-                command.ExecuteNonQuery();
+                
+                int iresult = command.ExecuteNonQuery();
 
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
                 outgoing.SMSRequest = this.RequestSMS;
                 outgoing.DateProcess = DateTime.Now;
-                outgoing.MessageText = "Profile anda telah berhasil diupdate";
+                if (iresult <= 0) {
+                    outgoing.MessageText = "Profile anda gagal diupdate, data terlalu panjang atau custID tidak ada";
+                } else {
+                    outgoing.MessageText = "Profile anda telah berhasil diupdate";
+                }
             } finally {
                 conn.Close();
             }
