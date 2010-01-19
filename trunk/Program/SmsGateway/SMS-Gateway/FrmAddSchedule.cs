@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using Com.Martin.SMS.DB;
 
 namespace SMS_Gateway
 {
@@ -56,6 +58,14 @@ namespace SMS_Gateway
             ms.MsDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");
 
             ms.Save();
+            MySqlCommand command = new MySqlCommand();
+            DBProvider dbProvider = new DBProvider();
+            command.CommandText  = "insert into customer_order(menu_schedule_id, com_order_date, com_selected, com_order_status, customer_id, id_input)";
+            command.CommandText += "select a.Menu_Schedule_Id, a.MS_DATE, a.MS_MENU_A, 'ACTIVE', b.Customer_ID, 0  from menu_schedule a join customer_profile b where a.menu_schedule_id not in (select c.menu_schedule_id from customer_order c)";
+
+            dbProvider.Exec(command);
+            dbProvider.dbClose();
+
             DialogResult = DialogResult.OK;
         }
 

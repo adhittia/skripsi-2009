@@ -28,7 +28,7 @@ public class FormAddMenu extends Form implements CommandListener, Runnable {
     private MKAdmin midlet;
     private Thread thread;
     private String textsms = "";
-    private String nodest = "081510649790";
+    private String nodest = "087884483676";
     private final Command cmdKembali = new Command("Back", Command.BACK, 1);
     private final Command cmdKirim = new Command("Send Request", Command.SCREEN, 2);
 

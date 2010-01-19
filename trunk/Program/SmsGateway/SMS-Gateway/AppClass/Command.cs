@@ -112,6 +112,7 @@ namespace Com.Martin.SMS.Command {
                 }
                 reader.Close();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -154,6 +155,7 @@ namespace Com.Martin.SMS.Command {
                 reader.Close();
                 teks = teks.Substring(0, teks.Length - 1);
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -217,6 +219,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?customer", custID);
                 command.ExecuteNonQuery();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -255,6 +258,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?customer", customer);
                 command.ExecuteNonQuery();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -308,6 +312,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?input", this.RequestSMS.ID);
                 command.ExecuteNonQuery();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -369,6 +374,7 @@ namespace Com.Martin.SMS.Command {
 
                 String teks = "tagihan anda untuk periode " + month.ToString() + "-" + DateTime.Now.Year.ToString() + " adalah sebesar " + total.ToString();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -408,6 +414,7 @@ namespace Com.Martin.SMS.Command {
                 
                 int iresult = command.ExecuteNonQuery();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -455,6 +462,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?price", price);
                 command.ExecuteNonQuery();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -498,6 +506,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?id", menuID);
                 command.ExecuteNonQuery();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -539,7 +548,13 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?menuC", menuC);
                 command.ExecuteNonQuery();
 
+                MySqlCommand cmdCreate = conn.CreateCommand();
+                cmdCreate.CommandText = "insert into customer_order(menu_schedule_id, com_order_date, com_selected, com_order_status, customer_id, id_input)";
+                cmdCreate.CommandText += "select a.Menu_Schedule_Id, a.MS_DATE, a.MS_MENU_A, 'ACTIVE', b.Customer_ID, 0  from menu_schedule a join customer_profile b where a.menu_schedule_id not in (select c.menu_schedule_id from customer_order c)";
+                cmdCreate.ExecuteNonQuery();
+
                 // harusnya ada trigger create schedule buat customer tp ini dipikir nantilah
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;
@@ -576,6 +591,7 @@ namespace Com.Martin.SMS.Command {
                 command.Parameters.AddWithValue("?news", news);
                 command.ExecuteNonQuery();
 
+                outgoing.DestinationNo = this.RequestSMS.Sender;
                 outgoing.RegisterType = this.GetRegType();
                 outgoing.RegisterName = this.GetRegName();
                 outgoing.Type = Com.Martin.SMS.Data.SMSType.RequestResponse;

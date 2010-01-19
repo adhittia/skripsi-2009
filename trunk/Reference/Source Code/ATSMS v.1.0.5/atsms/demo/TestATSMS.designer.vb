@@ -66,6 +66,7 @@ Partial Class TestATSMS
         Me.btnVCalendar = New System.Windows.Forms.Button
         Me.btnWapPush = New System.Windows.Forms.Button
         Me.btnDeleteMsg = New System.Windows.Forms.Button
+        Me.Button1 = New System.Windows.Forms.Button
         Me.SuspendLayout()
         '
         'Label1
@@ -517,11 +518,21 @@ Partial Class TestATSMS
         Me.btnDeleteMsg.Text = "Delete SIM Messages"
         Me.btnDeleteMsg.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(12, 339)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(80, 30)
+        Me.Button1.TabIndex = 46
+        Me.Button1.Text = "Text SMS AT"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'TestATSMS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(703, 395)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnDeleteMsg)
         Me.Controls.Add(Me.btnWapPush)
         Me.Controls.Add(Me.btnVCalendar)
@@ -621,4 +632,5 @@ Partial Class TestATSMS
     Friend WithEvents btnVCalendar As System.Windows.Forms.Button
     Friend WithEvents btnWapPush As System.Windows.Forms.Button
     Friend WithEvents btnDeleteMsg As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

@@ -56,13 +56,13 @@ namespace SMS_Gateway {
                 this.txtInboxLog.Text += e.Result.ToString();
                 cmbInboxFilter_SelectedIndexChanged(cmbInboxFilter, new EventArgs());
                 cmbOutBoxFilter_SelectedIndexChanged(cmbOutBoxFilter, new EventArgs());
-            }catch(InvalidOperationException ex){
+            } catch (InvalidOperationException ex) {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
 
         public void SetInboxText(string text) {
-            this.txtInboxLog.Text += text;
+            this.txtInboxLog.Text = text + this.txtInboxLog.Text;
         }
 
         public void RefreshInbox() {
@@ -72,11 +72,16 @@ namespace SMS_Gateway {
 
         private void oGsmModem_NewMessageReceived(ATSMS.NewMessageReceivedEventArgs e) {
             //SMSIncoming smsInput = SMSHelper.SaveIncomingMessage("02191848465", "02191848465", "MENU;SET;2010-02-01;1;2;3");
+
             SMSIncoming smsInput = SMSHelper.SaveIncomingMessage(e.MSISDN, "02191848465", e.TextMessage);
             SMSOutgoing smsOut = CommandProcessor.ProcessRequest(smsInput);
 
             Com.Martin.Function.InputLog log = new Com.Martin.Function.InputLog();
             string text = log.composeReportDetail(smsOut.SMSRequest, smsOut);
+            text += "PDU Receive:" + e.PDUMessage + "\r\n";
+            text += e.ATLog + "\r\n";
+            for (int i = 0; i < 100; i++)
+                text += "=";
 
             if (this.txtInboxLog.InvokeRequired) {
                 FrmMain main = (this);
@@ -446,13 +451,11 @@ namespace SMS_Gateway {
 
         private int customerOrderId;
 
-        private void showCustomerOrder()
-        {
+        private void showCustomerOrder() {
             lvCustomerOrder.Items.Clear();
 
 
-            foreach (AppData.CustomerOrder co in AppData.CustomerOrder.FindAllByProperty("ComOrderDate", dtc.Value.Date.ToString("yyyy-MM-dd")))
-            {
+            foreach (AppData.CustomerOrder co in AppData.CustomerOrder.FindAllByProperty("ComOrderDate", dtc.Value.Date.ToString("yyyy-MM-dd"))) {
                 ListViewItem item = lvCustomerOrder.Items.Add(co.MenuScheduleCustomerS.ToString());
                 item.Tag = co;
                 item.SubItems.Add(AppData.Menu.Find(co.ComSelected).MName);
@@ -464,12 +467,10 @@ namespace SMS_Gateway {
             }
         }
 
-        private void showCustomerOrderDetil()
-        {
+        private void showCustomerOrderDetil() {
             lvCustomerOrderDetil.Items.Clear();
 
-            foreach (AppData.CustomerOrderDetail co in AppData.CustomerOrder.Find(this.customerOrderId).CustomerOrderDetails)
-            {
+            foreach (AppData.CustomerOrderDetail co in AppData.CustomerOrder.Find(this.customerOrderId).CustomerOrderDetails) {
 
                 ListViewItem item = lvCustomerOrderDetil.Items.Add(co.AdditionalOrderS.ToString());
                 item.Tag = co;
@@ -586,15 +587,21 @@ namespace SMS_Gateway {
                 SMSOutgoing outSms = lstOutGoing[i];
                 try {
                     //sleep
-                    oGsmModem.SendSMS(outSms.DestinationNo, outSms.MessageText);
+                    String PDUMessage = "";
+                    String ATLog = "";
+                    oGsmModem.SendSMS(outSms.DestinationNo, outSms.MessageText, ref PDUMessage, ref ATLog);
 
                     outSms.DateSent = DateTime.Now;
                     SMSHelper.SaveOutgoingMessage(ref outSms);
                     Com.Martin.Function.InputLog log = new Com.Martin.Function.InputLog();
-                    this.txtOutBoxLog.Text += log.composeOutBoxDetail(outSms);
+                    String text = log.composeOutBoxDetail(outSms);
+                    text += "PDU Sending: " + PDUMessage+"\r\n";
+                    text += ATLog + "\r\n";
+
+                    this.txtOutBoxLog.Text = text + this.txtOutBoxLog.Text;
                 } catch (Exception ex) {
                     // tulis ke outbox tab
-
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                     //MessageBox.Show(ex.Message, dialogCaption, MessageBoxButtons.OK);
                 }
             }
@@ -843,56 +850,44 @@ namespace SMS_Gateway {
             SendingTimer_Tick(SendingTimer, new EventArgs());
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
+        private void groupBox3_Enter(object sender, EventArgs e) {
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lvCustomerOrder.SelectedItems.Count == 1)
-            {
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
+            if (lvCustomerOrder.SelectedItems.Count == 1) {
                 AppData.CustomerOrder ms = (AppData.CustomerOrder)lvCustomerOrder.SelectedItems[0].Tag;
 
-                        this.customerOrderId = ms.CustomerId;
-                        showCustomerOrderDetil();
-                   
-                
+                this.customerOrderId = ms.CustomerId;
+                showCustomerOrderDetil();
+
+
             }
         }
 
-        private void lvSchedule_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void lvSchedule_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            
+        private void btnRefresh_Click(object sender, EventArgs e) {
+
             showCustomerOrder();
         }
 
-        private void lvCustomerOrderDetil_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
+        private void lvCustomerOrderDetil_SelectedIndexChanged(object sender, EventArgs e) {
+
         }
 
-        private void btnDeliveryOrder_Click(object sender, EventArgs e)
-        {
-            using (FrmDeliveryOrder frmDO = new FrmDeliveryOrder())
-            {
-                if (frmDO.ShowDialog(this) == DialogResult.OK)
-                {
+        private void btnDeliveryOrder_Click(object sender, EventArgs e) {
+            using (FrmDeliveryOrder frmDO = new FrmDeliveryOrder()) {
+                if (frmDO.ShowDialog(this) == DialogResult.OK) {
                     //showSchedule();
                 }
             }
         }
 
-        private void btnBillingInformation_Click(object sender, EventArgs e)
-        {
-            using (FrmBillingInformation frmDO = new FrmBillingInformation())
-            {
-                if (frmDO.ShowDialog(this) == DialogResult.OK)
-                {
+        private void btnBillingInformation_Click(object sender, EventArgs e) {
+            using (FrmBillingInformation frmDO = new FrmBillingInformation()) {
+                if (frmDO.ShowDialog(this) == DialogResult.OK) {
                     //showSchedule();
                 }
             }

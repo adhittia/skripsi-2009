@@ -1171,11 +1171,12 @@ namespace SMS_Gateway
             this.button2.TabIndex = 3;
             this.button2.Text = "Test Message Received";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // BroadcastTimer
             // 
-            this.BroadcastTimer.Interval = 18000000;
+            this.BroadcastTimer.Interval = 30000;
             this.BroadcastTimer.Tick += new System.EventHandler(this.BroadcastTimer_Tick);
             // 
             // SendingTimer
