@@ -281,6 +281,7 @@ Public Class TestATSMS
 
     Private Sub oPhone_NewMessageReceived(ByVal e As ATSMS.NewMessageReceivedEventArgs) Handles oPhone.NewMessageReceived
         txtMsg.Text = "Received msg from " & e.MSISDN & ControlChars.CrLf & e.TextMessage & ControlChars.CrLf
+        txtMsg.Text &= e.ATLog
     End Sub
 
     Private Sub btnAbout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAbout.Click
@@ -500,5 +501,19 @@ Public Class TestATSMS
                 sms.Delete()
             Next
         End If
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        If Len(txtMSISDN.Text) = 0 Then
+            MsgBox("Please enter a phone number", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+        oPhone.Encoding = EnumEncoding.GSM_Default_7Bit
+        Dim ATLog, PDUMessage As String
+        Dim msgId As String = oPhone.SendSMS(txtMSISDN.Text, txtMsg.Text, PDUMessage, ATLog)
+        txtMsg.Text &= "PDU:" & PDUMessage & vbCrLf
+        txtMsg.Text &= ATLog
+
+        MsgBox("Message sent. Message id is " + msgId)
     End Sub
 End Class

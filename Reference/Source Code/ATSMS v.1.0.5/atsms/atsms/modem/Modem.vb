@@ -427,7 +427,7 @@ Public Class Modem : Inherits AbstractObject : Implements IDisposable
         Dim results(1) As String
         Dim i As Integer
         Dim rowCount As Integer
-        System.Diagnostics.Debug.WriteLine("ParseAT:" + response)
+        'System.Diagnostics.Debug.WriteLine("ParseAT:" + response)
         rowCount = 0
         rows = response.Split(ControlChars.CrLf)
         ReDim results(rows.Length)

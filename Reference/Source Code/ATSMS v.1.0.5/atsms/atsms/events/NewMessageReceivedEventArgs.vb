@@ -9,6 +9,8 @@ Public Class NewMessageReceivedEventArgs
     Private strTimestampRFC As String ' SMS sending date and time as RFC-822 format string 
     Private iTotalParts As Integer '  Total messages if this message is a part of a concatenated SMS (valid if NewMessageConcatenate property is set to False) 
     Private strTimeZone As String  ' Message timezone
+    Private strPDU As String
+    Private strLog As String
 
     Public Property MSISDN() As String
         Get
@@ -88,6 +90,24 @@ Public Class NewMessageReceivedEventArgs
         End Get
         Set(ByVal value As Integer)
             Me.iTotalParts = value
+        End Set
+    End Property
+
+    Public Property PDUMessage()
+        Get
+            Return Me.strPDU
+        End Get
+        Set(ByVal value)
+            Me.strPDU = value
+        End Set
+    End Property
+
+    Public Property ATLog()
+        Get
+            Return Me.strLog
+        End Get
+        Set(ByVal value)
+            Me.strLog = value
         End Set
     End Property
 End Class
